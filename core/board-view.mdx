@@ -1,0 +1,367 @@
+---
+title: "Board View"
+description: "Visualize workflows with kanban-style board views"
+---
+
+## Overview
+
+Board View displays your database as a kanban board, organizing rows into columns based on a grouping field. It's perfect for managing tasks, tracking project stages, and visualizing workflows.
+
+<CardGroup cols={2}>
+  <Card title="Visual Workflow" icon="sitemap" iconType="solid">
+    See work progress at a glance with columnar organization
+  </Card>
+  <Card title="Drag & Drop" icon="hand-pointer" iconType="solid">
+    Move cards between columns to update status
+  </Card>
+  <Card title="Customizable Groups" icon="layer-group" iconType="solid">
+    Group by any Single Select or Checkbox field
+  </Card>
+  <Card title="Card Layouts" icon="credit-card" iconType="solid">
+    Show relevant fields as card properties
+  </Card>
+</CardGroup>
+
+## Creating a Board View
+
+<Steps>
+  <Step title="Create new board">
+    Type `/board` in a document, or click **+** in sidebar and select **Board**
+  </Step>
+  
+  <Step title="Or add to existing database">
+    Open a database, click the view name, and select **+ Add View** → **Board**
+  </Step>
+  
+  <Step title="Configure grouping">
+    Choose which Single Select field to group by (defaults to "Status")
+  </Step>
+</Steps>
+
+<Info>
+  Board views require a Single Select or Checkbox field for grouping. If your database doesn't have one, AppFlowy creates a default "Status" field.
+</Info>
+
+## Understanding Board Structure
+
+### Columns (Groups)
+
+Each column represents one option from your grouping field:
+
+- **To Do** (Purple)
+- **In Progress** (Orange)  
+- **Done** (Green)
+
+Columns are created automatically from your Single Select options.
+
+### Cards (Rows)
+
+Each card is a database row showing:
+
+- Card title (primary field)
+- Field properties you choose to display
+- Cover image (optional)
+- Badges for checklists, comments, attachments
+
+## Working with Cards
+
+### Creating Cards
+
+<Steps>
+  <Step title="Add to column">
+    Click **+ New** at the bottom of any column
+  </Step>
+  
+  <Step title="Quick add">
+    Type a card name and press `Enter` to create another
+  </Step>
+  
+  <Step title="Set properties">
+    Click the card to open details and fill in other fields
+  </Step>
+</Steps>
+
+<Tip>
+  Press `Ctrl/Cmd + Enter` anywhere in the board to create a card in the first column.
+</Tip>
+
+### Moving Cards
+
+**Drag and drop**: Click and hold a card, then drag it to another column
+
+**Keyboard**: Select a card and use arrow keys to move between columns
+
+**Details view**: Open the card and change the grouping field value
+
+<Note>
+  Moving a card to a different column automatically updates its grouping field value.
+</Note>
+
+### Card Actions
+
+Hover over a card for quick actions:
+
+- **Click**: Open card details
+- **Drag handle**: Reorder within column
+- **⋯ Menu**: Duplicate, delete, or open in new tab
+
+## Managing Columns
+
+### Adding Columns
+
+<Steps>
+  <Step title="Add option">
+    Columns are created by adding options to your grouping field
+  </Step>
+  
+  <Step title="Edit field">
+    Click the field header, then **Edit property**
+  </Step>
+  
+  <Step title="Create option">
+    Click **+ Add option**, name it, and choose a color
+  </Step>
+</Steps>
+
+### Column Operations
+
+Click the **⋯** menu on any column header:
+
+- **Hide group**: Hide the column (cards remain in database)
+- **Delete group**: Remove the option and move cards to "No Status"
+- **Edit option**: Change name or color
+- **Duplicate**: Copy all cards in the column
+
+### Reordering Columns
+
+<Steps>
+  <Step title="Edit grouping field">
+    Click the grouping field header → **Edit property**
+  </Step>
+  
+  <Step title="Drag options">
+    Drag options up or down to reorder columns
+  </Step>
+</Steps>
+
+## Customizing Card Appearance
+
+Control what information appears on each card:
+
+<Steps>
+  <Step title="Open settings">
+    Click the **⚙️** icon in the toolbar → **Card Layout**
+  </Step>
+  
+  <Step title="Toggle fields">
+    Check/uncheck fields to show or hide them on cards
+  </Step>
+  
+  <Step title="Reorder properties">
+    Drag fields to change their order on cards
+  </Step>
+</Steps>
+
+### Card Display Options
+
+- **Card size**: Compact or comfortable spacing
+- **Cover images**: Show/hide cover images on cards
+- **Field visibility**: Choose which properties appear
+- **Field order**: Arrange properties in the order that makes sense
+
+<Tip>
+  Keep cards clean by only showing essential fields. Users can click cards to see all details.
+</Tip>
+
+## Grouping Options
+
+Change how your board is organized:
+
+### Changing the Grouping Field
+
+<Steps>
+  <Step title="Open settings">
+    Click **⚙️** → **Group by**
+  </Step>
+  
+  <Step title="Select field">
+    Choose a different Single Select or Checkbox field
+  </Step>
+  
+  <Step title="Board reorganizes">
+    Columns update automatically based on the new field
+  </Step>
+</Steps>
+
+### Checkbox Grouping
+
+When grouping by a Checkbox field, you get two columns:
+- **Checked**: Cards with checkbox enabled
+- **Unchecked**: Cards with checkbox disabled
+
+Perfect for simple workflows like:
+- Done / Not Done
+- Published / Draft
+- Approved / Pending
+
+## Filtering and Sorting
+
+Refine what cards appear on your board:
+
+### Filters
+
+<Steps>
+  <Step title="Add filter">
+    Click **Filter** in toolbar → **+ Add filter**
+  </Step>
+  
+  <Step title="Set conditions">
+    Choose field, operator, and value (e.g., "Priority is High")
+  </Step>
+  
+  <Step title="Combine filters">
+    Add multiple filters with AND logic
+  </Step>
+</Steps>
+
+Example filters:
+- Show only cards assigned to you
+- Hide completed tasks
+- Display only high-priority items
+
+### Sorting
+
+<Steps>
+  <Step title="Add sort">
+    Click **Sort** in toolbar → **+ Add sort**
+  </Step>
+  
+  <Step title="Choose field">
+    Select which field to sort by
+  </Step>
+  
+  <Step title="Set direction">
+    Choose ascending or descending order
+  </Step>
+</Steps>
+
+<Info>
+  Sorting determines card order within each column, not column order.
+</Info>
+
+## Hidden Groups
+
+Manage columns you want to hide temporarily:
+
+<Steps>
+  <Step title="Hide a group">
+    Click **⋯** on column header → **Hide group**
+  </Step>
+  
+  <Step title="Access hidden groups">
+    Click **Hidden groups** at the right edge of the board
+  </Step>
+  
+  <Step title="Restore group">
+    Click **Show** on any hidden group to restore it
+  </Step>
+</Steps>
+
+<Tip>
+  Use hidden groups to temporarily remove "Done" or "Archived" columns without deleting them.
+</Tip>
+
+## Board View Settings
+
+Access all board customization options:
+
+**Click ⚙️ in the toolbar** to configure:
+
+- **Properties**: Choose visible fields
+- **Card layout**: Adjust card size and appearance  
+- **Group by**: Change the grouping field
+- **Field settings**: Manage field visibility and order
+- **View options**: Show/hide calculation rows
+
+## Common Use Cases
+
+<CardGroup cols={2}>
+  <Card title="Task Management" icon="list-check">
+    Track tasks through stages: To Do → In Progress → Done
+  </Card>
+  
+  <Card title="Project Pipeline" icon="diagram-project">
+    Manage projects: Ideas → Planning → In Progress → Completed
+  </Card>
+  
+  <Card title="Content Calendar" icon="calendar">
+    Move content: Draft → Review → Scheduled → Published
+  </Card>
+  
+  <Card title="Sales Pipeline" icon="chart-line">
+    Track deals: Lead → Qualified → Proposal → Closed
+  </Card>
+  
+  <Card title="Bug Tracking" icon="bug">
+    Manage issues: Reported → Triaged → In Progress → Fixed
+  </Card>
+  
+  <Card title="Hiring Pipeline" icon="user-plus">
+    Track candidates: Applied → Phone Screen → Interview → Offer
+  </Card>
+</CardGroup>
+
+## Keyboard Shortcuts
+
+| Action | Shortcut |
+|--------|----------|
+| Create card | `Ctrl/Cmd + Enter` |
+| Open card | `Enter` |
+| Move card up/down | `↑` / `↓` |
+| Move card left/right | `←` / `→` |
+| Select card | Click or navigate with arrows |
+| Delete card | `Delete` or `Backspace` |
+
+## Tips and Best Practices
+
+<CardGroup cols={2}>
+  <Card title="Limit columns" icon="columns">
+    Keep 3-6 columns for clarity. More columns = harder to see workflow
+  </Card>
+  
+  <Card title="Use colors" icon="palette">
+    Assign meaningful colors to status options for visual clarity
+  </Card>
+  
+  <Card title="Hide done work" icon="eye-slash">
+    Hide completed columns or filter them out to focus on active work
+  </Card>
+  
+  <Card title="Set WIP limits" icon="ban">
+    Mentally track work-in-progress limits per column for better flow
+  </Card>
+</CardGroup>
+
+<Tip>
+  Create multiple board views with different filters for different team members or projects.
+</Tip>
+
+## Next Steps
+
+<CardGroup cols={2}>
+  <Card title="Grid View" icon="table" href="/core/grid-view">
+    View the same data in spreadsheet format
+  </Card>
+  
+  <Card title="Calendar View" icon="calendar" href="/core/calendar-view">
+    Switch to calendar for date-based planning
+  </Card>
+  
+  <Card title="Databases" icon="database" href="/core/databases">
+    Learn more about database fundamentals
+  </Card>
+  
+  <Card title="Templates" icon="clone" href="/core/templates">
+    Save your board as a reusable template
+  </Card>
+</CardGroup>

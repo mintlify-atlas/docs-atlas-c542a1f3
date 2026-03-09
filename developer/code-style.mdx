@@ -1,0 +1,729 @@
+---
+title: Code Style Guide
+description: Coding conventions and style guidelines for AppFlowy
+---
+
+Consistent code style makes AppFlowy's codebase easier to read, maintain, and contribute to. This guide covers style conventions for both Dart/Flutter and Rust code.
+
+## Dart/Flutter Code Style
+
+### Dart Style Guide
+
+AppFlowy follows the official [Dart Style Guide](https://dart.dev/guides/language/effective-dart/style).
+
+### Analysis Options
+
+Linting rules are configured in `analysis_options.yaml`:
+
+```yaml
+include: package:flutter_lints/flutter.yaml
+
+linter:
+  rules:
+    - require_trailing_commas
+    - prefer_collection_literals
+    - prefer_final_fields
+    - prefer_final_in_for_each
+    - prefer_final_locals
+    - sized_box_for_whitespace
+    - use_decorated_box
+    - unnecessary_parenthesis
+    - avoid_unnecessary_containers
+    - always_declare_return_types
+    - sort_constructors_first
+    - unawaited_futures
+```
+
+### Formatting
+
+<Steps>
+  <Step title="Use dartfmt">
+    Format code with `dartfmt` (built into `flutter format`):
+    
+    ```bash
+    cd appflowy_flutter
+    flutter format .
+    ```
+  </Step>
+  
+  <Step title="Enable format on save">
+    In VS Code (`settings.json`):
+    
+    ```json
+    {
+      "editor.formatOnSave": true,
+      "[dart]": {
+        "editor.formatOnSave": true
+      }
+    }
+    ```
+  </Step>
+</Steps>
+
+### Key Conventions
+
+#### Naming
+
+<Tabs>
+  <Tab title="Classes">
+    Use `UpperCamelCase` for class names:
+    
+    ```dart
+    class DocumentBloc { }
+    class UserProfile { }
+    class AppFlowyEditor { }
+    ```
+  </Tab>
+  
+  <Tab title="Variables">
+    Use `lowerCamelCase` for variables and functions:
+    
+    ```dart
+    final documentId = '123';
+    void loadDocument() { }
+    ```
+  </Tab>
+  
+  <Tab title="Constants">
+    Use `lowerCamelCase` for constants:
+    
+    ```dart
+    const maxRetries = 3;
+    const defaultTimeout = Duration(seconds: 30);
+    ```
+  </Tab>
+  
+  <Tab title="Private">
+    Prefix private members with underscore:
+    
+    ```dart
+    class _PrivateClass { }
+    final _privateField = '';
+    void _privateMethod() { }
+    ```
+  </Tab>
+</Tabs>
+
+#### Trailing Commas
+
+**Always use trailing commas** for better formatting:
+
+<CodeGroup>
+```dart Good
+Widget build(BuildContext context) {
+  return Column(
+    children: [
+      Text('Hello'),
+      Text('World'),
+    ],  // trailing comma
+  );
+}
+```
+
+```dart Bad
+Widget build(BuildContext context) {
+  return Column(
+    children: [
+      Text('Hello'),
+      Text('World')  // no trailing comma
+    ]
+  );
+}
+```
+</CodeGroup>
+
+#### Prefer Final
+
+Use `final` for variables that don't change:
+
+<CodeGroup>
+```dart Good
+final documentId = '123';
+final userProfile = getUserProfile();
+```
+
+```dart Bad
+var documentId = '123';  // use final instead
+String userProfile = getUserProfile();  // use final
+```
+</CodeGroup>
+
+#### Return Types
+
+Always declare return types explicitly:
+
+<CodeGroup>
+```dart Good
+Future<Document> loadDocument(String id) async {
+  // ...
+}
+
+Widget buildTitle() {
+  return Text('Title');
+}
+```
+
+```dart Bad
+loadDocument(String id) async {  // missing return type
+  // ...
+}
+
+buildTitle() {  // missing return type
+  return Text('Title');
+}
+```
+</CodeGroup>
+
+### BLoC Pattern
+
+AppFlowy uses the BLoC pattern for state management:
+
+```dart
+class DocumentBloc extends Bloc<DocumentEvent, DocumentState> {
+  DocumentBloc({
+    required this.documentId,
+  }) : super(DocumentState.initial()) {
+    on<DocumentEvent>(_onDocumentEvent);
+  }
+  
+  final String documentId;
+  
+  Future<void> _onDocumentEvent(
+    DocumentEvent event,
+    Emitter<DocumentState> emit,
+  ) async {
+    // Handle event
+  }
+}
+```
+
+**Key principles:**
+
+- Events are immutable and describe actions
+- States are immutable and describe UI state
+- BLoCs handle business logic, not UI
+
+### Widget Structure
+
+Organize widgets consistently:
+
+```dart
+class MyWidget extends StatelessWidget {
+  const MyWidget({
+    super.key,
+    required this.title,
+    this.subtitle,
+  });
+  
+  // 1. Fields
+  final String title;
+  final String? subtitle;
+  
+  // 2. Build method
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        _buildTitle(),
+        if (subtitle != null) _buildSubtitle(),
+      ],
+    );
+  }
+  
+  // 3. Private helper methods
+  Widget _buildTitle() {
+    return Text(title);
+  }
+  
+  Widget _buildSubtitle() {
+    return Text(subtitle!);
+  }
+}
+```
+
+### File Organization
+
+<Steps>
+  <Step title="One class per file">
+    Each file should contain one main public class.
+  </Step>
+  
+  <Step title="File naming">
+    Use `snake_case` for file names:
+    
+    ```
+    document_bloc.dart
+    user_profile_widget.dart
+    ```
+  </Step>
+  
+  <Step title="Import ordering">
+    Order imports as follows:
+    
+    ```dart
+    // 1. Dart SDK imports
+    import 'dart:async';
+    import 'dart:convert';
+    
+    // 2. Flutter imports
+    import 'package:flutter/material.dart';
+    import 'package:flutter/services.dart';
+    
+    // 3. Third-party package imports
+    import 'package:flutter_bloc/flutter_bloc.dart';
+    import 'package:freezed_annotation/freezed_annotation.dart';
+    
+    // 4. AppFlowy imports
+    import 'package:appflowy/workspace/domain/document.dart';
+    import 'package:appflowy_backend/protobuf/flowy-user/user_profile.pb.dart';
+    ```
+  </Step>
+</Steps>
+
+### Comments and Documentation
+
+<Tabs>
+  <Tab title="Doc comments">
+    Use `///` for public API documentation:
+    
+    ```dart
+    /// Loads a document by its ID.
+    ///
+    /// Returns a [Future] that completes with the [Document]
+    /// or throws a [DocumentNotFoundError].
+    Future<Document> loadDocument(String id) async {
+      // ...
+    }
+    ```
+  </Tab>
+  
+  <Tab title="Implementation comments">
+    Use `//` for implementation details:
+    
+    ```dart
+    void processDocument() {
+      // First validate the document structure
+      validate();
+      
+      // Then apply transformations
+      transform();
+    }
+    ```
+  </Tab>
+  
+  <Tab title="TODO comments">
+    Use `// TODO:` for future work:
+    
+    ```dart
+    // TODO: Implement offline caching
+    // TODO(username): Add retry logic
+    ```
+  </Tab>
+</Tabs>
+
+## Rust Code Style
+
+### Rust Style Guide
+
+AppFlowy follows the official [Rust Style Guide](https://doc.rust-lang.org/style-guide/).
+
+### Rustfmt Configuration
+
+Formatting is configured in `rust-lib/rustfmt.toml`:
+
+```toml
+max_width = 100
+tab_spaces = 2
+newline_style = "Auto"
+match_block_trailing_comma = true
+use_field_init_shorthand = true
+use_try_shorthand = true
+reorder_imports = true
+reorder_modules = true
+remove_nested_parens = true
+merge_derives = true
+edition = "2024"
+```
+
+### Formatting
+
+<Steps>
+  <Step title="Use rustfmt">
+    Format code with `rustfmt`:
+    
+    ```bash
+    cd rust-lib
+    cargo fmt
+    ```
+  </Step>
+  
+  <Step title="Check formatting">
+    ```bash
+    cargo fmt -- --check
+    ```
+  </Step>
+  
+  <Step title="Enable format on save">
+    In VS Code (`settings.json`):
+    
+    ```json
+    {
+      "[rust]": {
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "rust-lang.rust-analyzer"
+      }
+    }
+    ```
+  </Step>
+</Steps>
+
+### Clippy Linting
+
+Use Clippy for additional linting:
+
+```bash
+cargo clippy -- -D warnings
+```
+
+<Note>
+CI/CD pipelines enforce Clippy warnings. Fix all warnings before submitting PRs.
+</Note>
+
+### Key Conventions
+
+#### Naming
+
+<Tabs>
+  <Tab title="Types">
+    Use `UpperCamelCase` for types:
+    
+    ```rust
+    struct UserProfile { }
+    enum DocumentEvent { }
+    trait DocumentHandler { }
+    ```
+  </Tab>
+  
+  <Tab title="Functions">
+    Use `snake_case` for functions and variables:
+    
+    ```rust
+    fn load_document(id: &str) -> Document { }
+    let user_profile = get_profile();
+    ```
+  </Tab>
+  
+  <Tab title="Constants">
+    Use `SCREAMING_SNAKE_CASE` for constants:
+    
+    ```rust
+    const MAX_RETRIES: usize = 3;
+    const DEFAULT_TIMEOUT: Duration = Duration::from_secs(30);
+    ```
+  </Tab>
+  
+  <Tab title="Lifetimes">
+    Use short, descriptive lifetime names:
+    
+    ```rust
+    fn process<'a>(input: &'a str) -> &'a str { }
+    ```
+  </Tab>
+</Tabs>
+
+#### Error Handling
+
+Use `Result` for fallible operations:
+
+<CodeGroup>
+```rust Good
+use anyhow::Result;
+
+fn load_document(id: &str) -> Result<Document> {
+  let doc = database.get(id)?;
+  Ok(doc)
+}
+```
+
+```rust Avoid
+fn load_document(id: &str) -> Document {
+  database.get(id).unwrap()  // Don't panic in library code
+}
+```
+</CodeGroup>
+
+#### Option Handling
+
+Prefer combinators over pattern matching:
+
+<CodeGroup>
+```rust Good
+let name = user.name.unwrap_or_default();
+let length = text.as_ref().map(|t| t.len());
+```
+
+```rust Verbose
+let name = match user.name {
+  Some(n) => n,
+  None => String::new(),
+};
+```
+</CodeGroup>
+
+#### Struct Organization
+
+```rust
+pub struct Document {
+  // 1. Public fields
+  pub id: String,
+  pub title: String,
+  
+  // 2. Private fields
+  content: String,
+  metadata: Metadata,
+}
+
+impl Document {
+  // 1. Constructor(s)
+  pub fn new(id: String, title: String) -> Self {
+    Self {
+      id,
+      title,
+      content: String::new(),
+      metadata: Metadata::default(),
+    }
+  }
+  
+  // 2. Public methods
+  pub fn update_content(&mut self, content: String) {
+    self.content = content;
+  }
+  
+  // 3. Private methods
+  fn validate(&self) -> bool {
+    !self.content.is_empty()
+  }
+}
+```
+
+#### Module Organization
+
+<Steps>
+  <Step title="File naming">
+    Use `snake_case` for module files:
+    
+    ```
+    user_profile.rs
+    document_handler.rs
+    ```
+  </Step>
+  
+  <Step title="Module declaration">
+    In `lib.rs` or `mod.rs`:
+    
+    ```rust
+    mod user_profile;
+    mod document_handler;
+    
+    pub use user_profile::UserProfile;
+    pub use document_handler::DocumentHandler;
+    ```
+  </Step>
+  
+  <Step title="Import ordering">
+    ```rust
+    // 1. Standard library
+    use std::collections::HashMap;
+    use std::sync::Arc;
+    
+    // 2. External crates
+    use anyhow::Result;
+    use serde::{Deserialize, Serialize};
+    
+    // 3. Internal modules
+    use crate::user::UserProfile;
+    use crate::error::FlowyError;
+    ```
+  </Step>
+</Steps>
+
+### Comments and Documentation
+
+<Tabs>
+  <Tab title="Doc comments">
+    Use `///` for public API documentation:
+    
+    ```rust
+    /// Loads a document by its ID.
+    ///
+    /// # Arguments
+    ///
+    /// * `id` - The unique document identifier
+    ///
+    /// # Returns
+    ///
+    /// Returns `Ok(Document)` on success or `Err(FlowyError)` if not found.
+    ///
+    /// # Examples
+    ///
+    /// ```
+    /// let doc = load_document("123")?;
+    /// ```
+    pub fn load_document(id: &str) -> Result<Document> {
+      // ...
+    }
+    ```
+  </Tab>
+  
+  <Tab title="Module docs">
+    Use `//!` for module-level documentation:
+    
+    ```rust
+    //! Document management module.
+    //!
+    //! This module provides functionality for creating,
+    //! loading, and updating documents.
+    ```
+  </Tab>
+  
+  <Tab title="Implementation comments">
+    ```rust
+    // Validate the document before saving
+    if !doc.validate() {
+      return Err(FlowyError::InvalidDocument);
+    }
+    ```
+  </Tab>
+</Tabs>
+
+### Async Code
+
+Use async/await for asynchronous operations:
+
+```rust
+use tokio::time::sleep;
+
+pub async fn load_document(id: &str) -> Result<Document> {
+  // Simulate async operation
+  sleep(Duration::from_millis(100)).await;
+  
+  let doc = database.get(id).await?;
+  Ok(doc)
+}
+```
+
+### Testing
+
+Organize tests clearly:
+
+```rust
+#[cfg(test)]
+mod tests {
+  use super::*;
+  
+  #[test]
+  fn test_document_creation() {
+    let doc = Document::new("123".to_string(), "Title".to_string());
+    assert_eq!(doc.id, "123");
+  }
+  
+  #[tokio::test]
+  async fn test_async_load() {
+    let doc = load_document("123").await.unwrap();
+    assert!(!doc.title.is_empty());
+  }
+}
+```
+
+## General Best Practices
+
+<CardGroup cols={2}>
+  <Card title="Keep Functions Small" icon="compress">
+    Functions should do one thing well. Aim for under 50 lines.
+  </Card>
+  
+  <Card title="Avoid Deep Nesting" icon="indent">
+    Use early returns and helper functions to reduce nesting.
+  </Card>
+  
+  <Card title="Write Tests" icon="vial">
+    Test new code and maintain existing test coverage.
+  </Card>
+  
+  <Card title="Document Public APIs" icon="book">
+    All public functions and types should have documentation.
+  </Card>
+</CardGroup>
+
+## Pre-commit Checks
+
+Before committing, run:
+
+<Tabs>
+  <Tab title="Dart/Flutter">
+    ```bash
+    cd appflowy_flutter
+    
+    # Format code
+    flutter format .
+    
+    # Analyze code
+    flutter analyze
+    
+    # Run tests
+    flutter test
+    ```
+  </Tab>
+  
+  <Tab title="Rust">
+    ```bash
+    cd rust-lib
+    
+    # Format code
+    cargo fmt
+    
+    # Check formatting
+    cargo fmt -- --check
+    
+    # Run Clippy
+    cargo clippy -- -D warnings
+    
+    # Run tests
+    cargo test
+    ```
+  </Tab>
+</Tabs>
+
+## CI/CD Enforcement
+
+The following checks run automatically on all PRs:
+
+- Code formatting (Dart and Rust)
+- Linting (dartanalyzer, Clippy)
+- Unit tests
+- Integration tests
+- Build verification
+
+<Warning>
+PRs that fail these checks will not be merged. Fix all issues before requesting review.
+</Warning>
+
+## Next Steps
+
+<CardGroup cols={2}>
+  <Card title="Testing" href="/developer/testing" icon="vial">
+    Learn about testing practices
+  </Card>
+  
+  <Card title="Contributing" href="/developer/contributing" icon="code-pull-request">
+    Contribute to AppFlowy
+  </Card>
+  
+  <Card title="Architecture" href="/developer/architecture" icon="diagram-project">
+    Understand the architecture
+  </Card>
+  
+  <Card title="Building" href="/developer/building-desktop" icon="hammer">
+    Build AppFlowy from source
+  </Card>
+</CardGroup>

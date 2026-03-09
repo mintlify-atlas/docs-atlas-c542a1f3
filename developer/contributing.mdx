@@ -1,0 +1,497 @@
+---
+title: Contributing to AppFlowy
+description: Learn how to contribute to the AppFlowy open-source project
+---
+
+Welcome! We're excited that you're interested in contributing to AppFlowy. This guide will help you get started with contributing to the project.
+
+## Ways to Contribute
+
+<CardGroup cols={2}>
+  <Card title="Code Contributions" icon="code">
+    Implement features, fix bugs, improve performance
+  </Card>
+  
+  <Card title="Documentation" icon="book">
+    Write guides, improve docs, create tutorials
+  </Card>
+  
+  <Card title="Bug Reports" icon="bug">
+    Report issues, provide reproduction steps
+  </Card>
+  
+  <Card title="Feature Requests" icon="lightbulb">
+    Suggest new features and improvements
+  </Card>
+  
+  <Card title="Testing" icon="vial">
+    Test new features, write tests, improve coverage
+  </Card>
+  
+  <Card title="Translations" icon="language">
+    Help translate AppFlowy to your language
+  </Card>
+  
+  <Card title="Community Support" icon="users">
+    Help others on Discord, answer questions
+  </Card>
+  
+  <Card title="Design" icon="palette">
+    Contribute UI/UX designs and improvements
+  </Card>
+</CardGroup>
+
+## Getting Started
+
+<Steps>
+  <Step title="Join the community">
+    Connect with other contributors:
+    
+    - [Discord](https://discord.gg/9Q2xaN37tV) - Active community chat
+    - [Forum](https://forum.appflowy.io/) - Discussions and support
+    - [GitHub](https://github.com/AppFlowy-IO/AppFlowy) - Code and issues
+    - [Twitter](https://twitter.com/appflowy) - Updates and announcements
+  </Step>
+  
+  <Step title="Set up development environment">
+    Follow the [setup guide](/developer/setup) to configure your development environment.
+  </Step>
+  
+  <Step title="Find an issue">
+    Browse the [issue tracker](https://github.com/AppFlowy-IO/AppFlowy/issues) for:
+    
+    - `good first issue` - Great for beginners
+    - `help wanted` - Community contributions welcome
+    - `bug` - Bug fixes needed
+    - `enhancement` - New features
+  </Step>
+  
+  <Step title="Make your contribution">
+    Follow the development workflow below to contribute your changes.
+  </Step>
+</Steps>
+
+## Development Workflow
+
+### 1. Fork and Clone
+
+<Steps>
+  <Step title="Fork the repository">
+    Click the "Fork" button on the [AppFlowy GitHub repository](https://github.com/AppFlowy-IO/AppFlowy).
+  </Step>
+  
+  <Step title="Clone your fork">
+    ```bash
+    git clone https://github.com/<your-username>/AppFlowy.git
+    cd AppFlowy
+    ```
+  </Step>
+  
+  <Step title="Add upstream remote">
+    ```bash
+    git remote add upstream https://github.com/AppFlowy-IO/AppFlowy.git
+    git fetch upstream
+    ```
+  </Step>
+</Steps>
+
+### 2. Create a Branch
+
+Create a new branch for your work:
+
+```bash
+git checkout -b feature/your-feature-name
+```
+
+**Branch naming conventions:**
+
+- `feature/description` - New features
+- `fix/description` - Bug fixes
+- `docs/description` - Documentation changes
+- `refactor/description` - Code refactoring
+- `test/description` - Test improvements
+
+### 3. Make Changes
+
+<Steps>
+  <Step title="Write code">
+    Make your changes following the [code style guide](/developer/code-style).
+  </Step>
+  
+  <Step title="Test your changes">
+    Run tests to ensure nothing breaks:
+    
+    ```bash
+    # Run Dart tests
+    cd frontend/appflowy_flutter
+    flutter test
+    
+    # Run Rust tests
+    cd ../rust-lib
+    cargo test
+    ```
+  </Step>
+  
+  <Step title="Write tests">
+    Add tests for new functionality:
+    
+    - Unit tests for business logic
+    - Widget tests for UI components
+    - Integration tests for user flows
+  </Step>
+</Steps>
+
+### 4. Commit Changes
+
+Write clear, descriptive commit messages:
+
+<CodeGroup>
+```bash Good commit message
+git commit -m "feat: add markdown export for documents
+
+- Implement markdown serializer
+- Add export button to document menu
+- Update tests for export functionality
+
+Closes #1234"
+```
+
+```bash Bad commit message
+git commit -m "updated stuff"
+```
+</CodeGroup>
+
+**Commit message format:**
+
+```
+<type>: <subject>
+
+<body>
+
+<footer>
+```
+
+**Types:**
+
+- `feat`: New feature
+- `fix`: Bug fix
+- `docs`: Documentation changes
+- `style`: Code style changes (formatting)
+- `refactor`: Code refactoring
+- `test`: Adding or updating tests
+- `chore`: Maintenance tasks
+
+### 5. Push and Create Pull Request
+
+<Steps>
+  <Step title="Push to your fork">
+    ```bash
+    git push origin feature/your-feature-name
+    ```
+  </Step>
+  
+  <Step title="Create pull request">
+    1. Go to your fork on GitHub
+    2. Click "Pull request"
+    3. Select your branch
+    4. Fill out the PR template
+    5. Click "Create pull request"
+  </Step>
+</Steps>
+
+## Pull Request Guidelines
+
+### PR Title
+
+Use a clear, descriptive title following the commit message format:
+
+```
+feat: add offline mode support
+fix: resolve document sync conflict
+docs: update installation guide
+```
+
+### PR Description
+
+Your PR should include:
+
+<Steps>
+  <Step title="Description">
+    Explain what changes you made and why.
+  </Step>
+  
+  <Step title="Testing">
+    Describe how you tested the changes:
+    
+    - Platforms tested (macOS, Windows, Linux, iOS, Android)
+    - Test scenarios covered
+    - Screenshots or videos (for UI changes)
+  </Step>
+  
+  <Step title="Checklist">
+    - [ ] Code follows the style guide
+    - [ ] Tests pass locally
+    - [ ] Documentation updated
+    - [ ] Changelog updated (if applicable)
+  </Step>
+  
+  <Step title="Related issues">
+    Reference related issues:
+    
+    ```
+    Closes #123
+    Related to #456
+    ```
+  </Step>
+</Steps>
+
+### PR Size
+
+<Note>
+Keep PRs focused and reasonably sized. Large PRs are harder to review and take longer to merge.
+</Note>
+
+**Good practices:**
+
+- One feature/fix per PR
+- Break large changes into multiple PRs
+- Keep PRs under 500 lines when possible
+
+## Code Review Process
+
+### What to Expect
+
+<Steps>
+  <Step title="Automated checks">
+    CI/CD pipelines will run:
+    - Code formatting checks
+    - Tests
+    - Build verification
+  </Step>
+  
+  <Step title="Human review">
+    Maintainers will review your code and may:
+    - Request changes
+    - Ask questions
+    - Suggest improvements
+  </Step>
+  
+  <Step title="Address feedback">
+    Make requested changes:
+    ```bash
+    # Make changes
+    git add .
+    git commit -m "address review feedback"
+    git push
+    ```
+  </Step>
+  
+  <Step title="Merge">
+    Once approved, a maintainer will merge your PR.
+  </Step>
+</Steps>
+
+### Review Timeline
+
+- Initial review: 1-7 days
+- Small PRs: Usually faster
+- Large PRs: May take longer
+
+<Note>
+Be patient! Maintainers are volunteers and may take time to review.
+</Note>
+
+## Reporting Bugs
+
+Found a bug? Help us fix it:
+
+<Steps>
+  <Step title="Check existing issues">
+    Search [existing issues](https://github.com/AppFlowy-IO/AppFlowy/issues) to avoid duplicates.
+  </Step>
+  
+  <Step title="Create bug report">
+    Use the [bug report template](https://github.com/AppFlowy-IO/AppFlowy/issues/new?template=bug_report.yaml):
+    
+    - Clear title
+    - Steps to reproduce
+    - Expected behavior
+    - Actual behavior
+    - Environment (OS, version)
+    - Screenshots/videos
+  </Step>
+  
+  <Step title="Provide details">
+    Include:
+    - AppFlowy version
+    - Operating system
+    - Error messages
+    - Log files (if applicable)
+  </Step>
+</Steps>
+
+## Requesting Features
+
+Have an idea? Share it:
+
+<Steps>
+  <Step title="Check roadmap">
+    Review the [public roadmap](https://github.com/orgs/AppFlowy-IO/projects/5/views/12) to see if it's planned.
+  </Step>
+  
+  <Step title="Create feature request">
+    Use the [feature request template](https://github.com/AppFlowy-IO/AppFlowy/issues/new?template=feature_request.yaml):
+    
+    - Clear description
+    - Use case
+    - Expected behavior
+    - Mockups (if applicable)
+  </Step>
+  
+  <Step title="Discuss">
+    Engage in discussion:
+    - Why is this needed?
+    - How should it work?
+    - Are there alternatives?
+  </Step>
+</Steps>
+
+## Translation Contributions
+
+Help translate AppFlowy:
+
+<Steps>
+  <Step title="Use inlang editor">
+    Use the [inlang online editor](https://inlang.com/editor/github.com/AppFlowy-IO/AppFlowy) to add translations.
+  </Step>
+  
+  <Step title="Or edit JSON files">
+    Manually edit translation files in:
+    ```
+    frontend/resources/translations/
+    ```
+  </Step>
+  
+  <Step title="Or use machine translation">
+    ```bash
+    npx inlang machine translate
+    ```
+  </Step>
+</Steps>
+
+## Documentation Contributions
+
+Improve the docs:
+
+- Fix typos and errors
+- Add examples and tutorials
+- Clarify confusing sections
+- Update outdated information
+
+<Note>
+Documentation PRs are just as valuable as code contributions!
+</Note>
+
+## Community Guidelines
+
+### Code of Conduct
+
+AppFlowy follows the [Contributor Covenant Code of Conduct](https://github.com/AppFlowy-IO/AppFlowy/blob/main/CODE_OF_CONDUCT.md).
+
+**Key principles:**
+
+<CardGroup cols={2}>
+  <Card title="Be Respectful" icon="heart">
+    Treat everyone with respect and kindness
+  </Card>
+  
+  <Card title="Be Constructive" icon="comments">
+    Provide helpful, constructive feedback
+  </Card>
+  
+  <Card title="Be Welcoming" icon="hand-wave">
+    Welcome newcomers and help them get started
+  </Card>
+  
+  <Card title="Be Patient" icon="clock">
+    Everyone is learning and growing
+  </Card>
+</CardGroup>
+
+### Getting Help
+
+Stuck? Ask for help:
+
+- **Discord**: Real-time chat with community
+- **Forum**: Longer-form discussions
+- **GitHub Discussions**: Design discussions
+- **Stack Overflow**: Tag questions with `appflowy`
+
+## Recognition
+
+We value all contributions:
+
+<Steps>
+  <Step title="Contributors page">
+    All contributors appear on the [contributors page](https://github.com/AppFlowy-IO/AppFlowy/graphs/contributors).
+  </Step>
+  
+  <Step title="Changelog credits">
+    Significant contributions are credited in release notes.
+  </Step>
+  
+  <Step title="Community spotlight">
+    Outstanding contributors are featured in community updates.
+  </Step>
+</Steps>
+
+<Note>
+**Congratulations!** If your PR is accepted, you're now an official AppFlowy contributor!
+</Note>
+
+## Legal
+
+### License
+
+AppFlowy is licensed under the [AGPLv3 License](https://github.com/AppFlowy-IO/AppFlowy/blob/main/LICENSE).
+
+By contributing, you agree that your contributions will be licensed under the same license.
+
+### Contributor License Agreement
+
+Contributors retain copyright to their contributions but grant AppFlowy the right to use, modify, and distribute the code.
+
+## Next Steps
+
+<CardGroup cols={2}>
+  <Card title="Code Style" href="/developer/code-style" icon="paintbrush">
+    Learn about coding conventions
+  </Card>
+  
+  <Card title="Testing" href="/developer/testing" icon="vial">
+    Understand the testing approach
+  </Card>
+  
+  <Card title="Architecture" href="/developer/architecture" icon="diagram-project">
+    Deep dive into the architecture
+  </Card>
+  
+  <Card title="Setup" href="/developer/setup" icon="gear">
+    Set up your development environment
+  </Card>
+</CardGroup>
+
+## Resources
+
+- [GitHub Repository](https://github.com/AppFlowy-IO/AppFlowy)
+- [Official Documentation](https://docs.appflowy.io)
+- [Public Roadmap](https://github.com/orgs/AppFlowy-IO/projects/5/views/12)
+- [Discord Community](https://discord.gg/9Q2xaN37tV)
+- [Forum](https://forum.appflowy.io/)
+- [Website](https://www.appflowy.com)
+
+## Thank You!
+
+Thank you for contributing to AppFlowy! Your contributions help make AppFlowy better for everyone.
+
+<img src="https://contrib.rocks/image?repo=AppFlowy-IO/AppFlowy" alt="Contributors" />

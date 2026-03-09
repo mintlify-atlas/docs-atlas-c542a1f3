@@ -1,0 +1,253 @@
+---
+title: "Documents"
+description: "Create rich, structured documents with powerful block-based editing"
+---
+
+## Overview
+
+AppFlowy Documents provide a flexible, block-based editor for creating everything from simple notes to complex documentation. Built on a powerful editor framework, documents support rich formatting, embeds, and real-time collaboration.
+
+<CardGroup cols={2}>
+  <Card title="Block-Based" icon="cube" iconType="solid">
+    Build documents with modular blocks that can be rearranged and nested
+  </Card>
+  <Card title="Rich Media" icon="image" iconType="solid">
+    Embed images, videos, files, and more directly in your documents
+  </Card>
+  <Card title="Smart Editing" icon="wand-magic-sparkles" iconType="solid">
+    Use slash commands and AI assistance for faster content creation
+  </Card>
+  <Card title="Structured Content" icon="list-tree" iconType="solid">
+    Create headings, lists, tables, and nested pages for organization
+  </Card>
+</CardGroup>
+
+## Creating a Document
+
+<Steps>
+  <Step title="Create from sidebar">
+    Click the **+** button in your workspace sidebar or press `Ctrl/Cmd + N` to create a new document.
+  </Step>
+  
+  <Step title="Add a title">
+    Click on **Untitled** at the top and give your document a name.
+  </Step>
+  
+  <Step title="Start writing">
+    Click in the editor area and start typing. Press `/` to open the slash menu and insert different block types.
+  </Step>
+</Steps>
+
+## Block Types
+
+Documents are built from blocks. Each block has specific functionality:
+
+### Text Blocks
+
+- **Paragraph**: Standard text content
+- **Headings** (H1, H2, H3): Structure your document with hierarchical headings
+- **To-Do List**: Create checkable tasks within your document
+- **Bulleted List**: Unordered lists for organizing information
+- **Numbered List**: Ordered lists for sequential content
+- **Toggle List**: Collapsible sections to hide/show content
+- **Quote**: Highlight important quotes or excerpts
+- **Callout**: Draw attention to important information with colored backgrounds
+
+### Media Blocks
+
+- **Image**: Upload or link images (supports JPG, PNG, GIF, SVG)
+- **Video**: Embed videos from URLs or upload directly
+- **File**: Attach any file type to your document
+- **Photo Gallery**: Display multiple images in a grid layout
+
+### Content Blocks
+
+- **Code Block**: Syntax-highlighted code with language selection
+- **Math Equation**: Render mathematical formulas using LaTeX
+- **Table**: Create simple tables for organizing data
+- **Divider**: Add visual separation between sections
+- **Sub-page**: Link to or embed other pages within your document
+
+### Database Blocks
+
+- **Grid**: Insert a spreadsheet-style database
+- **Board**: Add a kanban board for task management
+- **Calendar**: Embed a calendar view for events and deadlines
+
+## Using the Slash Menu
+
+The slash command (`/`) is your quick way to insert any block:
+
+<Steps>
+  <Step title="Type slash">
+    In any empty line, type `/` to open the block menu
+  </Step>
+  
+  <Step title="Search or browse">
+    Start typing to filter blocks (e.g., `/image` or `/table`) or use arrow keys to browse
+  </Step>
+  
+  <Step title="Insert block">
+    Press `Enter` to insert the selected block type
+  </Step>
+</Steps>
+
+<Tip>
+  Common slash commands:
+  - `/h1`, `/h2`, `/h3` - Insert headings
+  - `/todo` - Create a to-do list
+  - `/code` - Insert a code block
+  - `/table` - Add a simple table
+  - `/ai` - Trigger AI writing assistance
+</Tip>
+
+## Text Formatting
+
+Format text using keyboard shortcuts or by selecting text:
+
+| Format | Shortcut | Markdown |
+|--------|----------|----------|
+| **Bold** | `Ctrl/Cmd + B` | `**text**` |
+| *Italic* | `Ctrl/Cmd + I` | `*text*` |
+| `Code` | `Ctrl/Cmd + E` | `` `text` `` |
+| ~~Strikethrough~~ | `Ctrl/Cmd + Shift + S` | `~~text~~` |
+| Link | `Ctrl/Cmd + K` | `[text](url)` |
+
+<Note>
+  AppFlowy supports Markdown syntax. Type Markdown shortcuts and they'll automatically convert to formatted text.
+</Note>
+
+## Working with Tables
+
+Tables help organize structured information:
+
+<Steps>
+  <Step title="Insert table">
+    Type `/table` and select the table size (rows × columns)
+  </Step>
+  
+  <Step title="Add content">
+    Click into cells and type content. Press `Tab` to move to the next cell
+  </Step>
+  
+  <Step title="Modify structure">
+    Right-click on rows or columns to insert, delete, or reorder
+  </Step>
+</Steps>
+
+### Table Features
+
+- **Resize columns**: Drag column borders to adjust width
+- **Cell alignment**: Left, center, or right align text
+- **Background colors**: Apply colors to cells, rows, or columns
+- **Copy/paste**: Works with Excel and Google Sheets
+
+## Nested Pages
+
+Create hierarchical document structures:
+
+<Steps>
+  <Step title="Add sub-page">
+    Type `/sub` and select **Sub-page** from the menu
+  </Step>
+  
+  <Step title="Name the page">
+    Give your sub-page a title
+  </Step>
+  
+  <Step title="Navigate">
+    Click the sub-page block to open it. Use breadcrumbs to navigate back
+  </Step>
+</Steps>
+
+<Tip>
+  Sub-pages appear in your sidebar hierarchy and can be moved independently.
+</Tip>
+
+## AI Writing Features
+
+Boost your productivity with built-in AI assistance:
+
+### AI Commands
+
+- Type `/ai` to open the AI writer
+- Select text and click the **AI** button in the toolbar
+- Ask AI to:
+  - Generate content from prompts
+  - Improve or rewrite existing text
+  - Summarize long sections
+  - Translate to other languages
+  - Fix spelling and grammar
+
+<Info>
+  AI features require an AI provider to be configured. See [AI Setup](/ai/setup) for details.
+</Info>
+
+## Collaboration
+
+Work together on documents in real-time:
+
+- **Live cursors**: See where collaborators are editing
+- **Comments**: Add inline comments by selecting text (coming soon)
+- **Version history**: Track changes and restore previous versions
+- **Presence indicators**: See who's viewing the document
+
+## Tips and Best Practices
+
+<CardGroup cols={2}>
+  <Card title="Use headings" icon="heading">
+    Structure documents with H1, H2, H3 for better navigation and outline view
+  </Card>
+  
+  <Card title="Toggle lists" icon="caret-right">
+    Hide detailed sections in toggle blocks to keep documents scannable
+  </Card>
+  
+  <Card title="Link pages" icon="link">
+    Use `@` mentions or sub-pages to connect related documents
+  </Card>
+  
+  <Card title="Templates" icon="clone">
+    Create reusable templates for meeting notes, project docs, and more
+  </Card>
+</CardGroup>
+
+## Keyboard Shortcuts
+
+Speed up your workflow with these shortcuts:
+
+| Action | Windows/Linux | macOS |
+|--------|--------------|-------|
+| New document | `Ctrl + N` | `Cmd + N` |
+| Bold | `Ctrl + B` | `Cmd + B` |
+| Italic | `Ctrl + I` | `Cmd + I` |
+| Code | `Ctrl + E` | `Cmd + E` |
+| Link | `Ctrl + K` | `Cmd + K` |
+| Undo | `Ctrl + Z` | `Cmd + Z` |
+| Redo | `Ctrl + Shift + Z` | `Cmd + Shift + Z` |
+| Slash menu | `/` | `/` |
+| Delete block | `Backspace` (empty) | `Delete` (empty) |
+
+<Note>
+  Press `Ctrl/Cmd + /` to see all available shortcuts in the app.
+</Note>
+
+## Next Steps
+
+<CardGroup cols={2}>
+  <Card title="Databases" icon="table" href="/core/databases">
+    Learn how to organize data with databases
+  </Card>
+  
+  <Card title="Templates" icon="clone" href="/core/templates">
+    Create reusable document templates
+  </Card>
+  
+  <Card title="AI Features" icon="sparkles" href="/ai/ai-chat">
+    Explore AI-powered writing tools
+  </Card>
+  
+  <Card title="Collaboration" icon="users" href="/collaboration/sharing">
+    Share and collaborate on documents
+  </Card>
+</CardGroup>

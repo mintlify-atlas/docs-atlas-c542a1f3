@@ -1,0 +1,202 @@
+---
+title: Architecture Overview
+description: Understanding AppFlowy's system architecture and design principles
+---
+
+AppFlowy is built with a hybrid architecture that combines Flutter for the frontend and Rust for the backend, providing a powerful, cross-platform collaborative workspace.
+
+## System Architecture
+
+AppFlowy follows a **client-first architecture** where most business logic runs locally on the client, with optional cloud synchronization for collaboration.
+
+```
+┌─────────────────────────────────────────┐
+│         Flutter Frontend                │
+│  (UI Layer + State Management)          │
+└──────────────┬──────────────────────────┘
+               │ FFI (dart-ffi)
+┌──────────────▼──────────────────────────┐
+│          Rust Backend                   │
+│  ┌─────────────────────────────────┐   │
+│  │      Event Dispatch System      │   │
+│  └────────────┬────────────────────┘   │
+│  ┌────────────▼────────────────────┐   │
+│  │    Core Business Logic          │   │
+│  │  • User Management              │   │
+│  │  • Folder & Workspace           │   │
+│  │  • Document Editor              │   │
+│  │  • Database (Grid/Board/Kanban) │   │
+│  │  • AI Services                  │   │
+│  │  • Storage & Search             │   │
+│  └─────────────────────────────────┘   │
+└──────────────┬──────────────────────────┘
+               │
+┌──────────────▼──────────────────────────┐
+│      Local Storage (SQLite)             │
+│      + AppFlowy Cloud (Optional)        │
+└─────────────────────────────────────────┘
+```
+
+## Technology Stack
+
+<CardGroup cols={2}>
+  <Card title="Frontend" icon="mobile">
+    - **Flutter** (v3.13.19+): Cross-platform UI framework
+    - **Dart**: Programming language for Flutter
+    - **State Management**: BLoC pattern
+    - **FFI Bridge**: dart-ffi for Rust interop
+  </Card>
+  
+  <Card title="Backend" icon="server">
+    - **Rust** (v1.70+): High-performance systems language
+    - **SQLite**: Local data persistence
+    - **CRDT**: Conflict-free replicated data types (Yrs)
+    - **Protobuf**: Serialization protocol
+  </Card>
+</CardGroup>
+
+## Core Components
+
+### Flutter Frontend
+
+The Flutter frontend is organized into feature-based modules:
+
+- **Workspace**: Workspace and page management
+- **Document**: Rich text editor with collaborative editing
+- **Database**: Grid, board, calendar, and kanban views
+- **AI Chat**: AI-powered chat and assistance
+- **User**: Authentication and user profile
+- **Settings**: Application configuration
+
+### Rust Backend
+
+The Rust backend provides core business logic through modular crates:
+
+| Module | Purpose |
+|--------|--------|
+| `flowy-core` | Central coordinator and dependency injection |
+| `flowy-user` | User authentication and profile management |
+| `flowy-folder` | Workspace and folder hierarchy |
+| `flowy-document` | Document editing with CRDT |
+| `flowy-database2` | Database views and data management |
+| `flowy-ai` | AI integration and services |
+| `flowy-storage` | File storage and management |
+| `flowy-search` | Full-text search capabilities |
+| `dart-ffi` | FFI bridge to Flutter |
+| `lib-dispatch` | Event dispatch and routing |
+
+## Communication Layer
+
+### FFI Bridge
+
+AppFlowy uses **Foreign Function Interface (FFI)** to enable seamless communication between Flutter (Dart) and Rust:
+
+<Steps>
+  <Step title="Flutter sends event">
+    Flutter code dispatches an event through the FFI layer with a payload
+  </Step>
+  
+  <Step title="Rust receives event">
+    The `dart-ffi` crate receives the event and routes it through the dispatch system
+  </Step>
+  
+  <Step title="Handler processes request">
+    The appropriate Rust handler processes the request and executes business logic
+  </Step>
+  
+  <Step title="Response sent back">
+    The result is serialized (using Protobuf) and sent back to Flutter via FFI
+  </Step>
+</Steps>
+
+### Event Dispatch System
+
+The event dispatch system (`lib-dispatch`) provides a type-safe, high-performance request-response mechanism:
+
+```rust
+// Example event flow
+Event → EventDispatcher → Handler → BusinessLogic → Response
+```
+
+Each module registers its event handlers at startup, creating a centralized routing system.
+
+## Data Synchronization
+
+### Local-First Architecture
+
+AppFlowy prioritizes **local-first** data management:
+
+1. All data is stored locally in SQLite
+2. Changes are applied immediately to the local database
+3. Optional sync to AppFlowy Cloud for collaboration
+4. Conflict resolution using CRDT algorithms
+
+### CRDT Integration
+
+For collaborative editing, AppFlowy uses **Conflict-free Replicated Data Types (CRDT)**:
+
+- Based on **Yrs** (Yjs implementation in Rust)
+- Enables real-time collaboration without conflicts
+- Supports offline editing with automatic merge on reconnect
+
+## Design Principles
+
+<CardGroup cols={2}>
+  <Card title="Data Privacy First" icon="shield">
+    User data is encrypted and stored locally. Cloud sync is optional and user-controlled.
+  </Card>
+  
+  <Card title="Native Performance" icon="bolt">
+    Rust backend provides native performance for all platforms with minimal overhead.
+  </Card>
+  
+  <Card title="Cross-Platform" icon="desktop">
+    Single codebase supports macOS, Windows, Linux, iOS, and Android.
+  </Card>
+  
+  <Card title="Extensible" icon="puzzle">
+    Plugin architecture allows for community-driven features and customization.
+  </Card>
+</CardGroup>
+
+### Modularity
+
+The architecture emphasizes:
+
+- **Separation of concerns**: Clear boundaries between UI, business logic, and data
+- **Testability**: Each layer can be tested independently
+- **Maintainability**: Features are organized into self-contained modules
+- **Scalability**: New features can be added without modifying core systems
+
+## Build Targets
+
+AppFlowy compiles to multiple platforms with platform-specific optimizations:
+
+<Tabs>
+  <Tab title="Desktop">
+    - **macOS**: Universal binary (arm64 + x86_64)
+    - **Windows**: x64 executable
+    - **Linux**: x64 and arm64 binaries
+  </Tab>
+  
+  <Tab title="Mobile">
+    - **iOS**: arm64 static library
+    - **Android**: arm64-v8a and armeabi-v7a shared libraries
+  </Tab>
+</Tabs>
+
+<Note>
+The Rust backend is compiled as a **static library** (.a) for macOS/iOS and a **dynamic library** (.dll/.so) for Windows/Linux/Android.
+</Note>
+
+## Next Steps
+
+<CardGroup cols={2}>
+  <Card title="Flutter Frontend" href="/developer/flutter-frontend" icon="mobile">
+    Explore the Flutter app structure and state management
+  </Card>
+  
+  <Card title="Rust Backend" href="/developer/rust-backend" icon="server">
+    Deep dive into the Rust workspace and core modules
+  </Card>
+</CardGroup>

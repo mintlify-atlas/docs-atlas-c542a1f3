@@ -1,0 +1,363 @@
+---
+title: Flutter Frontend
+description: Understanding the Flutter application structure and architecture
+---
+
+The AppFlowy Flutter frontend provides a rich, cross-platform user interface with native performance on desktop and mobile platforms.
+
+## Project Structure
+
+The Flutter app is located in `frontend/appflowy_flutter/` with the following structure:
+
+```
+appflowy_flutter/
+├── lib/                    # Main application code
+│   ├── core/              # Core utilities and configuration
+│   ├── features/          # Feature modules
+│   ├── plugins/           # Plugin system
+│   ├── shared/            # Shared widgets and utilities
+│   ├── startup/           # Application initialization
+│   ├── user/              # User management
+│   ├── workspace/         # Workspace management
+│   ├── mobile/            # Mobile-specific code
+│   └── main.dart          # Application entry point
+├── packages/              # Local packages
+│   └── appflowy_backend/  # FFI bindings to Rust
+├── assets/                # Images, fonts, icons
+├── integration_test/      # Integration tests
+├── test/                  # Unit tests
+└── pubspec.yaml           # Dependencies
+```
+
+## Key Directories
+
+### `/lib/core/`
+
+Core application infrastructure:
+
+- **config**: App configuration and environment variables
+- **helpers**: Utility functions and helpers
+- **notification**: Notification handling from Rust backend
+
+### `/lib/features/`
+
+Feature-based modules organized by domain:
+
+<CardGroup cols={2}>
+  <Card title="workspace" icon="folder">
+    Workspace management, sidebar, and navigation
+  </Card>
+  
+  <Card title="settings" icon="gear">
+    User settings, preferences, and account management
+  </Card>
+  
+  <Card title="view_management" icon="eye">
+    View creation, deletion, and organization
+  </Card>
+  
+  <Card title="shared_section" icon="share">
+    Shared workspaces and collaboration features
+  </Card>
+</CardGroup>
+
+### `/lib/plugins/`
+
+The plugin system enables extensible document types:
+
+| Plugin | Description |
+|--------|------------|
+| `document` | Rich text editor with blocks and formatting |
+| `database` | Grid, board, calendar, and kanban views |
+| `ai_chat` | AI-powered chat interface |
+| `blank` | Blank page template |
+| `database_document` | Database with embedded document |
+
+Each plugin implements the `Plugin` interface and registers itself with the plugin system.
+
+### `/lib/shared/`
+
+Reusable components and utilities:
+
+- **widgets**: Common UI components (buttons, dialogs, inputs)
+- **bloc**: Shared BLoC state management classes
+- **models**: Shared data models
+- **styles**: Theme and styling constants
+
+### `/lib/mobile/`
+
+Mobile-specific implementations:
+
+- **application**: Mobile app state management
+- **presentation**: Mobile-optimized screens and widgets
+
+## State Management
+
+AppFlowy uses the **BLoC (Business Logic Component)** pattern for state management:
+
+```dart
+// Example BLoC structure
+class DocumentBloc extends Bloc<DocumentEvent, DocumentState> {
+  DocumentBloc({
+    required this.documentId,
+  }) : super(DocumentState.initial()) {
+    on<DocumentEvent>(_onDocumentEvent);
+  }
+  
+  Future<void> _onDocumentEvent(
+    DocumentEvent event,
+    Emitter<DocumentState> emit,
+  ) async {
+    // Handle events and emit states
+  }
+}
+```
+
+### BLoC Pattern Benefits
+
+<CardGroup cols={2}>
+  <Card title="Separation of Concerns" icon="layer-group">
+    Business logic is separated from UI, making code more maintainable
+  </Card>
+  
+  <Card title="Testability" icon="vial">
+    BLoCs can be easily unit tested without UI dependencies
+  </Card>
+  
+  <Card title="Reusability" icon="recycle">
+    Business logic can be shared across different widgets
+  </Card>
+  
+  <Card title="Predictability" icon="chart-line">
+    State changes follow a unidirectional data flow
+  </Card>
+</CardGroup>
+
+## FFI Integration
+
+The Flutter app communicates with the Rust backend through FFI:
+
+### Package Structure
+
+```
+packages/appflowy_backend/
+├── lib/
+│   └── dispatch/          # Event dispatch to Rust
+├── macos/                 # macOS native code
+├── ios/                   # iOS native code
+├── android/               # Android native code
+├── linux/                 # Linux native code
+└── windows/               # Windows native code
+```
+
+### Event Dispatch
+
+<Steps>
+  <Step title="Create event request">
+    ```dart
+    final request = UserEventGetUserProfile();
+    ```
+  </Step>
+  
+  <Step title="Dispatch to Rust">
+    ```dart
+    final result = await UserEventGetUserProfile().send();
+    ```
+  </Step>
+  
+  <Step title="Handle response">
+    ```dart
+    result.fold(
+      (userProfile) => print('Success: ${userProfile.name}'),
+      (error) => print('Error: $error'),
+    );
+    ```
+  </Step>
+</Steps>
+
+### Code Generation
+
+Protobuf definitions are used to generate Dart classes:
+
+```bash
+# Generate Dart code from .proto files
+flutter pub run build_runner build
+```
+
+## Application Lifecycle
+
+### Initialization Flow
+
+<Steps>
+  <Step title="main.dart entry">
+    Application starts in `main.dart` with `runAppFlowy()`
+  </Step>
+  
+  <Step title="Startup initialization">
+    The `startup/` module initializes core services:
+    - Rust backend initialization
+    - Dependency injection setup
+    - Theme and localization
+  </Step>
+  
+  <Step title="Authentication check">
+    Check if user is logged in and load workspace
+  </Step>
+  
+  <Step title="Render UI">
+    Display the main workspace or login screen
+  </Step>
+</Steps>
+
+### Main Entry Point
+
+```dart
+// lib/main.dart
+import 'package:scaled_app/scaled_app.dart';
+import 'startup/startup.dart';
+
+Future<void> main() async {
+  ScaledWidgetsFlutterBinding.ensureInitialized(
+    scaleFactor: (_) => 1.0,
+  );
+  
+  await runAppFlowy();
+}
+```
+
+## Dependency Injection
+
+AppFlowy uses the **GetIt** service locator for dependency injection:
+
+```dart
+// Register services
+getIt.registerLazySingleton<AuthService>(() => AuthService());
+
+// Access services
+final authService = getIt<AuthService>();
+```
+
+## Platform-Specific Code
+
+### Desktop vs Mobile
+
+AppFlowy provides different UI implementations for desktop and mobile:
+
+<Tabs>
+  <Tab title="Desktop">
+    ```dart
+    if (PlatformExtension.isDesktop) {
+      return DesktopHomeScreen();
+    }
+    ```
+  </Tab>
+  
+  <Tab title="Mobile">
+    ```dart
+    if (PlatformExtension.isMobile) {
+      return MobileHomeScreen();
+    }
+    ```
+  </Tab>
+</Tabs>
+
+### Responsive Design
+
+The app uses responsive layouts that adapt to screen size:
+
+```dart
+LayoutBuilder(
+  builder: (context, constraints) {
+    if (constraints.maxWidth > 800) {
+      return DesktopLayout();
+    } else {
+      return MobileLayout();
+    }
+  },
+)
+```
+
+## Testing
+
+### Test Structure
+
+```
+test/
+├── bloc/           # BLoC unit tests
+├── widget/         # Widget tests
+└── util/           # Utility tests
+
+integration_test/
+└── *.dart          # Integration tests
+```
+
+### Running Tests
+
+<CodeGroup>
+```bash Unit Tests
+cd appflowy_flutter
+flutter test
+```
+
+```bash Widget Tests
+flutter test test/widget
+```
+
+```bash Integration Tests
+flutter test integration_test
+```
+</CodeGroup>
+
+## Dependencies
+
+Key Flutter packages used in AppFlowy:
+
+| Package | Purpose |
+|---------|--------|
+| `flutter_bloc` | State management with BLoC pattern |
+| `get_it` | Service locator for dependency injection |
+| `ffi` | Foreign function interface to Rust |
+| `freezed` | Code generation for immutable classes |
+| `protobuf` | Protocol buffer serialization |
+| `flutter_localizations` | Internationalization support |
+| `provider` | Simple dependency injection |
+| `go_router` | Declarative routing |
+
+<Note>
+See `pubspec.yaml` for the complete list of dependencies and versions.
+</Note>
+
+## Development Workflow
+
+<Steps>
+  <Step title="Install dependencies">
+    ```bash
+    cd frontend/appflowy_flutter
+    flutter pub get
+    ```
+  </Step>
+  
+  <Step title="Generate code">
+    ```bash
+    flutter pub run build_runner build --delete-conflicting-outputs
+    ```
+  </Step>
+  
+  <Step title="Run the app">
+    ```bash
+    flutter run
+    ```
+  </Step>
+</Steps>
+
+## Next Steps
+
+<CardGroup cols={2}>
+  <Card title="Rust Backend" href="/developer/rust-backend" icon="server">
+    Learn about the Rust backend architecture
+  </Card>
+  
+  <Card title="Building Desktop" href="/developer/building-desktop" icon="desktop">
+    Build AppFlowy for desktop platforms
+  </Card>
+</CardGroup>

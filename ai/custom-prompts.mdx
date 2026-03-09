@@ -1,0 +1,409 @@
+---
+title: "Custom Prompts"
+description: "Create reusable AI prompts using database pages as sources"
+---
+
+## Overview
+
+Custom Prompts let you create your own AI prompt library by loading database pages as sources for AI interactions. This feature enables you to build standardized, reusable prompts that incorporate your own content, ensuring consistent AI responses across your team.
+
+<Info>
+  Custom Prompts were introduced in v0.9.3 and work with both AI Chat and the Ask AI feature in documents.
+</Info>
+
+## What Are Custom Prompts?
+
+Custom Prompts turn your database pages into AI prompt templates:
+
+- **Database-powered** - Store prompts in structured database format
+- **Reusable** - Use the same prompt multiple times across different contexts
+- **Customizable** - Tailor prompts to your specific workflows and needs
+- **Team-wide** - Share prompt libraries with your team members
+
+## Creating Custom Prompts
+
+<Steps>
+  <Step title="Create a Database">
+    Create a new database (grid, board, or calendar view) to store your prompts.
+  </Step>
+  
+  <Step title="Add Prompt Fields">
+    Set up your database with these essential properties:
+    
+    - **Prompt Name** (Text) - The title/name of your prompt
+    - **Prompt Content** (Text) - The actual prompt text
+    - **Category** (Select) - Optional categorization (Writing, Coding, Analysis, etc.)
+    - **Tags** (Multi-select) - Optional tags for filtering
+  </Step>
+  
+  <Step title="Add Your Prompts">
+    Create rows in the database, each representing one prompt:
+    
+    ```plaintext
+    Name: "Meeting Summary"
+    Content: "Summarize this meeting note into key points, decisions, and action items with owners."
+    Category: "Productivity"
+    ```
+  </Step>
+  
+  <Step title="Load as Custom Prompts">
+    In AI Chat or Ask AI:
+    1. Click the prompt selector icon
+    2. Choose **Load Custom Prompts**
+    3. Select your database page
+    4. Your prompts are now available for use
+  </Step>
+</Steps>
+
+## Using Custom Prompts
+
+### In AI Chat
+
+<Steps>
+  <Step title="Open Prompt Menu">
+    Click the prompt icon in the chat input area or type `/` to open the prompt selector.
+  </Step>
+  
+  <Step title="Select Your Custom Prompt">
+    Browse the prompt library and select your custom prompt from the list.
+  </Step>
+  
+  <Step title="Apply the Prompt">
+    The prompt content is applied to your message. Add any additional context or variables.
+  </Step>
+  
+  <Step title="Send to AI">
+    Press Enter to send the customized prompt to the AI.
+  </Step>
+</Steps>
+
+### In Document Ask AI
+
+1. Select text in your document
+2. Open the Ask AI menu (`Cmd/Ctrl + /`)
+3. Choose a custom prompt from your library
+4. The AI applies the prompt to your selected content
+
+<Tip>
+  You can load multiple database pages as custom prompt sources, organizing prompts by project, team, or use case.
+</Tip>
+
+## Custom Prompt Examples
+
+### Writing Prompts
+
+<AccordionGroup>
+  <Accordion title="Content Improvement">
+    **Name**: Improve Clarity
+    
+    **Prompt**: 
+    ```plaintext
+    Review this text and improve its clarity and readability. 
+    Make it more concise while preserving all key information. 
+    Use simple language and short sentences.
+    ```
+  </Accordion>
+  
+  <Accordion title="Tone Adjustment">
+    **Name**: Make Professional
+    
+    **Prompt**: 
+    ```plaintext
+    Rewrite this text in a professional tone suitable for 
+    business communication. Maintain the core message but 
+    adjust language, formality, and structure.
+    ```
+  </Accordion>
+  
+  <Accordion title="Format Conversion">
+    **Name**: Convert to Email
+    
+    **Prompt**: 
+    ```plaintext
+    Convert these notes into a professional email format with 
+    a clear subject line, greeting, structured body, and 
+    appropriate closing.
+    ```
+  </Accordion>
+</AccordionGroup>
+
+### Analysis Prompts
+
+<AccordionGroup>
+  <Accordion title="Meeting Summary">
+    **Name**: Summarize Meeting
+    
+    **Prompt**: 
+    ```plaintext
+    Analyze these meeting notes and provide:
+    1. Key discussion points
+    2. Decisions made with rationale
+    3. Action items with assigned owners
+    4. Unresolved questions or concerns
+    ```
+  </Accordion>
+  
+  <Accordion title="Document Review">
+    **Name**: Review Proposal
+    
+    **Prompt**: 
+    ```plaintext
+    Review this proposal and provide:
+    - Strengths and compelling points
+    - Potential weaknesses or gaps
+    - Questions that should be addressed
+    - Suggestions for improvement
+    ```
+  </Accordion>
+</AccordionGroup>
+
+### Development Prompts
+
+<AccordionGroup>
+  <Accordion title="Code Review">
+    **Name**: Code Review Checklist
+    
+    **Prompt**: 
+    ```plaintext
+    Review this code for:
+    - Code quality and readability
+    - Potential bugs or errors
+    - Performance considerations
+    - Best practices and patterns
+    Provide specific suggestions for improvement.
+    ```
+  </Accordion>
+  
+  <Accordion title="API Documentation">
+    **Name**: Generate API Docs
+    
+    **Prompt**: 
+    ```plaintext
+    Generate API documentation for this endpoint including:
+    - Description and purpose
+    - Request parameters and types
+    - Response format and examples
+    - Error codes and handling
+    - Usage examples in cURL and JavaScript
+    ```
+  </Accordion>
+</AccordionGroup>
+
+## Advanced Custom Prompts
+
+### Parameterized Prompts
+
+Create prompts with placeholders for variables:
+
+```plaintext
+Name: "Product Feature Description"
+Prompt: "Write a product feature description for [FEATURE_NAME] 
+that highlights [KEY_BENEFIT] and targets [AUDIENCE]. 
+Include a compelling headline and 2-3 supporting bullet points."
+```
+
+When using this prompt, replace the bracketed placeholders with specific values.
+
+### Multi-Step Prompts
+
+Create complex prompts with multiple stages:
+
+```plaintext
+Name: "Comprehensive Content Review"
+Prompt: 
+"Step 1: Read the content and identify the main purpose and audience.
+Step 2: Evaluate clarity, structure, and readability.
+Step 3: Check for factual accuracy and completeness.
+Step 4: Provide a summary with specific improvement recommendations."
+```
+
+### Context-Rich Prompts
+
+Include context and constraints in your prompts:
+
+```plaintext
+Name: "User Story Generation"
+Prompt: "Create user stories following this format:
+'As a [user type], I want to [action], so that [benefit].'
+
+Context:
+- Follow Agile/Scrum best practices
+- Include acceptance criteria
+- Estimate story points (1, 2, 3, 5, 8)
+- Identify dependencies or risks"
+```
+
+## Organizing Your Prompt Library
+
+### Database Structure
+
+Optimal database setup for Custom Prompts:
+
+| Property | Type | Purpose |
+|----------|------|----------|
+| **Name** | Text | Prompt identifier |
+| **Prompt** | Text | The actual prompt content |
+| **Category** | Select | Group by type (Writing, Code, Analysis) |
+| **Use Case** | Multi-select | Specific applications |
+| **Model** | Select | Best AI model for this prompt |
+| **Variables** | Text | List of placeholders to fill |
+| **Version** | Number | Track prompt iterations |
+| **Last Used** | Date | Track usage frequency |
+
+### Categories to Consider
+
+<CardGroup cols={2}>
+  <Card title="Content Creation" icon="pen">
+    Writing, editing, formatting, and content improvement prompts
+  </Card>
+  
+  <Card title="Analysis" icon="chart-line">
+    Summarization, review, comparison, and evaluation prompts
+  </Card>
+  
+  <Card title="Development" icon="code">
+    Code review, documentation, debugging, and testing prompts
+  </Card>
+  
+  <Card title="Planning" icon="calendar">
+    Project planning, brainstorming, and strategy prompts
+  </Card>
+</CardGroup>
+
+### Using Views for Organization
+
+Create different database views for prompt organization:
+
+- **By Category** - Board view grouped by Category
+- **By Frequency** - Sort by Last Used date
+- **By Project** - Filter prompts for specific projects
+- **Favorites** - Filter for most-used prompts
+
+## Sharing Custom Prompts
+
+### Team Prompt Libraries
+
+Share your prompt database with team members:
+
+1. Set appropriate **sharing permissions** on the database page
+2. Team members can load the shared database as custom prompts
+3. Everyone uses the same standardized prompts
+4. Update prompts centrally for entire team
+
+<Note>
+  When you update prompts in the database, changes are immediately available to everyone using that database as a custom prompt source.
+</Note>
+
+### Project-Specific Prompts
+
+Create separate prompt databases for different projects:
+
+- **Marketing Prompts** - Social media, blog posts, campaigns
+- **Engineering Prompts** - Code review, documentation, architecture
+- **Product Prompts** - User stories, feature specs, requirements
+- **Support Prompts** - Response templates, troubleshooting guides
+
+## Best Practices
+
+<CardGroup cols={2}>
+  <Card title="Be Specific" icon="bullseye">
+    Clear, detailed prompts produce better AI responses. Include format, tone, and length requirements.
+  </Card>
+  
+  <Card title="Test and Iterate" icon="arrows-rotate">
+    Refine prompts based on AI outputs. Track versions to compare effectiveness.
+  </Card>
+  
+  <Card title="Include Examples" icon="list-check">
+    Add example outputs in your prompts to guide the AI's response format.
+  </Card>
+  
+  <Card title="Document Variables" icon="brackets-curly">
+    List all placeholders and variables that need to be filled when using the prompt.
+  </Card>
+</CardGroup>
+
+### Writing Effective Prompts
+
+<Steps>
+  <Step title="Define the Task">
+    Start with a clear action verb: "Summarize", "Analyze", "Generate", "Review"
+  </Step>
+  
+  <Step title="Provide Context">
+    Include relevant background, constraints, and requirements
+  </Step>
+  
+  <Step title="Specify Format">
+    Define how the output should be structured (bullets, paragraphs, tables)
+  </Step>
+  
+  <Step title="Set Tone and Style">
+    Indicate the desired tone: professional, casual, technical, etc.
+  </Step>
+  
+  <Step title="Add Examples">
+    Show what good output looks like with concrete examples
+  </Step>
+</Steps>
+
+## Troubleshooting
+
+### Prompts Not Appearing
+
+If your custom prompts don't show up:
+
+1. Verify the database page is loaded as a custom prompt source
+2. Check that the database has the correct property names
+3. Ensure the database has at least one row with prompt content
+4. Reload the custom prompt source
+
+### Inconsistent AI Responses
+
+If the AI gives varying results with the same prompt:
+
+- Make the prompt more specific and detailed
+- Include examples of desired outputs
+- Specify format and structure requirements
+- Mention what to avoid or exclude
+
+### Managing Multiple Prompt Libraries
+
+- Use clear naming for database pages: "Team Prompts - Marketing"
+- Unload unused prompt libraries to reduce clutter
+- Create a master database linking to all prompt libraries
+- Document which prompts work best with which AI models
+
+## Custom Prompts vs. AppFlowy Prompt Library
+
+| Feature | Custom Prompts | Built-in Library |
+|---------|----------------|------------------|
+| **Source** | Your database pages | Pre-built by AppFlowy |
+| **Customization** | Fully customizable | Fixed prompts |
+| **Sharing** | Share with team | Available to all users |
+| **Updates** | You control updates | Updated by AppFlowy |
+| **Use Case** | Organization-specific | General purpose |
+
+<Tip>
+  Use both! Leverage the built-in library for common tasks and create custom prompts for your specific workflows.
+</Tip>
+
+## Related Features
+
+<CardGroup cols={2}>
+  <Card title="AI Chat" icon="comments" href="/ai/ai-chat">
+    Use custom prompts in interactive AI conversations
+  </Card>
+  
+  <Card title="Databases" icon="table" href="/core/databases">
+    Learn more about creating and organizing databases
+  </Card>
+  
+  <Card title="Templates" icon="file-lines" href="/core/templates">
+    Create reusable document and database templates
+  </Card>
+  
+  <Card title="Collaboration" icon="users" href="/collaboration/sharing">
+    Share prompt libraries with your team
+  </Card>
+</CardGroup>

@@ -1,0 +1,278 @@
+---
+title: "Installation"
+description: "Download and install AppFlowy on your device"
+---
+
+AppFlowy is available on Desktop (macOS, Windows, Linux), iOS, and Android. Choose your platform below to get started.
+
+## System Requirements
+
+Before installing AppFlowy, ensure your system meets these minimum requirements:
+
+<Tabs>
+  <Tab title="Desktop">
+    ### macOS
+    - macOS 10.15 (Catalina) or later
+    - Apple Silicon (M1/M2/M3) or Intel processor
+    - 4GB RAM minimum, 8GB recommended
+
+    ### Windows
+    - Windows 10 (64-bit) or later
+    - 4GB RAM minimum, 8GB recommended
+    - x86_64 processor
+
+    ### Linux
+    - Ubuntu 20.04 or later (or equivalent)
+    - 4GB RAM minimum, 8GB recommended
+    - x86_64 or ARM64 processor
+  </Tab>
+  <Tab title="iOS">
+    - iOS 13.0 or later
+    - iPhone 6s or newer
+    - iPad Air 2 or newer
+    - 100MB free storage
+  </Tab>
+  <Tab title="Android">
+    - Android 10 or later
+    - ARMv8 (64-bit) processor
+    - ARMv7 is not supported
+    - 100MB free storage
+  </Tab>
+</Tabs>
+
+## Installation Instructions
+
+<Tabs>
+  <Tab title="macOS">
+    <Steps>
+      <Step title="Download AppFlowy">
+        Download the latest macOS installer from [GitHub Releases](https://github.com/AppFlowy-IO/AppFlowy/releases).
+
+        AppFlowy automatically detects your processor type (Apple Silicon or Intel).
+      </Step>
+      <Step title="Install the application">
+        1. Open the downloaded `.dmg` file
+        2. Drag **AppFlowy** to your **Applications** folder
+        3. Launch AppFlowy from Applications
+      </Step>
+      <Step title="Grant permissions (first launch)">
+        On first launch, macOS may show a security warning:
+
+        1. Go to **System Settings** > **Privacy & Security**
+        2. Click **Open Anyway** next to the AppFlowy warning
+        3. Confirm by clicking **Open**
+      </Step>
+    </Steps>
+
+    <Tip>
+      AppFlowy will automatically check for updates. You can disable this in **Settings** > **General** > **Auto-update**.
+    </Tip>
+  </Tab>
+
+  <Tab title="Windows">
+    <Steps>
+      <Step title="Download AppFlowy">
+        Download the Windows installer from [GitHub Releases](https://github.com/AppFlowy-IO/AppFlowy/releases).
+
+        Look for the file named `AppFlowy-*-windows-x86_64.exe`.
+      </Step>
+      <Step title="Run the installer">
+        1. Double-click the downloaded `.exe` file
+        2. If Windows SmartScreen appears, click **More info** then **Run anyway**
+        3. Follow the installation wizard
+        4. Choose your installation directory (default: `C:\Program Files\AppFlowy`)
+      </Step>
+      <Step title="Launch AppFlowy">
+        AppFlowy will launch automatically after installation. You can also launch it from:
+        - Start menu
+        - Desktop shortcut (if created during installation)
+      </Step>
+    </Steps>
+  </Tab>
+
+  <Tab title="Linux">
+    AppFlowy is available through multiple installation methods on Linux:
+
+    <CodeGroup>
+      ```bash GitHub Releases (tar.gz)
+      # Download the latest release
+      curl -L https://github.com/AppFlowy-IO/AppFlowy/releases/latest/download/AppFlowy-*-linux-x86_64.tar.gz -o AppFlowy.tar.gz
+
+      # Extract to /opt
+      sudo tar -xzf AppFlowy.tar.gz -C /opt
+
+      # Run AppFlowy
+      cd /opt/AppFlowy
+      ./AppFlowy
+      ```
+
+      ```bash Flatpak
+      # Install from Flathub
+      flatpak install flathub io.appflowy.AppFlowy
+
+      # Run AppFlowy
+      flatpak run io.appflowy.AppFlowy
+      ```
+
+      ```bash Snap
+      # Install from Snapcraft
+      sudo snap install appflowy
+
+      # Run AppFlowy
+      appflowy
+      ```
+
+      ```bash Install Script
+      # Download and run the install script
+      curl -fsSL https://raw.githubusercontent.com/AppFlowy-IO/AppFlowy/main/install.sh | bash
+
+      # The script installs to /opt/AppFlowy by default
+      # Customize installation directory:
+      curl -fsSL https://raw.githubusercontent.com/AppFlowy-IO/AppFlowy/main/install.sh | bash -s -- -b /usr/local
+      ```
+    </CodeGroup>
+
+    <Note>
+      The install script supports multiple architectures: x86_64, ARM64, ARMv6, and ARMv7.
+    </Note>
+
+    ### Creating a Desktop Entry
+
+    For manual installations (tar.gz or install script), create a desktop entry:
+
+    ```bash
+    cat > ~/.local/share/applications/appflowy.desktop <<EOF
+    [Desktop Entry]
+    Name=AppFlowy
+    Exec=/opt/AppFlowy/AppFlowy
+    Icon=/opt/AppFlowy/assets/icons/icon.png
+    Type=Application
+    Categories=Office;Productivity;
+    EOF
+    ```
+  </Tab>
+
+  <Tab title="iOS">
+    <Steps>
+      <Step title="Open the App Store">
+        Launch the **App Store** on your iPhone or iPad.
+      </Step>
+      <Step title="Search for AppFlowy">
+        Search for "AppFlowy" or visit:
+        
+        [Download on App Store](https://apps.apple.com/app/appflowy/id6457261352)
+      </Step>
+      <Step title="Install and open">
+        1. Tap **Get** to download AppFlowy
+        2. Authenticate with Face ID, Touch ID, or your Apple ID password
+        3. Tap **Open** to launch AppFlowy
+      </Step>
+    </Steps>
+
+    <Tip>
+      AppFlowy for iOS supports widgets for quick access to recent and favorite pages. Configure them after installation.
+    </Tip>
+  </Tab>
+
+  <Tab title="Android">
+    <Steps>
+      <Step title="Open Google Play Store">
+        Launch **Google Play Store** on your Android device.
+      </Step>
+      <Step title="Search for AppFlowy">
+        Search for "AppFlowy" or visit:
+        
+        [Download on Google Play](https://play.google.com/store/apps/details?id=io.appflowy.appflowy)
+      </Step>
+      <Step title="Install and open">
+        1. Tap **Install** to download AppFlowy
+        2. Once installed, tap **Open**
+        3. Grant any necessary permissions when prompted
+      </Step>
+    </Steps>
+
+    <Note>
+      Android 10 or above is required. ARMv7 devices are not supported.
+    </Note>
+  </Tab>
+</Tabs>
+
+## Verification
+
+After installation, verify AppFlowy is working correctly:
+
+1. Launch AppFlowy
+2. You should see the welcome screen
+3. The app should open without errors
+
+If you encounter any issues, see our [troubleshooting guide](#troubleshooting) below.
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="macOS: 'AppFlowy cannot be opened because the developer cannot be verified'">
+    This is a security feature in macOS. To resolve:
+
+    1. Open **System Settings** > **Privacy & Security**
+    2. Scroll down to find the AppFlowy warning
+    3. Click **Open Anyway**
+    4. Confirm by clicking **Open** in the dialog
+  </Accordion>
+
+  <Accordion title="Windows: 'Windows protected your PC' SmartScreen warning">
+    This is expected for new versions:
+
+    1. Click **More info** on the SmartScreen dialog
+    2. Click **Run anyway**
+    
+    AppFlowy is open source and safe to install.
+  </Accordion>
+
+  <Accordion title="Linux: Missing dependencies error">
+    Install required dependencies:
+
+    ```bash Ubuntu/Debian
+    sudo apt-get update
+    sudo apt-get install libgtk-3-0 libwebkit2gtk-4.0-37
+    ```
+
+    ```bash Fedora
+    sudo dnf install gtk3 webkit2gtk3
+    ```
+  </Accordion>
+
+  <Accordion title="App won't launch or crashes on startup">
+    Try these steps:
+
+    1. **Restart your device**
+    2. **Clear app cache** (mobile only)
+    3. **Reinstall AppFlowy**
+    4. Check if you meet the [system requirements](#system-requirements)
+
+    If the issue persists, report it on [GitHub Issues](https://github.com/AppFlowy-IO/AppFlowy/issues).
+  </Accordion>
+</AccordionGroup>
+
+## Alternative Installation Methods
+
+<CardGroup cols={2}>
+  <Card title="Self-Hosting" icon="server" href="/self-hosting/overview">
+    Deploy AppFlowy on your own infrastructure for complete control
+  </Card>
+  <Card title="Build from Source" icon="code" href="/developer/building-desktop">
+    Compile AppFlowy yourself from the source code
+  </Card>
+</CardGroup>
+
+## Next Steps
+
+Now that AppFlowy is installed:
+
+<CardGroup cols={2}>
+  <Card title="Quick Start" icon="rocket" href="/getting-started/quickstart">
+    Get up and running in under 5 minutes
+  </Card>
+  <Card title="Account Setup" icon="user" href="/getting-started/account-setup">
+    Create your account and customize your profile
+  </Card>
+</CardGroup>

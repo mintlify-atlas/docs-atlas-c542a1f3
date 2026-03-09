@@ -1,0 +1,470 @@
+---
+title: Development Environment Setup
+description: Set up your development environment to build AppFlowy from source
+---
+
+This guide will help you set up your development environment for building and running AppFlowy from source.
+
+## Prerequisites
+
+<CardGroup cols={2}>
+  <Card title="Flutter SDK" icon="mobile">
+    Version 3.13.19 or higher
+  </Card>
+  
+  <Card title="Rust Toolchain" icon="gear">
+    Version 1.70 or higher
+  </Card>
+  
+  <Card title="Git" icon="code-branch">
+    For cloning the repository
+  </Card>
+  
+  <Card title="Build Tools" icon="hammer">
+    Platform-specific compilers and SDKs
+  </Card>
+</CardGroup>
+
+## Installing Flutter
+
+<Steps>
+  <Step title="Download Flutter SDK">
+    Download the Flutter SDK from the [official website](https://flutter.dev/docs/get-started/install):
+    
+    <Tabs>
+      <Tab title="macOS">
+        ```bash
+        # Download Flutter
+        cd ~/development
+        git clone https://github.com/flutter/flutter.git -b stable
+        
+        # Add to PATH
+        export PATH="$PATH:$HOME/development/flutter/bin"
+        ```
+      </Tab>
+      
+      <Tab title="Linux">
+        ```bash
+        # Download Flutter
+        cd ~/development
+        git clone https://github.com/flutter/flutter.git -b stable
+        
+        # Add to PATH
+        export PATH="$PATH:$HOME/development/flutter/bin"
+        ```
+      </Tab>
+      
+      <Tab title="Windows">
+        Download the Flutter SDK zip file and extract it to `C:\src\flutter`.
+        
+        Add `C:\src\flutter\bin` to your PATH environment variable.
+      </Tab>
+    </Tabs>
+  </Step>
+  
+  <Step title="Verify installation">
+    ```bash
+    flutter --version
+    flutter doctor
+    ```
+    
+    The output should show Flutter 3.13.19 or higher.
+  </Step>
+  
+  <Step title="Install required Flutter dependencies">
+    ```bash
+    flutter doctor --android-licenses  # Accept Android licenses if building for mobile
+    flutter config --enable-macos-desktop  # Enable desktop support
+    flutter config --enable-linux-desktop
+    flutter config --enable-windows-desktop
+    ```
+  </Step>
+</Steps>
+
+## Installing Rust
+
+<Steps>
+  <Step title="Install rustup">
+    <Tabs>
+      <Tab title="macOS/Linux">
+        ```bash
+        curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+        ```
+      </Tab>
+      
+      <Tab title="Windows">
+        Download and run [rustup-init.exe](https://rustup.rs/).
+      </Tab>
+    </Tabs>
+  </Step>
+  
+  <Step title="Verify installation">
+    ```bash
+    rustc --version
+    cargo --version
+    ```
+    
+    You should see Rust 1.70 or higher.
+  </Step>
+  
+  <Step title="Install required Rust components">
+    ```bash
+    # Install the stable toolchain
+    rustup default stable
+    
+    # Add platform targets
+    rustup target add aarch64-apple-darwin    # macOS ARM
+    rustup target add x86_64-apple-darwin     # macOS Intel
+    rustup target add x86_64-pc-windows-msvc  # Windows
+    rustup target add x86_64-unknown-linux-gnu # Linux
+    ```
+  </Step>
+</Steps>
+
+## Installing cargo-make
+
+AppFlowy uses `cargo-make` for build automation:
+
+```bash
+cargo install cargo-make
+```
+
+Verify installation:
+
+```bash
+cargo make --version
+```
+
+## Platform-Specific Setup
+
+<Tabs>
+  <Tab title="macOS">
+    ### macOS Requirements
+    
+    <Steps>
+      <Step title="Install Xcode">
+        Install Xcode from the App Store or download from [developer.apple.com](https://developer.apple.com/xcode/).
+        
+        ```bash
+        # Install Xcode Command Line Tools
+        xcode-select --install
+        
+        # Accept license
+        sudo xcodebuild -license accept
+        ```
+      </Step>
+      
+      <Step title="Install Homebrew">
+        ```bash
+        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+        ```
+      </Step>
+      
+      <Step title="Install dependencies">
+        ```bash
+        brew install protobuf
+        ```
+      </Step>
+    </Steps>
+  </Tab>
+  
+  <Tab title="Linux">
+    ### Linux Requirements
+    
+    <Steps>
+      <Step title="Install build essentials">
+        <CodeGroup>
+        ```bash Ubuntu/Debian
+        sudo apt-get update
+        sudo apt-get install -y \
+          curl \
+          build-essential \
+          libssl-dev \
+          clang \
+          cmake \
+          ninja-build \
+          pkg-config \
+          libgtk-3-dev \
+          libsqlite3-dev \
+          protobuf-compiler
+        ```
+        
+        ```bash Fedora
+        sudo dnf install -y \
+          curl \
+          gcc-c++ \
+          openssl-devel \
+          clang \
+          cmake \
+          ninja-build \
+          pkgconfig \
+          gtk3-devel \
+          sqlite-devel \
+          protobuf-compiler
+        ```
+        
+        ```bash Arch
+        sudo pacman -S --needed \
+          curl \
+          base-devel \
+          openssl \
+          clang \
+          cmake \
+          ninja \
+          pkgconf \
+          gtk3 \
+          sqlite \
+          protobuf
+        ```
+        </CodeGroup>
+      </Step>
+    </Steps>
+  </Tab>
+  
+  <Tab title="Windows">
+    ### Windows Requirements
+    
+    <Steps>
+      <Step title="Install Visual Studio">
+        Download and install [Visual Studio 2022](https://visualstudio.microsoft.com/downloads/).
+        
+        During installation, select:
+        - Desktop development with C++
+        - Windows 10/11 SDK
+      </Step>
+      
+      <Step title="Install vcpkg">
+        ```powershell
+        # Clone vcpkg
+        git clone https://github.com/Microsoft/vcpkg.git C:\vcpkg
+        cd C:\vcpkg
+        .\bootstrap-vcpkg.bat
+        
+        # Install dependencies
+        .\vcpkg install protobuf:x64-windows
+        ```
+      </Step>
+      
+      <Step title="Set environment variables">
+        Add to your system PATH:
+        - `C:\vcpkg`
+        - `C:\src\flutter\bin`
+      </Step>
+    </Steps>
+  </Tab>
+</Tabs>
+
+## Clone the Repository
+
+<Steps>
+  <Step title="Clone AppFlowy">
+    ```bash
+    git clone https://github.com/AppFlowy-IO/AppFlowy.git
+    cd AppFlowy
+    ```
+  </Step>
+  
+  <Step title="Navigate to frontend">
+    ```bash
+    cd frontend
+    ```
+  </Step>
+</Steps>
+
+## Repository Structure
+
+Understanding the repository layout:
+
+```
+AppFlowy/
+├── frontend/
+│   ├── appflowy_flutter/    # Flutter application
+│   ├── rust-lib/            # Rust backend
+│   ├── scripts/             # Build scripts
+│   └── Makefile.toml        # Build configuration
+├── doc/                     # Documentation
+├── README.md
+└── LICENSE
+```
+
+<Note>
+All build commands should be run from the `frontend/` directory.
+</Note>
+
+## Verify Setup
+
+<Steps>
+  <Step title="Check Flutter">
+    ```bash
+    flutter doctor -v
+    ```
+    
+    Ensure all required components are installed.
+  </Step>
+  
+  <Step title="Check Rust">
+    ```bash
+    rustc --version
+    cargo --version
+    cargo make --version
+    ```
+  </Step>
+  
+  <Step title="Install Flutter dependencies">
+    ```bash
+    cd appflowy_flutter
+    flutter pub get
+    ```
+  </Step>
+</Steps>
+
+## IDE Setup
+
+<Tabs>
+  <Tab title="VS Code">
+    ### Visual Studio Code
+    
+    Install recommended extensions:
+    
+    ```json
+    {
+      "recommendations": [
+        "dart-code.dart-code",
+        "dart-code.flutter",
+        "rust-lang.rust-analyzer",
+        "tamasfe.even-better-toml",
+        "vadimcn.vscode-lldb"
+      ]
+    }
+    ```
+    
+    Open the workspace:
+    
+    ```bash
+    code AppFlowy/
+    ```
+  </Tab>
+  
+  <Tab title="Android Studio">
+    ### Android Studio / IntelliJ IDEA
+    
+    Install plugins:
+    - Flutter
+    - Dart
+    - Rust
+    
+    Open the project:
+    - File → Open
+    - Select the `AppFlowy/frontend/appflowy_flutter` directory
+  </Tab>
+</Tabs>
+
+## Build Tools
+
+### Protobuf
+
+AppFlowy uses Protocol Buffers for serialization:
+
+```bash
+# Verify protobuf installation
+protoc --version
+```
+
+If not installed:
+
+<Tabs>
+  <Tab title="macOS">
+    ```bash
+    brew install protobuf
+    ```
+  </Tab>
+  
+  <Tab title="Linux">
+    ```bash
+    # Ubuntu/Debian
+    sudo apt-get install protobuf-compiler
+    
+    # Fedora
+    sudo dnf install protobuf-compiler
+    ```
+  </Tab>
+  
+  <Tab title="Windows">
+    ```powershell
+    # Using vcpkg
+    vcpkg install protobuf:x64-windows
+    ```
+  </Tab>
+</Tabs>
+
+## Next Steps
+
+Now that your environment is set up, you can build AppFlowy:
+
+<CardGroup cols={2}>
+  <Card title="Building Desktop" href="/developer/building-desktop" icon="desktop">
+    Build AppFlowy for macOS, Windows, or Linux
+  </Card>
+  
+  <Card title="Building Mobile" href="/developer/building-mobile" icon="mobile">
+    Build AppFlowy for iOS or Android
+  </Card>
+  
+  <Card title="Architecture" href="/developer/architecture" icon="diagram-project">
+    Learn about AppFlowy's architecture
+  </Card>
+  
+  <Card title="Contributing" href="/developer/contributing" icon="code-pull-request">
+    Start contributing to AppFlowy
+  </Card>
+</CardGroup>
+
+## Troubleshooting
+
+<Warning>
+If you encounter issues during setup, check the following:
+</Warning>
+
+### Common Issues
+
+<Tabs>
+  <Tab title="Flutter">
+    **Flutter doctor shows issues:**
+    
+    ```bash
+    # Update Flutter
+    flutter upgrade
+    
+    # Clean and reinstall
+    flutter clean
+    flutter pub get
+    ```
+  </Tab>
+  
+  <Tab title="Rust">
+    **Rust compilation fails:**
+    
+    ```bash
+    # Update Rust
+    rustup update
+    
+    # Clean build
+    cargo clean
+    ```
+  </Tab>
+  
+  <Tab title="Protobuf">
+    **Protobuf errors:**
+    
+    Make sure `protoc` is in your PATH:
+    
+    ```bash
+    which protoc  # macOS/Linux
+    where protoc  # Windows
+    ```
+  </Tab>
+</Tabs>
+
+<Note>
+For more help, join the [AppFlowy Discord](https://discord.gg/9Q2xaN37tV) community.
+</Note>

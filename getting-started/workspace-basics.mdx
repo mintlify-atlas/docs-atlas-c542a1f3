@@ -1,0 +1,392 @@
+---
+title: "Workspace Basics"
+description: "Understand AppFlowy's workspace structure, navigation, and organization"
+---
+
+AppFlowy organizes your content in a flexible hierarchy. Understanding workspaces, folders, pages, and views will help you stay organized as your content grows.
+
+## Understanding Workspaces
+
+A **workspace** is your top-level container for all content. Think of it as a complete, self-contained environment.
+
+### Workspace Types
+
+AppFlowy offers two types of workspaces:
+
+<CardGroup cols={2}>
+  <Card title="Cloud Workspace" icon="cloud">
+    - Syncs across all your devices
+    - Enables real-time collaboration
+    - Uses cloud-powered AI features
+    - Requires an AppFlowy account
+    - Data stored securely in the cloud
+  </Card>
+  <Card title="Vault Workspace" icon="vault">
+    - Completely offline and private
+    - No data leaves your device
+    - AI runs locally with your models
+    - No account required
+    - Perfect for sensitive information
+  </Card>
+</CardGroup>
+
+### Creating Multiple Workspaces
+
+You can create and manage multiple workspaces:
+
+<Steps>
+  <Step title="Open workspace menu">
+    Click your workspace name in the top-left corner of the sidebar.
+  </Step>
+  <Step title="Create new workspace">
+    Select **Create New Workspace** from the dropdown.
+  </Step>
+  <Step title="Choose workspace type">
+    Pick Cloud or Vault based on your needs.
+  </Step>
+  <Step title="Name your workspace">
+    Give it a descriptive name (e.g., "Personal", "Work", "Client Projects").
+  </Step>
+</Steps>
+
+<Tip>
+  **Use case ideas**: Create separate workspaces for work and personal life, different clients, or public vs. private content.
+</Tip>
+
+### Switching Between Workspaces
+
+To switch workspaces:
+
+1. Click your workspace name in the sidebar
+2. Select the workspace you want from the dropdown
+3. AppFlowy switches instantly
+
+## Content Hierarchy
+
+AppFlowy uses a simple, flexible hierarchy:
+
+```
+Workspace
+├── Folder (optional)
+│   ├── Page
+│   ├── Page
+│   └── Subfolder
+│       └── Page
+├── Page
+└── Page
+    └── Subpage (nested)
+```
+
+### Pages
+
+**Pages** are the core building blocks. Each page can be:
+
+- **Document** - Rich text with blocks, embeds, and AI
+- **Grid** - Database with spreadsheet-like table view
+- **Board** - Kanban board for visual task management
+- **Calendar** - Date-based organization
+
+<Note>
+  Pages can contain subpages, creating unlimited nesting levels. Simply drag one page onto another to nest it.
+</Note>
+
+### Folders
+
+**Folders** help organize related pages:
+
+- Create folders from the sidebar right-click menu
+- Drag and drop pages into folders
+- Collapse/expand folders to hide contents
+- Use emojis or icons to visually distinguish folders
+
+### Views (in Database Pages)
+
+Database pages support multiple **views** of the same data:
+
+- **Grid View** - Traditional table layout
+- **Board View** - Kanban cards grouped by status
+- **Calendar View** - Items organized by date
+
+Each view can have its own filters, sorts, and display settings.
+
+## Navigating Your Workspace
+
+### Sidebar Navigation
+
+The left sidebar is your command center:
+
+<AccordionGroup>
+  <Accordion title="Favorites" icon="star">
+    Quick access to your most-used pages:
+
+    - Star any page by hovering and clicking the star icon
+    - Appears at the top of your sidebar
+    - Drag to reorder favorites
+  </Accordion>
+
+  <Accordion title="Private Pages" icon="folder">
+    Your personal pages and folders:
+
+    - Default location for new pages
+    - Organize with folders and subfolders
+    - Only visible to you (unless shared)
+  </Accordion>
+
+  <Accordion title="Shared with Me" icon="users">
+    Pages others have shared with you:
+
+    - Automatically appears when someone shares a page
+    - Shows permission level (View or Edit)
+    - Separate from your private pages
+  </Accordion>
+
+  <Accordion title="Trash" icon="trash">
+    Deleted pages are stored here for 30 days:
+
+    - Right-click a page and select **Move to Trash**
+    - Restore pages from trash anytime
+    - Permanently delete or empty trash after 30 days
+  </Accordion>
+</AccordionGroup>
+
+### Quick Search
+
+The fastest way to find content:
+
+<Tabs>
+  <Tab title="Keyboard Shortcut">
+    Press `Cmd + P` (macOS) or `Ctrl + P` (Windows/Linux) to open quick search.
+  </Tab>
+  <Tab title="Search Box">
+    Click the search icon in the top-right of the sidebar.
+  </Tab>
+</Tabs>
+
+**Search capabilities:**
+
+- **Title search** - Type page names for instant results
+- **AI search** - Ask natural language questions
+- **Recent pages** - Shows your recent history
+- **Keywords** - Search by tags or content
+
+<Tip>
+  Try AI-powered search: "Show me all my meeting notes from last week" or "Find pages about the marketing campaign".
+</Tip>
+
+### Breadcrumbs
+
+Breadcrumbs at the top of each page show your location:
+
+```
+Workspace > Projects > Client A > Meeting Notes
+```
+
+- Click any breadcrumb to navigate up the hierarchy
+- Useful for understanding page location
+- Shows nested page structure
+
+## Organizing Content
+
+### Creating a Logical Structure
+
+Best practices for organization:
+
+<Steps>
+  <Step title="Start with main categories">
+    Create top-level folders for major areas:
+    - Projects
+    - Personal
+    - Reference
+    - Archive
+  </Step>
+
+  <Step title="Use subfolders for projects">
+    Break down projects into logical groups:
+    ```
+    Projects
+    ├── Client A
+    │   ├── Meeting Notes
+    │   ├── Deliverables
+    │   └── Resources
+    └── Client B
+    ```
+  </Step>
+
+  <Step title="Leverage favorites">
+    Star your active pages for quick access:
+    - Current project pages
+    - Daily notes or task lists
+    - Frequently referenced docs
+  </Step>
+
+  <Step title="Archive completed work">
+    Move finished projects to an Archive folder:
+    - Keeps sidebar clean
+    - Preserves history
+    - Easy to find if needed
+  </Step>
+</Steps>
+
+### Using Icons and Emojis
+
+Make pages and folders visually distinct:
+
+1. Click the page icon (or placeholder) next to the title
+2. Choose from:
+   - **Emoji picker** - Thousands of emojis
+   - **Icon library** - Professional icons
+   - **Upload image** - Custom images
+3. Icons appear in sidebar and breadcrumbs
+
+<Tip>
+  Use consistent icons for similar content types (📊 for databases, 📝 for notes, 🎯 for projects).
+</Tip>
+
+### Drag and Drop
+
+Rearrange your workspace effortlessly:
+
+- **Reorder pages** - Drag pages up or down in the sidebar
+- **Create nesting** - Drag a page onto another to make it a subpage
+- **Move to folders** - Drag pages into folders
+- **Reorganize folders** - Drag folders to different locations
+
+## Managing Pages
+
+### Page Actions
+
+Right-click any page in the sidebar for options:
+
+| Action | Description |
+|--------|-------------|
+| **Rename** | Change the page title |
+| **Duplicate** | Create a copy with all content |
+| **Move to** | Relocate to a different folder |
+| **Share** | Invite collaborators with permissions |
+| **Add to favorites** | Pin to top of sidebar |
+| **Copy link** | Get shareable URL |
+| **Move to trash** | Delete the page |
+| **Properties** | View metadata and settings |
+
+### Page Properties
+
+Every page has customizable properties:
+
+- **Icon** - Visual identifier
+- **Cover image** - Banner at the top of the page
+- **Description** - Brief summary
+- **Created/Modified dates** - Automatic timestamps
+- **Custom properties** - Add your own metadata
+
+Access properties by clicking the **⋯** menu in the page title.
+
+### Duplicating and Templates
+
+**Duplicate a page** to reuse structure:
+
+1. Right-click the page in the sidebar
+2. Select **Duplicate**
+3. A copy appears with "(Copy)" suffix
+4. Rename and edit as needed
+
+**Save as template** for frequent reuse:
+
+1. Open the page you want to save
+2. Click **⋯** > **Save as Template**
+3. Choose a category
+4. Access from **New Page** > **Templates**
+
+Learn more in [Templates](/core/templates).
+
+## Workspace Settings
+
+Customize your workspace behavior:
+
+### Accessing Settings
+
+1. Click your workspace name in the sidebar
+2. Select **Settings** from the dropdown
+3. Browse settings categories:
+   - **General** - Workspace name, language, theme
+   - **Members** - Manage collaborators and permissions
+   - **Appearance** - Font size, color theme
+   - **Sync** - Sync status and history
+   - **AI** - Configure AI models and features
+
+### Key Settings to Configure
+
+<AccordionGroup>
+  <Accordion title="Language & Region" icon="globe">
+    - **Language** - Interface language
+    - **Date format** - MM/DD/YYYY or DD/MM/YYYY
+    - **Time format** - 12-hour or 24-hour
+    - **Week starts on** - Sunday or Monday
+    - **Timezone** - For accurate timestamps
+  </Accordion>
+
+  <Accordion title="Appearance" icon="palette">
+    - **Theme** - Light, Dark, or System auto-switching
+    - **Font** - Choose from available fonts
+    - **Font size** - Adjust for readability
+    - **Document width** - Full width or centered
+  </Accordion>
+
+  <Accordion title="Members & Permissions" icon="users">
+    - View all workspace members
+    - See pending invitations
+    - Change member roles
+    - Remove members
+    - Manage guest editors
+    
+    See [Permissions](/collaboration/permissions) for details.
+  </Accordion>
+</AccordionGroup>
+
+## Tips for Staying Organized
+
+<CardGroup cols={2}>
+  <Card title="Weekly Review" icon="calendar-check">
+    Spend 10 minutes each week:
+    - Archive completed projects
+    - Update favorites
+    - Clean up trash
+    - Review shared pages
+  </Card>
+  <Card title="Naming Conventions" icon="signature">
+    Use consistent naming:
+    - Dates: `YYYY-MM-DD Format`
+    - Projects: `[Client] Project Name`
+    - Meetings: `Meeting - Topic - Date`
+  </Card>
+  <Card title="Color Coding" icon="palette">
+    Use consistent icons/emojis:
+    - 🟢 Active projects
+    - 🟡 In progress
+    - 🔴 Blocked/urgent
+    - ⚪ Archive
+  </Card>
+  <Card title="Link Related Pages" icon="link">
+    Create connections:
+    - Use `@page` to link pages
+    - Build a personal wiki
+    - Create index pages
+    - Use backlinks to see connections
+  </Card>
+</CardGroup>
+
+## Next Steps
+
+<CardGroup cols={2}>
+  <Card title="Account Setup" icon="user" href="/getting-started/account-setup">
+    Customize your profile and preferences
+  </Card>
+  <Card title="Documents" icon="file-lines" href="/core/documents">
+    Learn advanced document editing features
+  </Card>
+  <Card title="Databases" icon="table" href="/core/databases">
+    Create powerful databases with views
+  </Card>
+  <Card title="Collaboration" icon="users" href="/collaboration/sharing">
+    Share pages and work with others
+  </Card>
+</CardGroup>

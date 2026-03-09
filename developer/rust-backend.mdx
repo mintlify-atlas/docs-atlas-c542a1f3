@@ -1,0 +1,470 @@
+---
+title: Rust Backend
+description: Deep dive into the Rust workspace structure and core modules
+---
+
+The AppFlowy Rust backend provides high-performance business logic, data persistence, and collaborative features through a modular workspace architecture.
+
+## Workspace Structure
+
+The Rust codebase is located in `frontend/rust-lib/` and organized as a Cargo workspace:
+
+```
+rust-lib/
+├── Cargo.toml              # Workspace manifest
+├── dart-ffi/               # FFI bridge to Flutter
+├── flowy-core/             # Core coordinator
+├── flowy-user/             # User management
+├── flowy-folder/           # Workspace & folders
+├── flowy-document/         # Document editor
+├── flowy-database2/        # Database views
+├── flowy-ai/               # AI services
+├── flowy-storage/          # File storage
+├── flowy-search/           # Search functionality
+├── flowy-server/           # Server integration
+├── lib-dispatch/           # Event dispatch system
+├── lib-infra/              # Infrastructure utilities
+├── lib-log/                # Logging
+└── build-tool/             # Build tools & codegen
+```
+
+## Core Modules
+
+### `dart-ffi` - FFI Bridge
+
+The FFI layer bridges Dart/Flutter with Rust:
+
+<CardGroup cols={2}>
+  <Card title="Purpose" icon="bridge">
+    Exposes Rust functions to Dart through C-compatible FFI
+  </Card>
+  
+  <Card title="Crate Type" icon="box">
+    Compiled as staticlib (macOS/iOS) or cdylib (Windows/Linux/Android)
+  </Card>
+</CardGroup>
+
+**Key responsibilities:**
+
+- Receives events from Flutter through FFI
+- Marshals data between Dart and Rust
+- Routes events to the dispatch system
+- Sends responses back to Flutter
+
+```rust
+// Example FFI function signature
+#[no_mangle]
+pub extern "C" fn async_event(
+  port: i64,
+  input: *const u8,
+  len: usize,
+) {
+  // Process event and respond
+}
+```
+
+### `flowy-core` - Central Coordinator
+
+The core module orchestrates all other modules:
+
+```rust
+// Key dependencies
+flowy-user
+flowy-folder  
+flowy-document
+flowy-database2
+flowy-ai
+flowy-storage
+flowy-search
+```
+
+**Responsibilities:**
+
+- Application lifecycle management
+- Module initialization and dependency injection
+- Configuration and environment setup
+- Cross-module coordination
+
+### `flowy-user` - User Management
+
+Handles authentication and user profiles:
+
+<Steps>
+  <Step title="Authentication">
+    - Email/password login
+    - OAuth integration (Google, GitHub)
+    - Anonymous sessions
+  </Step>
+  
+  <Step title="User Profile">
+    - Profile management
+    - User preferences
+    - Session management
+  </Step>
+  
+  <Step title="Authorization">
+    - Permission checking
+    - Role-based access control
+  </Step>
+</Steps>
+
+### `flowy-folder` - Workspace & Folders
+
+Manages workspace hierarchy and organization:
+
+```
+Workspace
+├── Folder
+│   ├── View (Document)
+│   ├── View (Database)
+│   └── Folder (nested)
+└── Trash
+```
+
+**Features:**
+
+- Workspace creation and management
+- Folder hierarchy with nesting
+- View organization and ordering
+- Trash and restore functionality
+- Favorites and recent items
+
+### `flowy-document` - Document Editor
+
+Rich text editing with collaborative features:
+
+<CardGroup cols={2}>
+  <Card title="CRDT-based" icon="users">
+    Uses Yrs (Yjs in Rust) for conflict-free collaborative editing
+  </Card>
+  
+  <Card title="Block-based" icon="cube">
+    Document is composed of blocks (paragraphs, headings, lists)
+  </Card>
+</CardGroup>
+
+**Supported blocks:**
+
+- Paragraph, headings (H1-H6)
+- Lists (bulleted, numbered, toggle)
+- Checkboxes and to-do lists
+- Code blocks with syntax highlighting
+- Images and embeds
+- Tables and dividers
+
+### `flowy-database2` - Database Views
+
+Provides multiple views over structured data:
+
+<Tabs>
+  <Tab title="Grid">
+    Spreadsheet-like table view with cells, rows, and columns
+  </Tab>
+  
+  <Tab title="Board">
+    Kanban board with draggable cards
+  </Tab>
+  
+  <Tab title="Calendar">
+    Calendar view for date-based data
+  </Tab>
+  
+  <Tab title="Gallery">
+    Card-based gallery view
+  </Tab>
+</Tabs>
+
+**Features:**
+
+- Multiple field types (text, number, date, select, etc.)
+- Filters and sorts
+- Grouping and aggregation
+- Cell editing and validation
+- Real-time updates
+
+### `flowy-ai` - AI Services
+
+Integrates AI capabilities:
+
+- AI chat interface
+- Text generation and completion
+- Document summarization
+- Translation and rewriting
+- Integration with OpenAI, local LLMs
+
+### `flowy-storage` - File Storage
+
+Manages file uploads and storage:
+
+- Local file caching
+- Cloud storage integration
+- Image optimization
+- File download and upload
+
+### `flowy-search` - Search Functionality
+
+Full-text search powered by **Tantivy**:
+
+```rust
+// Search index for documents, databases, folders
+- Document content indexing
+- Field-based search
+- Fuzzy matching
+- Ranked results
+```
+
+## Infrastructure Modules
+
+### `lib-dispatch` - Event Dispatch System
+
+The event dispatch system is the backbone of the architecture:
+
+<Steps>
+  <Step title="Event Registration">
+    Each module registers its events and handlers:
+    ```rust
+    pub fn register_event_handler(
+      event: Event,
+      handler: impl EventHandler,
+    )
+    ```
+  </Step>
+  
+  <Step title="Event Routing">
+    Events are routed to the appropriate handler based on event type
+  </Step>
+  
+  <Step title="Request Processing">
+    Handlers process requests asynchronously and return results
+  </Step>
+  
+  <Step title="Response Delivery">
+    Results are sent back to the caller through the FFI layer
+  </Step>
+</Steps>
+
+**Event structure:**
+
+```rust
+pub struct Event {
+  pub event: String,       // Event identifier
+  pub payload: Vec<u8>,    // Serialized payload
+}
+```
+
+### `lib-infra` - Infrastructure
+
+Shared infrastructure utilities:
+
+- Async runtime utilities
+- Error handling and result types
+- Serialization helpers
+- Platform detection
+
+### `lib-log` - Logging
+
+Structured logging across all modules:
+
+```rust
+use lib_log::*;
+
+info!("User logged in: {}", user_id);
+error!("Failed to save document: {:?}", error);
+```
+
+## Data Layer
+
+### SQLite Integration
+
+`flowy-sqlite` provides database access:
+
+```rust
+// Connection pooling
+// Migration management  
+// Query builders
+// Transaction support
+```
+
+### Database Schema
+
+Each module maintains its own tables:
+
+| Module | Tables |
+|--------|--------|
+| `flowy-user` | `user_table`, `user_profile` |
+| `flowy-folder` | `workspace`, `folder`, `view` |
+| `flowy-document` | `document`, `block` |
+| `flowy-database2` | `database`, `row`, `field` |
+
+## Collaborative Features
+
+### CRDT Integration
+
+AppFlowy uses the **collab** crates for CRDT support:
+
+```toml
+[dependencies]
+collab = "0.2"
+collab-entity = "0.2"
+collab-folder = "0.2"
+collab-document = "0.2"
+collab-database = "0.2"
+```
+
+These are built on **Yrs** (Yjs in Rust).
+
+### Sync Protocol
+
+<Steps>
+  <Step title="Local changes">
+    User edits are applied to the local CRDT state
+  </Step>
+  
+  <Step title="Generate updates">
+    CRDT generates binary updates representing the changes
+  </Step>
+  
+  <Step title="Send to server">
+    Updates are sent to AppFlowy Cloud via WebSocket
+  </Step>
+  
+  <Step title="Apply remote updates">
+    Remote updates are applied to the local state automatically
+  </Step>
+</Steps>
+
+<Note>
+CRDT ensures that concurrent edits from multiple users are merged without conflicts.
+</Note>
+
+## Build System
+
+### Cargo Workspace
+
+All crates are part of a single workspace:
+
+```toml
+[workspace]
+members = [
+  "lib-dispatch",
+  "lib-log",
+  "flowy-core",
+  "dart-ffi",
+  "flowy-user",
+  "flowy-folder",
+  "flowy-document",
+  "flowy-database2",
+  # ... more members
+]
+```
+
+### Shared Dependencies
+
+Common dependencies are defined at the workspace level:
+
+```toml
+[workspace.dependencies]
+tokio = { version = "1.38.0", features = ["full"] }
+serde = { version = "1.0.194" }
+serde_json = { version = "1.0.108" }
+collab = { version = "0.2", git = "..." }
+```
+
+## Platform Compilation
+
+### Target Platforms
+
+<Tabs>
+  <Tab title="macOS">
+    ```bash
+    cargo build --target aarch64-apple-darwin  # Apple Silicon
+    cargo build --target x86_64-apple-darwin   # Intel
+    ```
+  </Tab>
+  
+  <Tab title="iOS">
+    ```bash
+    cargo lipo --targets aarch64-apple-ios
+    ```
+  </Tab>
+  
+  <Tab title="Android">
+    ```bash
+    cargo ndk -t arm64-v8a build
+    ```
+  </Tab>
+  
+  <Tab title="Linux">
+    ```bash
+    cargo build --target x86_64-unknown-linux-gnu
+    ```
+  </Tab>
+  
+  <Tab title="Windows">
+    ```bash
+    cargo build --target x86_64-pc-windows-msvc
+    ```
+  </Tab>
+</Tabs>
+
+### Feature Flags
+
+Compile-time features control functionality:
+
+```toml
+[features]
+default = ["dart"]
+dart = ["flowy-core/dart"]       # Enable Dart FFI
+http_sync = []                     # Enable HTTP sync
+verbose_log = []                   # Detailed logging
+openssl_vendored = []              # Bundle OpenSSL
+```
+
+## Testing
+
+### Unit Tests
+
+```bash
+cd rust-lib
+cargo test --no-default-features
+```
+
+### Integration Tests
+
+```bash
+cd rust-lib/event-integration-test
+cargo test
+```
+
+<Warning>
+Some tests require the Rust backend to be built with the `dart` feature.
+</Warning>
+
+## Code Style
+
+Rust code follows the `rustfmt.toml` configuration:
+
+```toml
+max_width = 100
+tab_spaces = 2
+reorder_imports = true
+reorder_modules = true
+```
+
+Format code with:
+
+```bash
+cargo fmt
+```
+
+## Next Steps
+
+<CardGroup cols={2}>
+  <Card title="Setup Environment" href="/developer/setup" icon="gear">
+    Set up your development environment
+  </Card>
+  
+  <Card title="Building Desktop" href="/developer/building-desktop" icon="desktop">
+    Build the Rust backend for desktop
+  </Card>
+</CardGroup>

@@ -1,0 +1,287 @@
+---
+title: "AI Search"
+description: "Find pages quickly using natural language questions and keyword searches"
+---
+
+## Overview
+
+AppFlowy's Workspace AI Search helps you find information across your entire workspace using natural language queries. Instead of remembering exact page titles or keywords, simply ask questions in plain English.
+
+<Info>
+  AI Search is available on both desktop and mobile platforms, searching across all your workspace pages.
+</Info>
+
+## How AI Search Works
+
+AI Search combines traditional keyword matching with intelligent natural language understanding:
+
+- **Keyword search** - Find pages by title and content keywords
+- **Natural language queries** - Ask questions like "What are my project deadlines?" or "Show me meeting notes from last week"
+- **Semantic understanding** - The AI understands context and intent, not just exact word matches
+
+## Using AI Search
+
+<Steps>
+  <Step title="Open Search">
+    Press `Cmd/Ctrl + K` or click the search icon in the toolbar to open the search panel.
+  </Step>
+  
+  <Step title="Enter Your Query">
+    Type your search query or question in the search field. You can use:
+    - Page titles: `project planning`
+    - Keywords: `meeting notes Q1`
+    - Natural questions: `What tasks are assigned to me?`
+  </Step>
+  
+  <Step title="Review Results">
+    Search results appear instantly, showing:
+    - Page titles and icons
+    - Content snippets with matching text
+    - Page location in your workspace hierarchy
+  </Step>
+  
+  <Step title="Open Pages">
+    Click any result to open that page. Use `↑` and `↓` arrow keys to navigate results and `Enter` to open the selected page.
+  </Step>
+</Steps>
+
+## Natural Language Search Examples
+
+Ask questions naturally to find what you need:
+
+<AccordionGroup>
+  <Accordion title="Finding Project Information">
+    **Query**: "Show me all pages about the mobile app redesign"
+    
+    AI Search will find pages with relevant content, even if they don't have "mobile app redesign" in the title.
+  </Accordion>
+  
+  <Accordion title="Time-Based Queries">
+    **Query**: "What did I work on last week?"
+    
+    Finds recently modified pages or pages with date references matching your timeframe.
+  </Accordion>
+  
+  <Accordion title="Task and Assignment Queries">
+    **Query**: "Which tasks are marked as urgent?"
+    
+    Searches for pages and database entries with urgency markers or priority tags.
+  </Accordion>
+  
+  <Accordion title="Content-Specific Searches">
+    **Query**: "Find documents about user authentication"
+    
+    Locates pages containing technical content about your query topic.
+  </Accordion>
+</AccordionGroup>
+
+## Search Panel Features
+
+### Revamped Interface
+
+The redesigned search panel (introduced in v0.9.3) provides:
+
+- **Cleaner layout** - Streamlined interface for faster searching
+- **Better result organization** - Results grouped by type and relevance
+- **Rich previews** - See content snippets before opening pages
+- **Recent searches** - Quick access to your previous queries
+
+### Search Filters
+
+Refine your search results:
+
+<CardGroup cols={2}>
+  <Card title="Page Type" icon="file">
+    Filter by documents, databases, boards, or calendars
+  </Card>
+  
+  <Card title="Date Range" icon="calendar">
+    Search pages created or modified within a specific timeframe
+  </Card>
+  
+  <Card title="Location" icon="folder-tree">
+    Limit search to specific spaces or folders
+  </Card>
+  
+  <Card title="Created By" icon="user">
+    Find pages created by specific team members
+  </Card>
+</CardGroup>
+
+### Keyboard Shortcuts
+
+Search efficiently with keyboard navigation:
+
+| Shortcut | Action |
+|----------|--------|
+| `Cmd/Ctrl + K` | Open search |
+| `↑` / `↓` | Navigate results |
+| `Enter` | Open selected page |
+| `Esc` | Close search |
+| `Cmd/Ctrl + ↓` | Jump to AI Overviews |
+
+<Tip>
+  Use `Tab` to switch between different search result sections quickly.
+</Tip>
+
+## AI-Powered Search Intelligence
+
+AI Search goes beyond simple text matching:
+
+### Context Understanding
+
+The AI understands:
+- **Synonyms** - "meeting" matches "discussion", "conference", "standup"
+- **Related concepts** - "budget" finds "financial planning", "expenses", "costs"
+- **Intent** - "urgent tasks" understands you want high-priority items
+
+### Smart Ranking
+
+Search results are ranked by:
+- **Relevance** - How well the content matches your query
+- **Recency** - Recently modified pages rank higher for time-sensitive queries
+- **Importance** - Starred/favorited pages get priority
+- **Usage** - Frequently accessed pages appear higher
+
+## Search on Mobile
+
+AI Search is fully supported on iOS and Android:
+
+<Steps>
+  <Step title="Access Search">
+    Tap the search icon in the top navigation bar or use the Search tab.
+  </Step>
+  
+  <Step title="Use Voice Input">
+    On mobile, you can use voice input for natural language queries.
+  </Step>
+  
+  <Step title="Quick Actions">
+    Long-press search results to access quick actions like share, favorite, or delete.
+  </Step>
+</Steps>
+
+## Search Best Practices
+
+<CardGroup cols={2}>
+  <Card title="Start Broad" icon="circle">
+    Begin with general queries and refine with filters if you get too many results.
+  </Card>
+  
+  <Card title="Use Natural Language" icon="comments">
+    Ask questions as you would to a colleague - the AI understands conversational queries.
+  </Card>
+  
+  <Card title="Combine Keywords" icon="plus">
+    Mix specific terms with context: "Q1 marketing budget spreadsheet"
+  </Card>
+  
+  <Card title="Try Variations" icon="arrows-rotate">
+    If you don't find what you need, rephrase your query using different words.
+  </Card>
+</CardGroup>
+
+## Search vs. AI Overviews
+
+Understand when to use each feature:
+
+| Feature | Best For | Output |
+|---------|----------|--------|
+| **AI Search** | Finding specific pages | List of matching pages |
+| **AI Overviews** | Getting summaries | AI-generated answer with sources |
+
+<Info>
+  You can switch from search results to AI Overviews mode with `Cmd/Ctrl + ↓` to get an AI summary of your query.
+</Info>
+
+## Advanced Search Techniques
+
+### Search Operators
+
+Use special operators for precise searches:
+
+```plaintext
+title:"Project Plan"          # Search only page titles
+type:database                  # Find only database pages
+modified:>2024-01-01          # Pages modified after date
+creator:@username              # Pages by specific user
+```
+
+### Multi-Word Queries
+
+Improve accuracy with quoted phrases:
+
+```plaintext
+"user interface design"       # Exact phrase match
+UI design -mobile             # Exclude mobile results
+design OR mockup              # Match either term
+```
+
+## Improving Search Results
+
+### Better Page Titles
+
+Use descriptive, searchable page titles:
+- ✅ "Q1 2025 Marketing Strategy Meeting Notes"
+- ❌ "Meeting Notes 1"
+
+### Add Metadata
+
+Enhance searchability with:
+- **Tags** - Add relevant keywords
+- **Descriptions** - Include page summaries
+- **Properties** - Use database fields for structured data
+
+### Organize Content
+
+Structure your workspace for better search:
+- Use consistent naming conventions
+- Organize related pages in spaces
+- Link related pages together
+
+<Warning>
+  AI Search requires an active internet connection. For offline search in private workspaces, use RAG Search in Vault workspaces.
+</Warning>
+
+## Troubleshooting
+
+### Search Not Finding Pages
+
+1. Check if the page exists and you have access to it
+2. Try different keywords or phrases
+3. Verify search filters aren't excluding results
+4. Wait a moment for recently created pages to be indexed
+
+### Irrelevant Results
+
+- Use more specific search terms
+- Apply filters to narrow results
+- Try quoted phrases for exact matches
+- Use search operators to refine queries
+
+### Slow Search Performance
+
+- Check your internet connection
+- Clear the search cache in Settings
+- Try searching with fewer filters
+- Simplify complex natural language queries
+
+## Related Features
+
+<CardGroup cols={2}>
+  <Card title="AI Overviews" icon="lightbulb" href="/ai/ai-overviews">
+    Get AI-generated summaries instead of search results
+  </Card>
+  
+  <Card title="AI Chat" icon="comments" href="/ai/ai-chat">
+    Ask questions and get conversational AI responses
+  </Card>
+  
+  <Card title="RAG Search" icon="database" href="/ai/rag-search">
+    Search with AI in offline Vault workspaces
+  </Card>
+  
+  <Card title="Command Palette" icon="terminal" href="/advanced/command-palette">
+    Access quick actions and commands
+  </Card>
+</CardGroup>

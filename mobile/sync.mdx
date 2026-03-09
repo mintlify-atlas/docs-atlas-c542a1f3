@@ -1,0 +1,430 @@
+---
+title: 'Mobile Sync'
+description: 'How AppFlowy syncs your data across mobile devices - offline mode, troubleshooting, and best practices'
+---
+
+## Overview
+
+AppFlowy uses a modern syncing protocol to keep your data synchronized across all your devices in real-time. Whether you're working on desktop, iOS, or Android, your changes are automatically saved and synced to the cloud.
+
+<Info>
+  AppFlowy introduced a new syncing protocol in v0.9.4 optimized for faster, more reliable multi-user and multi-device data synchronization.
+</Info>
+
+## How Sync Works
+
+### Real-Time Synchronization
+
+When you're connected to the internet:
+
+<Steps>
+  <Step title="Make a change">
+    Edit a document, update a database, or create a new page on your mobile device.
+  </Step>
+  
+  <Step title="Instant local save">
+    Your change is saved locally on your device immediately.
+  </Step>
+  
+  <Step title="Cloud sync">
+    The change is sent to AppFlowy Cloud within seconds.
+  </Step>
+  
+  <Step title="Broadcast to other devices">
+    All your other devices receive the update in real-time.
+  </Step>
+  
+  <Step title="Conflict resolution">
+    If multiple people edit simultaneously, AppFlowy automatically merges changes.
+  </Step>
+</Steps>
+
+### Sync Indicators
+
+AppFlowy provides visual feedback about sync status:
+
+<CardGroup cols={2}>
+  <Card title="Network Indicator" icon="wifi">
+    Shows your connection status in the app (v0.9.5+). Look for the icon in the top bar.
+  </Card>
+  
+  <Card title="Sync Status" icon="rotate">
+    In-document indicator shows when content is syncing (v0.5.4+). Watch for the spinning icon.
+  </Card>
+</CardGroup>
+
+**Indicator states:**
+- **Green/Connected**: Fully synced with cloud
+- **Yellow/Syncing**: Actively uploading changes  
+- **Red/Offline**: No internet connection; working in offline mode
+- **Gray/Error**: Sync error; may need attention
+
+## Offline Mode
+
+AppFlowy is designed to work seamlessly offline. You never lose access to your data.
+
+### How Offline Mode Works
+
+<Steps>
+  <Step title="Lose connection">
+    Your device goes offline (airplane mode, no WiFi, no cellular data).
+  </Step>
+  
+  <Step title="Continue working">
+    AppFlowy detects offline mode and allows you to keep working normally.
+    
+    All changes are saved locally on your device.
+  </Step>
+  
+  <Step title="Reconnect">
+    When your device reconnects to the internet, sync resumes automatically.
+  </Step>
+  
+  <Step title="Upload changes">
+    All offline changes are uploaded to the cloud.
+    
+    Changes from other devices are downloaded.
+  </Step>
+  
+  <Step title="Merge conflicts">
+    If there are conflicts, AppFlowy merges them intelligently.
+  </Step>
+</Steps>
+
+### What Works Offline
+
+✅ **Full access:**
+- Read all pages and documents
+- Edit existing pages
+- Create new pages
+- Modify databases
+- Use most features normally
+
+❌ **Requires internet:**
+- AI features (AI Chat, AI Search, AI Overviews)
+- Downloading pages not yet cached locally
+- Sharing and collaboration features
+- Publishing pages to web
+- Uploading images to cloud storage
+
+<Note>
+  Pages are cached locally as you view them. If you haven't opened a page while online, it may not be available offline.
+</Note>
+
+## First-Time Setup
+
+### Syncing from Desktop to Mobile
+
+If you've been using AppFlowy on desktop and are setting up mobile for the first time:
+
+<Steps>
+  <Step title="Ensure desktop is synced">
+    On your desktop, verify all content is synced to the cloud.
+    
+    Look for sync indicators showing everything is up to date.
+  </Step>
+  
+  <Step title="Sign in on mobile">
+    Install AppFlowy on your mobile device and sign in with the **same account** you use on desktop.
+  </Step>
+  
+  <Step title="Initial sync">
+    AppFlowy will download your workspace data. This can take a few minutes depending on how much data you have.
+    
+    Keep the app open and connected to WiFi during initial sync.
+  </Step>
+  
+  <Step title="Verify content">
+    Once sync completes, verify your pages, documents, and databases appear correctly.
+  </Step>
+</Steps>
+
+<Warning>
+  Important: Read the [official sync guide](https://docs.appflowy.io/docs/guides/sync-desktop-and-mobile) before logging into mobile for the first time if you have existing desktop data.
+</Warning>
+
+## Sync Performance
+
+### What's Synced
+
+AppFlowy syncs:
+- **Documents**: All text, formatting, and structure
+- **Databases**: Grid, Board, Calendar views and all data
+- **Properties**: View settings, filters, sorts
+- **User settings**: Preferences, theme, language, font (v0.9.8+)
+- **Workspaces**: All workspace data and structure
+- **Images**: Uploaded to cloud storage
+- **Favorites**: Synced across devices
+- **Recent pages**: Updates across devices
+
+### Sync Speed
+
+Typical sync times (v0.9.4+ with new protocol):
+- **Small edit** (typing): < 1 second
+- **Medium change** (formatting, moving blocks): 1-3 seconds  
+- **Large operation** (creating database): 3-10 seconds
+- **Initial workspace download**: Varies by size (1-5 minutes typical)
+
+<Tip>
+  Connect to WiFi for faster sync, especially when uploading images or syncing large databases.
+</Tip>
+
+### Improving Sync Performance
+
+**Mobile (Android):**
+1. Disable battery optimization for AppFlowy:
+   - Settings > Apps > AppFlowy > Battery
+   - Select **Unrestricted**
+2. Ensure background data is enabled
+3. Use WiFi when possible for faster uploads
+
+**Mobile (iOS):**
+1. Enable Background App Refresh:
+   - Settings > AppFlowy
+   - Turn on **Background App Refresh**
+2. Keep the app updated to the latest version
+3. Use WiFi for large uploads
+
+## Troubleshooting Sync Issues
+
+### Changes not syncing
+
+<Steps>
+  <Step title="Check connection">
+    Verify you have an active internet connection.
+    
+    Look for the network indicator in AppFlowy.
+  </Step>
+  
+  <Step title="Check sync indicator">
+    Look at the sync status indicator in the document.
+    
+    If it's stuck, there may be a sync error.
+  </Step>
+  
+  <Step title="Force sync">
+    Close and reopen the app to trigger a fresh sync.
+  </Step>
+  
+  <Step title="Sign out and back in">
+    If the issue persists:
+    - Sign out of AppFlowy
+    - Close the app completely  
+    - Reopen and sign back in
+  </Step>
+</Steps>
+
+### "Failed to sync" error
+
+**Possible causes:**
+- Network connection interrupted during sync
+- Server temporarily unavailable
+- Authentication expired
+
+**Solutions:**
+1. Wait 30 seconds and try again
+2. Check your internet connection
+3. Sign out and sign back in
+4. Clear app cache (Settings > Manage Data)
+5. Update to the latest app version
+
+### Sync conflicts
+
+If you edit the same content offline on multiple devices:
+
+<Note>
+  AppFlowy uses Operational Transformation (OT) to automatically merge most conflicts. In rare cases where automatic merge isn't possible, you may see duplicate content.
+</Note>
+
+**How to handle conflicts:**
+1. Review both versions of the conflicting content
+2. Manually merge the information
+3. Delete the duplicate content
+4. Save your merged version
+
+### WebSocket connection issues
+
+AppFlowy uses WebSocket for real-time sync. Connection problems were addressed in v0.9.5.
+
+**If you see connection errors:**
+1. Update to the latest version
+2. Check if your network blocks WebSocket connections (some corporate networks do)
+3. Try switching between WiFi and cellular data
+4. Restart your router if on WiFi
+
+### Images not syncing
+
+**Issue**: Images upload to cloud storage separately from text content.
+
+**Solutions:**
+1. Ensure you have internet connection when adding images
+2. Wait for upload to complete (look for progress indicator)
+3. If image fails to upload, try re-adding it
+4. Check storage quota (Pro plan may be needed for large image libraries)
+
+## Collaboration & Multi-User Sync
+
+### Real-Time Collaboration
+
+When multiple people edit the same page:
+
+<CardGroup cols={2}>
+  <Card title="Live Cursors" icon="location-dot">
+    See where other editors are working (v0.5.6+).
+  </Card>
+  
+  <Card title="Instant Updates" icon="bolt">
+    Changes from others appear immediately as they type.
+  </Card>
+  
+  <Card title="Conflict Prevention" icon="shield">
+    Automatic merge prevents data loss from simultaneous edits.
+  </Card>
+  
+  <Card title="Presence Indicators" icon="user">
+    See who else is viewing or editing the page.
+  </Card>
+</CardGroup>
+
+### Shared Page Sync
+
+Pages shared with you (v0.9.4+) sync just like your own pages:
+- View shared pages on mobile
+- Edit with Can Edit permission
+- See changes in real-time
+- Receive notifications for mentions
+
+<Tip>
+  For best collaboration experience, ensure all team members are on the latest version of AppFlowy.
+</Tip>
+
+## Data Storage & Privacy
+
+### What's Stored Where
+
+**Local storage (on device):**
+- Cached pages for offline access
+- User preferences
+- Session data
+- Temporary files
+
+**Cloud storage (AppFlowy Cloud):**
+- All workspace data
+- Documents and databases
+- Images and uploaded files
+- User account information
+- Sharing and permissions
+
+### Managing Local Storage
+
+To clear cached data on mobile:
+
+<Steps>
+  <Step title="Open Settings">
+    Tap the profile icon and go to **Settings**.
+  </Step>
+  
+  <Step title="Manage Data">
+    Navigate to **Manage Data** (v0.5.8+).
+  </Step>
+  
+  <Step title="Clear cache">
+    Tap **Clear cache** to remove locally cached pages.
+    
+    Your data in the cloud is not affected.
+  </Step>
+  
+  <Step title="Re-sync">
+    Pages will be re-downloaded from cloud as you access them.
+  </Step>
+</Steps>
+
+<Warning>
+  Clearing cache removes offline access to pages. You'll need internet to view them again.
+</Warning>
+
+## Advanced Sync Features
+
+### Selective Sync
+
+Currently, AppFlowy syncs all workspace data. Selective sync (choosing which pages to sync to mobile) is not yet available but is on the roadmap.
+
+### Sync History
+
+AppFlowy maintains version history in the cloud:
+- View document history (desktop feature)
+- Restore previous versions
+- Track who made changes
+
+<Note>
+  Full version history features are primarily available on desktop. Mobile access to version history is planned for future releases.
+</Note>
+
+## Best Practices
+
+<Tip>
+  **Stay connected**: Keep Background App Refresh (iOS) or disable battery optimization (Android) for AppFlowy to ensure smooth sync.
+</Tip>
+
+<Tip>
+  **WiFi for uploads**: Upload large images and files over WiFi to save cellular data and improve speed.
+</Tip>
+
+<Tip>
+  **Wait for sync**: Before closing the app after major edits, wait a few seconds to ensure sync completes.
+</Tip>
+
+<Tip>
+  **Keep updated**: Always update to the latest AppFlowy version for sync improvements and bug fixes.
+</Tip>
+
+<Tip>
+  **Regular sync checks**: If working offline for extended periods, periodically check that sync completes when you reconnect.
+</Tip>
+
+## Known Sync Issues & Fixes
+
+### Historical Issues (Fixed)
+
+These issues were present in older versions but have been fixed. Update to the latest version:
+
+- **v0.9.5**: Fixed WebSocket connection issues
+- **v0.9.6**: Fixed some syncing issues  
+- **v0.5.1**: Fixed pages failing to sync properly
+- **v0.4.5**: Fixed refresh token bug affecting sync
+
+### Reporting Sync Problems
+
+If you encounter sync issues:
+
+1. Update to the latest app version
+2. Try the troubleshooting steps above
+3. If the issue persists, report it:
+   - GitHub: [AppFlowy Issues](https://github.com/AppFlowy-IO/AppFlowy/issues)
+   - Discord: [AppFlowy Community](https://discord.gg/9Q2xaN37tV)
+
+Include:
+- Device type (iOS/Android)
+- AppFlowy version
+- Steps to reproduce
+- Error messages (if any)
+
+## What's Next?
+
+<CardGroup cols={2}>
+  <Card title="iOS App" icon="apple" href="/mobile/ios">
+    Learn about iOS-specific features and setup
+  </Card>
+  
+  <Card title="Android App" icon="android" href="/mobile/android">
+    Explore Android features and configuration
+  </Card>
+  
+  <Card title="Collaboration" icon="users" href="/collaboration/sharing">
+    Set up sharing and real-time collaboration
+  </Card>
+  
+  <Card title="Self-Hosting" icon="server" href="/self-hosting/overview">
+    Host your own AppFlowy sync server
+  </Card>
+</CardGroup>

@@ -1,0 +1,491 @@
+---
+title: 'Plugins & Extensions'
+description: 'Extend AppFlowy functionality with plugins and integrations'
+icon: 'puzzle-piece'
+---
+
+## Overview
+
+AppFlowy is designed with extensibility in mind. While the plugin system is still evolving, AppFlowy supports various plugin types and integrations to enhance your workspace capabilities.
+
+<Info>
+  The plugin architecture is actively being developed. Check the [AppFlowy GitHub repository](https://github.com/AppFlowy-IO/AppFlowy) for the latest plugin capabilities.
+</Info>
+
+## Plugin System Architecture
+
+### Current Plugin Types
+
+AppFlowy's plugin system supports several core plugin types:
+
+<CardGroup cols={2}>
+  <Card title="Editor Plugins" icon="pen-to-square">
+    Enhance document editing with custom blocks and tools
+  </Card>
+  <Card title="AI Plugins" icon="brain">
+    Integrate AI services and local AI models
+  </Card>
+  <Card title="Database Plugins" icon="database">
+    Add custom views and data processing to databases
+  </Card>
+  <Card title="View Plugins" icon="eye">
+    Create custom view types (Document, Grid, Board, Calendar, Chat)
+  </Card>
+</CardGroup>
+
+### Plugin Architecture
+
+AppFlowy plugins are built using:
+
+- **Dart/Flutter**: For UI and cross-platform functionality
+- **Rust**: For backend logic and performance-critical operations
+- **Plugin API**: Well-defined interfaces for plugin integration
+
+<Note>
+  Plugin development requires familiarity with AppFlowy's codebase. See the development documentation for technical details.
+</Note>
+
+## Built-in Editor Plugins
+
+AppFlowy comes with several built-in editor plugins:
+
+### Content Block Plugins
+
+<Steps>
+  <Step title="Code Block">
+    Syntax-highlighted code with 100+ language support
+    - Line numbers (since v0.5.5)
+    - Multiple themes
+    - Copy code functionality
+  </Step>
+  
+  <Step title="Callout Block">
+    Highlight important information with custom icons and colors
+    - Custom icon selection (since v0.8.7)
+    - Nested lists support
+    - Multiple color schemes
+  </Step>
+  
+  <Step title="Math Equation">
+    Inline and block math equations using LaTeX
+    - Full LaTeX syntax support
+    - Inline math equations (since v0.2.6)
+  </Step>
+  
+  <Step title="Toggle List">
+    Collapsible sections for better organization
+    - Nested toggle lists
+    - Toggle headings (since v0.7.3)
+  </Step>
+</Steps>
+
+### Media Plugins
+
+<CardGroup cols={2}>
+  <Card title="Image Gallery" icon="images">
+    Drag-and-drop image support with gallery view (v0.6.6)
+  </Card>
+  <Card title="Video Embed" icon="video">
+    Embed videos in documents (v0.5.9)
+  </Card>
+  <Card title="File Upload" icon="file">
+    Attach files to documents and databases
+  </Card>
+  <Card title="Unsplash" icon="camera">
+    Browse and insert images from Unsplash (v0.3.5)
+  </Card>
+</CardGroup>
+
+### Table Plugins
+
+**Simple Table** (since v0.7.8):
+- Insert lists, images, quotes, callouts, and code blocks in cells
+- Drag to move rows or columns
+- Toggle header rows/columns
+- Distribute columns evenly
+- Adjust to page width
+- Available on mobile (v0.7.9)
+
+## AI Plugins
+
+AppFlowy supports multiple AI integrations:
+
+### Cloud AI Providers
+
+<CardGroup cols={2}>
+  <Card title="OpenAI" icon="openai">
+    GPT-4, GPT-4.1, GPT-4.1-mini, GPT-5
+  </Card>
+  <Card title="Claude" icon="message">
+    Claude 3.7 Sonnet and other Anthropic models
+  </Card>
+  <Card title="DALL-E" icon="image">
+    AI image generation from text prompts (v0.8.1)
+  </Card>
+  <Card title="AppFlowy AI" icon="robot">
+    Built-in AI service optimized for AppFlowy
+  </Card>
+</CardGroup>
+
+### Local AI Plugins
+
+**Ollama Integration** (since v0.8.7):
+- Free local AI processing
+- No internet required
+- Privacy-focused
+- Support for custom models
+
+<Steps>
+  <Step title="Install Ollama">
+    Download and install Ollama from [ollama.ai](https://ollama.ai)
+  </Step>
+  
+  <Step title="Configure in AppFlowy">
+    Go to **Settings → AI** and select **Local AI (Ollama)**
+  </Step>
+  
+  <Step title="Select Model">
+    Choose from available Ollama models or download new ones
+  </Step>
+  
+  <Step title="Start Using">
+    Use Ask AI and AI Chat with local processing
+  </Step>
+</Steps>
+
+<Info>
+  Local AI is perfect for privacy-sensitive work and offline environments, especially in Vault Workspaces.
+</Info>
+
+### AI Features
+
+- **Ask AI**: Get AI assistance directly in documents
+- **AI Chat**: Have conversations with AI, including chat with files (PDF, Markdown, TXT)
+- **AI Writer**: Generate content with formatting options (list, table, text with images)
+- **Custom Prompts**: Load custom AI prompts from database pages (v0.9.2)
+- **Prompt Library**: Access pre-built prompts for common tasks (v0.9.1)
+
+## Database Plugins
+
+### View Type Plugins
+
+AppFlowy databases support multiple view types:
+
+<CardGroup cols={2}>
+  <Card title="Grid" icon="table">
+    Traditional spreadsheet-style database
+  </Card>
+  <Card title="Board" icon="columns">
+    Kanban board for visual project management
+  </Card>
+  <Card title="Calendar" icon="calendar">
+    Timeline view for date-based information
+  </Card>
+  <Card title="Gallery" icon="images">
+    Visual card-based layout
+  </Card>
+</CardGroup>
+
+### Field Type Plugins
+
+Custom field types in databases:
+
+- Text, Number, Date, Checkbox
+- Single-select, Multi-select
+- URL, Email, Phone
+- Files & Media (v0.6.9)
+- Relation (v0.5.3)
+- Checklist (v0.0.8)
+- Created At, Updated At (v0.2.0)
+
+<Note>
+  Each field type comes with its own editor and filter options, effectively acting as a plugin.
+</Note>
+
+## Integration Plugins
+
+### Publishing Plugins
+
+**Publish to Web** (since v0.6.3):
+- Publish documents and databases to the web
+- Custom URLs for published pages (v0.7.3)
+- Navigation menu in published sites (v0.6.9)
+- Share links for easy distribution
+
+### Import/Export Plugins
+
+<CardGroup cols={2}>
+  <Card title="Markdown" icon="markdown">
+    Import and export markdown files
+  </Card>
+  <Card title="CSV" icon="table">
+    Import up to 1,000 rows (v0.6.8)
+  </Card>
+  <Card title="HTML" icon="code">
+    Export documents as HTML
+  </Card>
+  <Card title="PDF" icon="file-pdf">
+    Export documents as PDF
+  </Card>
+</CardGroup>
+
+### Authentication Plugins
+
+Multiple sign-in methods:
+
+- **Email & Password** (v0.9.1)
+- **Magic Link** (v0.5.5)
+- **One-Time Password (OTP)** (v0.8.9)
+- **Apple Sign-in** (v0.6.9)
+- **Google Sign-in**
+- **Anonymous Sign-in** (v0.4.4)
+
+## Theme Plugins
+
+AppFlowy supports dynamic theme loading:
+
+### Built-in Themes
+
+- Default (Light & Dark)
+- Dandelion (v0.3.6)
+- Lemonade (v0.3.6)
+- Community themes
+
+### Custom Theme Plugin
+
+<Steps>
+  <Step title="Create Theme File">
+    Use JSON format to define colors and styles
+  </Step>
+  
+  <Step title="Upload Theme">
+    Go to **Settings → Workspace → Upload Custom Theme**
+  </Step>
+  
+  <Step title="Apply Theme">
+    Select your theme from the dropdown
+  </Step>
+  
+  <Step title="Share Theme">
+    Share your theme file with the community
+  </Step>
+</Steps>
+
+<Info>
+  Check the [AppFlowy Community Themes repository](https://github.com/AppFlowy-IO/AppFlowy) for user-created themes.
+</Info>
+
+## Developing Custom Plugins
+
+<Warning>
+  Plugin development is an advanced feature. It requires knowledge of Dart/Flutter and Rust, as well as familiarity with AppFlowy's architecture.
+</Warning>
+
+### Plugin Development Resources
+
+1. **Source Code**: `frontend/appflowy_flutter/lib/startup/plugin/`
+2. **Plugin Types**: See `plugin.dart:13` for supported plugin types
+3. **Plugin Builder**: Implement `PluginBuilder` interface
+4. **Registration**: Use `registerPlugin()` to add your plugin
+
+### Plugin Structure
+
+```dart Plugin Example Structure
+abstract class Plugin {
+  PluginId get id;
+  PluginWidgetBuilder get widgetBuilder;
+  PluginNotifier? get notifier;
+  PluginType get pluginType;
+  
+  void init() {}
+  void dispose() {}
+}
+```
+
+### Creating a Simple Plugin
+
+<Steps>
+  <Step title="Define Plugin Type">
+    Choose or create a new plugin type (document, grid, board, etc.)
+  </Step>
+  
+  <Step title="Implement Plugin Interface">
+    Create a class that implements the `Plugin` abstract class
+  </Step>
+  
+  <Step title="Create Widget Builder">
+    Implement `PluginWidgetBuilder` to define the UI
+  </Step>
+  
+  <Step title="Register Plugin">
+    Call `registerPlugin()` in your app initialization
+  </Step>
+  
+  <Step title="Test Plugin">
+    Build and test your plugin in development mode
+  </Step>
+</Steps>
+
+### Plugin API
+
+Key interfaces for plugin development:
+
+- **PluginBuilder**: Defines plugin metadata and creation
+- **PluginWidgetBuilder**: Handles UI rendering
+- **PluginNotifier**: Manages plugin lifecycle events
+- **PluginContext**: Provides context and callbacks
+
+<Note>
+  See `frontend/appflowy_flutter/lib/startup/plugin/plugin.dart` for complete API documentation.
+</Note>
+
+## Community Plugins
+
+### Finding Plugins
+
+Community plugins are shared via:
+
+- **GitHub**: AppFlowy organization and user repositories
+- **Discord**: AppFlowy community Discord server
+- **Forum**: AppFlowy community discussions
+
+### Installing Community Plugins
+
+<Warning>
+  Community plugins are not officially vetted. Install only from trusted sources and review code when possible.
+</Warning>
+
+<Steps>
+  <Step title="Download Plugin">
+    Get the plugin source code or package
+  </Step>
+  
+  <Step title="Review Code">
+    Check the plugin code for security and compatibility
+  </Step>
+  
+  <Step title="Install Plugin">
+    Follow plugin-specific installation instructions
+  </Step>
+  
+  <Step title="Configure">
+    Set up plugin settings as needed
+  </Step>
+</Steps>
+
+## Plugin Configuration
+
+### AI Plugin Settings
+
+**Settings → AI**:
+- Select AI provider (OpenAI, Claude, AppFlowy AI, Local AI)
+- Configure API keys
+- Choose models
+- Set embedding models (for Vault Workspaces)
+
+### Plugin Status Indicator
+
+In AI settings, you can see plugin status:
+- ✅ Connected and ready
+- ⚠️ Configuration needed
+- ❌ Error or disconnected
+
+<Info>
+  Plugin status indicators help you troubleshoot integration issues quickly.
+</Info>
+
+## Future Plugin Capabilities
+
+AppFlowy's plugin system is actively being expanded:
+
+<CardGroup cols={2}>
+  <Card title="API Integrations" icon="cloud">
+    Connect to external services and APIs
+  </Card>
+  <Card title="Custom Views" icon="window">
+    Create entirely new view types
+  </Card>
+  <Card title="Data Processors" icon="gears">
+    Add custom data transformation logic
+  </Card>
+  <Card title="Workflow Automation" icon="bolt">
+    Automate tasks and processes
+  </Card>
+</CardGroup>
+
+<Note>
+  Follow the [AppFlowy blog](https://blog.appflowy.io) and [GitHub discussions](https://github.com/AppFlowy-IO/AppFlowy/discussions) for plugin system updates.
+</Note>
+
+## Troubleshooting Plugins
+
+<AccordionGroup>
+  <Accordion title="Plugin not loading">
+    - Check plugin compatibility with your AppFlowy version
+    - Verify plugin files are in the correct location
+    - Review logs for error messages
+    - Try reinstalling the plugin
+  </Accordion>
+  
+  <Accordion title="AI plugin not responding">
+    - Check API key configuration
+    - Verify internet connection (for cloud AI)
+    - Ensure Ollama is running (for local AI)
+    - Check plugin status indicator in settings
+  </Accordion>
+  
+  <Accordion title="Custom theme not applying">
+    - Validate JSON syntax in theme file
+    - Check all required color values are present
+    - Try default theme first, then reapply custom
+    - Restart AppFlowy after uploading
+  </Accordion>
+  
+  <Accordion title="Plugin conflicts">
+    - Disable plugins one by one to identify conflicts
+    - Check for duplicate plugin registrations
+    - Update all plugins to latest versions
+    - Report conflicts to plugin developers
+  </Accordion>
+</AccordionGroup>
+
+## Contributing Plugins
+
+Want to create a plugin for AppFlowy?
+
+<Steps>
+  <Step title="Join the Community">
+    Connect with other developers on [Discord](https://discord.gg/appflowy)
+  </Step>
+  
+  <Step title="Study the Codebase">
+    Review existing plugins and architecture
+  </Step>
+  
+  <Step title="Develop Your Plugin">
+    Build and test your plugin locally
+  </Step>
+  
+  <Step title="Share with Community">
+    Share on GitHub and announce in Discord
+  </Step>
+  
+  <Step title="Consider Contributing">
+    Submit a PR to include your plugin in AppFlowy core
+  </Step>
+</Steps>
+
+<Info>
+  Check the [CONTRIBUTING.md](https://github.com/AppFlowy-IO/AppFlowy/blob/main/CONTRIBUTING.md) guide for contribution guidelines.
+</Info>
+
+## Next Steps
+
+<CardGroup cols={2}>
+  <Card title="Customization" href="/advanced/customization" icon="palette">
+    Customize themes, fonts, and appearance
+  </Card>
+  <Card title="Data Export" href="/advanced/data-export" icon="download">
+    Learn about exporting and backing up data
+  </Card>
+</CardGroup>

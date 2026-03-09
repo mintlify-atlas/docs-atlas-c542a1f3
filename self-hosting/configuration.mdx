@@ -1,0 +1,624 @@
+---
+title: Configuration
+description: Configure your self-hosted AppFlowy instance
+---
+
+## Environment Variables
+
+AppFlowy uses environment variables for configuration. All settings are defined in the `.env` file.
+
+### Core Application Settings
+
+<ParamField path="APPFLOWY_CLOUD_BASE_URL" type="string" required>
+  The base URL where your AppFlowy instance is accessible.
+  
+  ```bash
+  APPFLOWY_CLOUD_BASE_URL=https://appflowy.yourdomain.com
+  ```
+  
+  <Warning>
+    Must use HTTPS in production. HTTP is only acceptable for local development.
+  </Warning>
+</ParamField>
+
+<ParamField path="APPFLOWY_CLOUD_WS_BASE_URL" type="string" required>
+  WebSocket URL for real-time collaboration features.
+  
+  ```bash
+  APPFLOWY_CLOUD_WS_BASE_URL=wss://appflowy.yourdomain.com
+  ```
+  
+  <Note>
+    Use `wss://` (secure WebSocket) for production. Must match your base URL domain.
+  </Note>
+</ParamField>
+
+<ParamField path="APPFLOWY_CLOUD_GOTRUE_URL" type="string" required>
+  GoTrue authentication service URL.
+  
+  ```bash
+  APPFLOWY_CLOUD_GOTRUE_URL=https://appflowy.yourdomain.com/gotrue
+  ```
+</ParamField>
+
+<ParamField path="APPFLOWY_ENABLE_SYNC_TRACE" type="boolean" default="false">
+  Enable detailed sync tracing for debugging collaboration issues.
+  
+  ```bash
+  APPFLOWY_ENABLE_SYNC_TRACE=true
+  ```
+  
+  <Warning>
+    Enabling this will generate verbose logs. Use only for troubleshooting.
+  </Warning>
+</ParamField>
+
+### Database Configuration
+
+AppFlowy requires PostgreSQL 14 or later.
+
+<ParamField path="POSTGRES_HOST" type="string" required>
+  PostgreSQL server hostname.
+  
+  ```bash
+  POSTGRES_HOST=postgres
+  ```
+</ParamField>
+
+<ParamField path="POSTGRES_PORT" type="integer" default="5432">
+  PostgreSQL server port.
+  
+  ```bash
+  POSTGRES_PORT=5432
+  ```
+</ParamField>
+
+<ParamField path="POSTGRES_DB" type="string" required>
+  Database name for AppFlowy.
+  
+  ```bash
+  POSTGRES_DB=appflowy
+  ```
+</ParamField>
+
+<ParamField path="POSTGRES_USER" type="string" required>
+  Database username.
+  
+  ```bash
+  POSTGRES_USER=appflowy
+  ```
+</ParamField>
+
+<ParamField path="POSTGRES_PASSWORD" type="string" required>
+  Database password.
+  
+  ```bash
+  POSTGRES_PASSWORD=your_secure_password_here
+  ```
+  
+  <Warning>
+    Use a strong, randomly generated password. Never use default passwords in production.
+  </Warning>
+</ParamField>
+
+<ParamField path="POSTGRES_MAX_CONNECTIONS" type="integer" default="100">
+  Maximum number of database connections.
+  
+  ```bash
+  POSTGRES_MAX_CONNECTIONS=100
+  ```
+</ParamField>
+
+### Redis Configuration
+
+Redis is used for caching, session management, and real-time presence.
+
+<ParamField path="REDIS_HOST" type="string" required>
+  Redis server hostname.
+  
+  ```bash
+  REDIS_HOST=redis
+  ```
+</ParamField>
+
+<ParamField path="REDIS_PORT" type="integer" default="6379">
+  Redis server port.
+  
+  ```bash
+  REDIS_PORT=6379
+  ```
+</ParamField>
+
+<ParamField path="REDIS_PASSWORD" type="string">
+  Redis password (optional but recommended).
+  
+  ```bash
+  REDIS_PASSWORD=your_redis_password
+  ```
+</ParamField>
+
+<ParamField path="REDIS_DB" type="integer" default="0">
+  Redis database number.
+  
+  ```bash
+  REDIS_DB=0
+  ```
+</ParamField>
+
+### Storage Configuration
+
+AppFlowy uses S3-compatible object storage for files and attachments.
+
+<CardGroup cols={2}>
+  <Card title="MinIO" icon="box">
+    Self-hosted S3-compatible storage (recommended for self-hosting)
+  </Card>
+  <Card title="AWS S3" icon="aws">
+    Amazon S3 for cloud-based deployments
+  </Card>
+  <Card title="Cloudflare R2" icon="cloud">
+    Cost-effective S3-compatible alternative
+  </Card>
+  <Card title="DigitalOcean Spaces" icon="water">
+    Another S3-compatible option
+  </Card>
+</CardGroup>
+
+<ParamField path="S3_ENDPOINT" type="string" required>
+  S3 service endpoint URL.
+  
+  ```bash
+  # MinIO (Docker Compose)
+  S3_ENDPOINT=http://minio:9000
+  
+  # AWS S3
+  S3_ENDPOINT=https://s3.us-east-1.amazonaws.com
+  
+  # Cloudflare R2
+  S3_ENDPOINT=https://[account-id].r2.cloudflarestorage.com
+  ```
+</ParamField>
+
+<ParamField path="S3_ACCESS_KEY_ID" type="string" required>
+  S3 access key ID.
+  
+  ```bash
+  S3_ACCESS_KEY_ID=your_access_key
+  ```
+</ParamField>
+
+<ParamField path="S3_SECRET_ACCESS_KEY" type="string" required>
+  S3 secret access key.
+  
+  ```bash
+  S3_SECRET_ACCESS_KEY=your_secret_key
+  ```
+  
+  <Warning>
+    Keep this secret secure. Never commit to version control.
+  </Warning>
+</ParamField>
+
+<ParamField path="S3_BUCKET" type="string" required>
+  S3 bucket name for storing files.
+  
+  ```bash
+  S3_BUCKET=appflowy-storage
+  ```
+</ParamField>
+
+<ParamField path="S3_REGION" type="string" default="us-east-1">
+  S3 region (for AWS S3 or compatible services).
+  
+  ```bash
+  S3_REGION=us-east-1
+  ```
+</ParamField>
+
+<ParamField path="S3_USE_PATH_STYLE" type="boolean" default="true">
+  Use path-style URLs (required for MinIO).
+  
+  ```bash
+  S3_USE_PATH_STYLE=true
+  ```
+</ParamField>
+
+### Authentication Configuration
+
+AppFlowy uses GoTrue for authentication.
+
+<ParamField path="GOTRUE_JWT_SECRET" type="string" required>
+  Secret key for JWT token signing.
+  
+  ```bash
+  GOTRUE_JWT_SECRET=your_64_character_random_string
+  ```
+  
+  Generate with:
+  ```bash
+  openssl rand -hex 32
+  ```
+  
+  <Warning>
+    This is critical for security. Use a cryptographically random value.
+  </Warning>
+</ParamField>
+
+<ParamField path="GOTRUE_SITE_URL" type="string" required>
+  The URL where GoTrue is accessible.
+  
+  ```bash
+  GOTRUE_SITE_URL=https://appflowy.yourdomain.com
+  ```
+</ParamField>
+
+<ParamField path="GOTRUE_JWT_EXP" type="integer" default="3600">
+  JWT token expiration time in seconds.
+  
+  ```bash
+  GOTRUE_JWT_EXP=3600  # 1 hour
+  ```
+</ParamField>
+
+<ParamField path="GOTRUE_DISABLE_SIGNUP" type="boolean" default="false">
+  Disable public user registration.
+  
+  ```bash
+  GOTRUE_DISABLE_SIGNUP=true
+  ```
+  
+  <Note>
+    Set to `true` in private deployments where you want to control user creation.
+  </Note>
+</ParamField>
+
+<ParamField path="GOTRUE_MAILER_AUTOCONFIRM" type="boolean" default="false">
+  Skip email confirmation for new users.
+  
+  ```bash
+  GOTRUE_MAILER_AUTOCONFIRM=true
+  ```
+</ParamField>
+
+### Email Configuration
+
+Configure SMTP for sending authentication emails.
+
+<ParamField path="SMTP_HOST" type="string">
+  SMTP server hostname.
+  
+  ```bash
+  SMTP_HOST=smtp.gmail.com
+  ```
+</ParamField>
+
+<ParamField path="SMTP_PORT" type="integer" default="587">
+  SMTP server port.
+  
+  ```bash
+  SMTP_PORT=587
+  ```
+</ParamField>
+
+<ParamField path="SMTP_USER" type="string">
+  SMTP username.
+  
+  ```bash
+  SMTP_USER=noreply@yourdomain.com
+  ```
+</ParamField>
+
+<ParamField path="SMTP_PASS" type="string">
+  SMTP password.
+  
+  ```bash
+  SMTP_PASS=your_smtp_password
+  ```
+</ParamField>
+
+<ParamField path="SMTP_FROM_EMAIL" type="string">
+  Email address for outgoing emails.
+  
+  ```bash
+  SMTP_FROM_EMAIL=AppFlowy <noreply@yourdomain.com>
+  ```
+</ParamField>
+
+### AI Configuration (Optional)
+
+Configure AI features if you want to enable them.
+
+<ParamField path="OPENAI_API_KEY" type="string">
+  OpenAI API key for AI features.
+  
+  ```bash
+  OPENAI_API_KEY=sk-...
+  ```
+</ParamField>
+
+<ParamField path="AI_MODEL" type="string" default="gpt-4">
+  AI model to use.
+  
+  ```bash
+  AI_MODEL=gpt-4-turbo
+  ```
+</ParamField>
+
+<ParamField path="AI_ENABLED" type="boolean" default="false">
+  Enable or disable AI features.
+  
+  ```bash
+  AI_ENABLED=true
+  ```
+</ParamField>
+
+<ParamField path="AI_MAX_TOKENS" type="integer" default="2000">
+  Maximum tokens for AI responses.
+  
+  ```bash
+  AI_MAX_TOKENS=2000
+  ```
+</ParamField>
+
+## Advanced Configuration
+
+### Resource Limits
+
+Configure resource limits in `docker-compose.yml`:
+
+```yaml
+services:
+  appflowy-server:
+    deploy:
+      resources:
+        limits:
+          cpus: '2'
+          memory: 4G
+        reservations:
+          cpus: '1'
+          memory: 2G
+```
+
+### Database Connection Pooling
+
+Optimize database performance:
+
+```bash
+# Maximum pool size
+DB_POOL_MAX_SIZE=20
+
+# Minimum pool size
+DB_POOL_MIN_SIZE=5
+
+# Connection timeout (seconds)
+DB_POOL_TIMEOUT=30
+```
+
+### Logging Configuration
+
+<ParamField path="LOG_LEVEL" type="string" default="info">
+  Application log level.
+  
+  ```bash
+  LOG_LEVEL=info  # debug, info, warn, error
+  ```
+</ParamField>
+
+<ParamField path="LOG_FORMAT" type="string" default="json">
+  Log output format.
+  
+  ```bash
+  LOG_FORMAT=json  # json or text
+  ```
+</ParamField>
+
+### Performance Tuning
+
+<Tabs>
+  <Tab title="Database">
+    
+Optimize PostgreSQL for AppFlowy:
+
+```sql
+-- Adjust shared_buffers (25% of RAM)
+shared_buffers = 4GB
+
+-- Increase effective_cache_size (50% of RAM)
+effective_cache_size = 8GB
+
+-- Optimize work_mem
+work_mem = 64MB
+
+-- Increase maintenance_work_mem
+maintenance_work_mem = 512MB
+
+-- Enable query planning optimization
+random_page_cost = 1.1
+effective_io_concurrency = 200
+```
+
+Apply in `postgresql.conf` or via environment:
+
+```yaml
+services:
+  postgres:
+    command:
+      - postgres
+      - -c
+      - shared_buffers=4GB
+      - -c
+      - effective_cache_size=8GB
+```
+
+  </Tab>
+  
+  <Tab title="Redis">
+    
+Optimize Redis configuration:
+
+```bash
+# Maximum memory
+REDIS_MAXMEMORY=2gb
+
+# Eviction policy
+REDIS_MAXMEMORY_POLICY=allkeys-lru
+
+# Persistence
+REDIS_SAVE="900 1 300 10 60 10000"
+```
+
+In `docker-compose.yml`:
+
+```yaml
+services:
+  redis:
+    command: redis-server --maxmemory 2gb --maxmemory-policy allkeys-lru
+```
+
+  </Tab>
+  
+  <Tab title="Application">
+    
+Tune application performance:
+
+```bash
+# Worker threads
+WORKER_THREADS=8
+
+# Request timeout (seconds)
+REQUEST_TIMEOUT=30
+
+# Max request body size (MB)
+MAX_REQUEST_SIZE=100
+
+# Enable compression
+ENABLE_GZIP=true
+```
+
+  </Tab>
+</Tabs>
+
+## Configuration Examples
+
+### Small Team Setup
+
+Optimal for 5-20 users:
+
+```bash
+# Application
+APPFLOWY_CLOUD_BASE_URL=https://appflowy.company.com
+APPFLOWY_CLOUD_WS_BASE_URL=wss://appflowy.company.com
+
+# Database
+POSTGRES_HOST=postgres
+POSTGRES_DB=appflowy
+POSTGRES_MAX_CONNECTIONS=50
+
+# Redis
+REDIS_HOST=redis
+REDIS_MAXMEMORY=1gb
+
+# Storage (MinIO)
+S3_ENDPOINT=http://minio:9000
+S3_BUCKET=appflowy-storage
+
+# Security
+GOTRUE_DISABLE_SIGNUP=true
+GOTRUE_MAILER_AUTOCONFIRM=false
+```
+
+### Enterprise Setup
+
+Optimal for 100+ users:
+
+```bash
+# Application
+APPFLOWY_CLOUD_BASE_URL=https://appflowy.enterprise.com
+APPFLOWY_CLOUD_WS_BASE_URL=wss://appflowy.enterprise.com
+
+# Database (external)
+POSTGRES_HOST=postgres.internal.company.com
+POSTGRES_DB=appflowy_prod
+POSTGRES_MAX_CONNECTIONS=200
+DB_POOL_MAX_SIZE=50
+
+# Redis (cluster)
+REDIS_HOST=redis-cluster.internal.company.com
+REDIS_MAXMEMORY=8gb
+
+# Storage (AWS S3)
+S3_ENDPOINT=https://s3.us-east-1.amazonaws.com
+S3_BUCKET=company-appflowy-prod
+S3_REGION=us-east-1
+S3_USE_PATH_STYLE=false
+
+# Security
+GOTRUE_DISABLE_SIGNUP=true
+GOTRUE_JWT_EXP=7200
+
+# Performance
+WORKER_THREADS=16
+LOG_LEVEL=warn
+```
+
+## Validating Configuration
+
+Verify your configuration is correct:
+
+<Steps>
+  <Step title="Check environment variables">
+    ```bash
+    docker compose config
+    ```
+  </Step>
+  
+  <Step title="Test database connection">
+    ```bash
+    docker compose exec postgres pg_isready -U appflowy
+    ```
+  </Step>
+  
+  <Step title="Verify Redis connection">
+    ```bash
+    docker compose exec redis redis-cli ping
+    ```
+  </Step>
+  
+  <Step title="Test S3 connectivity">
+    ```bash
+    docker compose exec appflowy-server s3-test
+    ```
+  </Step>
+</Steps>
+
+## Configuration Best Practices
+
+<CardGroup cols={2}>
+  <Card title="Use Secrets Management" icon="vault">
+    Store sensitive values in Docker secrets or a secrets manager like HashiCorp Vault.
+  </Card>
+  <Card title="Environment Separation" icon="layer-group">
+    Maintain separate configurations for development, staging, and production.
+  </Card>
+  <Card title="Version Control" icon="code-branch">
+    Track configuration changes (excluding secrets) in version control.
+  </Card>
+  <Card title="Regular Audits" icon="magnifying-glass">
+    Review and update configurations periodically.
+  </Card>
+</CardGroup>
+
+<Warning>
+  Never commit `.env` files with real credentials to version control. Use `.env.example` as a template.
+</Warning>
+
+## Next Steps
+
+<CardGroup cols={2}>
+  <Card title="Security Guide" icon="lock" href="/self-hosting/security">
+    Secure your AppFlowy deployment
+  </Card>
+  <Card title="Monitoring & Logs" icon="chart-line" href="/advanced/monitoring">
+    Set up monitoring and alerting
+  </Card>
+</CardGroup>

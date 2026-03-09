@@ -1,0 +1,422 @@
+---
+title: "RAG Search"
+description: "Search documents with AI locally in Vault workspaces using Retrieval-Augmented Generation"
+---
+
+## Overview
+
+RAG (Retrieval-Augmented Generation) Search provides AI-powered document search that runs completely offline in Vault workspaces. Unlike cloud-based AI features, RAG Search processes your documents locally, ensuring privacy and security while delivering intelligent search results with AI-generated overviews.
+
+<Info>
+  RAG Search is exclusive to Vault workspaces, introduced in v0.9.5. It combines local AI with vector embeddings for private, offline document intelligence.
+</Info>
+
+## What Is RAG?
+
+Retrieval-Augmented Generation (RAG) combines two AI capabilities:
+
+1. **Retrieval** - Finding relevant documents using semantic search
+2. **Generation** - Creating AI summaries based on retrieved content
+
+### How It Works
+
+<Steps>
+  <Step title="Document Indexing">
+    Your documents are processed locally and converted into vector embeddings (numerical representations of meaning).
+  </Step>
+  
+  <Step title="Semantic Search">
+    When you search, the query is converted to a vector and compared against document vectors to find semantically similar content.
+  </Step>
+  
+  <Step title="AI Generation">
+    Retrieved documents are sent to your local AI model (via Ollama) to generate a contextual summary with citations.
+  </Step>
+</Steps>
+
+<Note>
+  All processing happens on your device. No data is sent to the cloud, ensuring complete privacy.
+</Note>
+
+## Setting Up RAG Search
+
+### Prerequisites
+
+<Steps>
+  <Step title="Create a Vault Workspace">
+    RAG Search only works in Vault workspaces. Create a new Vault workspace from Settings → Workspaces.
+  </Step>
+  
+  <Step title="Install Ollama">
+    Download and install [Ollama](https://ollama.ai) for local AI processing.
+    
+    ```bash
+    # macOS
+    brew install ollama
+    
+    # Linux
+    curl -fsSL https://ollama.ai/install.sh | sh
+    ```
+  </Step>
+  
+  <Step title="Download AI Models">
+    Pull the required models for embeddings and generation:
+    
+    ```bash
+    # Embedding model for document indexing
+    ollama pull nomic-embed-text
+    
+    # Generation model for summaries
+    ollama pull llama2
+    # or
+    ollama pull mistral
+    ```
+  </Step>
+  
+  <Step title="Configure Embedding Model">
+    In AppFlowy Settings → AI, select your preferred embedding model from the available options.
+  </Step>
+</Steps>
+
+### Supported File Types
+
+RAG Search can process:
+
+- **PDF files** - Extracts text and indexes content
+- **Markdown files** (.md) - Indexes structured content
+- **Text files** (.txt) - Indexes plain text
+- **AppFlowy pages** - Native document support
+
+<Tip>
+  Upload files to your Vault workspace by dragging and dropping them into the file manager or importing them through the menu.
+</Tip>
+
+## Using RAG Search
+
+<Steps>
+  <Step title="Open Search in Vault">
+    Press `Cmd/Ctrl + K` to open the search panel in your Vault workspace.
+  </Step>
+  
+  <Step title="Ask a Question">
+    Type a natural language question or search query:
+    
+    - "What are the key findings in the research papers?"
+    - "Summarize the meeting notes from this week"
+    - "Find information about deployment procedures"
+  </Step>
+  
+  <Step title="Review AI Overview">
+    RAG Search returns:
+    
+    - **AI-generated summary** - Comprehensive answer to your question
+    - **Key highlights** - Important points extracted from documents
+    - **Source citations** - Links to specific files and pages
+  </Step>
+  
+  <Step title="Explore Sources">
+    Click source links to view the original documents and verify information.
+  </Step>
+</Steps>
+
+## RAG Search Features
+
+### Semantic Search
+
+RAG Search understands meaning, not just keywords:
+
+- **Conceptual matching** - Finds documents about "machine learning" when you search for "AI training"
+- **Synonym recognition** - Matches "purchase" with "buy", "acquire", "procurement"
+- **Context awareness** - Understands multi-word concepts and relationships
+
+### Chat with Files
+
+Ask questions about uploaded documents:
+
+```plaintext
+Question: "What are the main conclusions in the research PDF?"
+
+RAG Search:
+1. Finds relevant sections in the PDF
+2. Extracts key conclusions
+3. Generates a summary with page references
+4. Provides direct quotes with citations
+```
+
+### Multi-Document Synthesis
+
+Combine information from multiple files:
+
+- **Cross-document analysis** - Compare findings across multiple PDFs
+- **Timeline building** - Order events from different markdown notes
+- **Theme identification** - Find common themes across text files
+- **Comprehensive answers** - Synthesize information from multiple sources
+
+<CardGroup cols={2}>
+  <Card title="PDF Search" icon="file-pdf">
+    Extract and search content from PDF documents with page-level citations
+  </Card>
+  
+  <Card title="Markdown Search" icon="markdown">
+    Search through structured markdown notes with section references
+  </Card>
+  
+  <Card title="Text Search" icon="file-lines">
+    Index and search plain text files with line number citations
+  </Card>
+  
+  <Card title="Workspace Search" icon="folder">
+    Search all AppFlowy pages in your Vault workspace
+  </Card>
+</CardGroup>
+
+## Embedding Models
+
+Choose the right embedding model for your needs:
+
+### Available Models
+
+| Model | Size | Speed | Quality | Best For |
+|-------|------|-------|---------|----------|
+| **nomic-embed-text** | ~274MB | Fast | High | General purpose, multilingual |
+| **all-minilm** | ~45MB | Very Fast | Good | Quick indexing, limited resources |
+| **mxbai-embed-large** | ~669MB | Slower | Highest | Maximum quality, powerful hardware |
+
+### Switching Embedding Models
+
+<Warning>
+  Changing embedding models requires re-indexing all documents, which may take time depending on your content volume.
+</Warning>
+
+<Steps>
+  <Step title="Go to AI Settings">
+    Navigate to Settings → AI → Vault Configuration
+  </Step>
+  
+  <Step title="Select New Model">
+    Choose a different embedding model from the dropdown
+  </Step>
+  
+  <Step title="Trigger Re-indexing">
+    AppFlowy automatically re-indexes all documents with the new model
+  </Step>
+  
+  <Step title="Wait for Completion">
+    Monitor the indexing progress indicator until complete
+  </Step>
+</Steps>
+
+## RAG Search Best Practices
+
+<CardGroup cols={2}>
+  <Card title="Ask Complete Questions" icon="comment">
+    Use full sentences like "What were the Q1 revenue figures?" rather than just "revenue"
+  </Card>
+  
+  <Card title="Be Specific" icon="crosshairs">
+    Include context: "What did the design review document say about mobile UX?"
+  </Card>
+  
+  <Card title="Verify Sources" icon="shield-check">
+    Always check source documents for critical information and exact details
+  </Card>
+  
+  <Card title="Organize Files" icon="folder-tree">
+    Use clear file names and organize content in folders for better context
+  </Card>
+</CardGroup>
+
+### Optimizing Document Indexing
+
+**For better RAG Search results:**
+
+- Use descriptive file names that indicate content
+- Structure markdown files with clear headings
+- Keep related documents in the same folders
+- Add metadata (dates, authors, topics) to file names
+- Break large documents into logical sections
+
+### Query Optimization
+
+**Write queries that get better results:**
+
+✅ **Good queries:**
+- "Summarize the key features discussed in the product spec"
+- "What budget was allocated for marketing in Q1?"
+- "Compare the two proposal documents and highlight differences"
+
+❌ **Less effective queries:**
+- "features"
+- "budget"
+- "proposals"
+
+## Privacy and Security
+
+### What Stays Local
+
+<Info>
+  RAG Search in Vault workspaces is 100% private. Everything runs on your device:
+</Info>
+
+- **Document content** - Never leaves your device
+- **Embeddings** - Stored locally in your Vault database
+- **AI processing** - Runs through local Ollama instance
+- **Search queries** - Processed entirely offline
+- **Generated summaries** - Created by your local AI model
+
+### Data Storage
+
+RAG Search stores:
+
+- **Vector embeddings** - In local SQLite database
+- **Document metadata** - File names, locations, timestamps
+- **No external services** - Zero cloud dependencies for search
+
+<Note>
+  Vault workspaces are designed for sensitive data. RAG Search maintains this privacy guarantee by keeping all AI operations local.
+</Note>
+
+## Performance Considerations
+
+### Hardware Requirements
+
+RAG Search performance depends on your hardware:
+
+**Minimum:**
+- 8GB RAM
+- 2GB free disk space
+- Multi-core processor
+
+**Recommended:**
+- 16GB+ RAM
+- 10GB+ free disk space (for larger models)
+- Apple Silicon M1/M2 or modern x86 processor with AVX2
+
+### Indexing Speed
+
+Document indexing time varies by:
+
+- **File size** - Larger PDFs take longer
+- **File count** - More files = longer initial indexing
+- **Model size** - Larger embedding models are slower
+- **Hardware** - Faster CPU/GPU speeds up processing
+
+<Tip>
+  Index documents in batches. Add files to your Vault gradually rather than importing hundreds at once.
+</Tip>
+
+### Search Speed
+
+Once indexed, RAG Search is fast:
+
+- **Query matching** - Near-instant with vector search
+- **AI generation** - 2-10 seconds depending on model and context
+- **No network latency** - Offline operation is consistently fast
+
+## Troubleshooting
+
+### RAG Search Not Available
+
+**Problem:** RAG Search option doesn't appear in search.
+
+**Solutions:**
+1. Verify you're in a Vault workspace (not a regular workspace)
+2. Check that Ollama is installed and running: `ollama list`
+3. Ensure embedding model is downloaded: `ollama pull nomic-embed-text`
+4. Restart AppFlowy after installing Ollama
+
+### Slow Indexing
+
+**Problem:** Document indexing takes too long.
+
+**Solutions:**
+1. Use a smaller, faster embedding model (all-minilm)
+2. Index fewer documents at once
+3. Close other applications to free up resources
+4. Check available disk space
+5. Consider upgrading hardware for better performance
+
+### Poor Search Results
+
+**Problem:** RAG Search returns irrelevant results.
+
+**Solutions:**
+1. Rewrite queries with more specific details
+2. Check that documents are properly indexed (Settings → AI)
+3. Try a different embedding model for better quality
+4. Verify uploaded files contain searchable text (PDFs may have image-only content)
+5. Re-index documents if search quality has degraded
+
+### AI Generation Errors
+
+**Problem:** Search finds documents but AI fails to generate summary.
+
+**Solutions:**
+1. Verify Ollama is running: `ollama serve`
+2. Check generation model is available: `ollama list`
+3. Download recommended model: `ollama pull llama2`
+4. Try a different generation model
+5. Check logs for specific error messages
+
+## RAG Search vs. Cloud AI Search
+
+| Feature | RAG Search (Vault) | Cloud AI Search |
+|---------|-------------------|------------------|
+| **Privacy** | 100% local | Cloud-processed |
+| **Internet** | Works offline | Requires connection |
+| **Speed** | Fast (local) | Depends on network |
+| **Models** | Ollama models | GPT, Claude, etc. |
+| **File Types** | PDF, MD, TXT | AppFlowy pages only |
+| **Setup** | Requires Ollama | No setup |
+| **Cost** | Free (local resources) | May require subscription |
+
+## Advanced RAG Configuration
+
+### Embedding Model Parameters
+
+Adjust embedding behavior in Settings → AI → Advanced:
+
+- **Chunk size** - Size of document sections for indexing (default: 512 tokens)
+- **Chunk overlap** - Overlap between chunks for context (default: 128 tokens)
+- **Top K results** - Number of document chunks to retrieve (default: 5)
+- **Score threshold** - Minimum similarity score for results (default: 0.5)
+
+### Generation Model Selection
+
+Choose the best generation model for your needs:
+
+| Model | Size | Speed | Quality | Use Case |
+|-------|------|-------|---------|----------|
+| **llama2** | 3.8GB | Medium | Good | General purpose |
+| **mistral** | 4.1GB | Medium | High | Better reasoning |
+| **mixtral** | 26GB | Slow | Highest | Maximum quality |
+| **codellama** | 3.8GB | Medium | Good | Code-focused tasks |
+
+### Custom RAG Workflows
+
+Combine RAG Search with other features:
+
+1. **Research workflow** - Upload PDFs → RAG Search → Save summaries to pages
+2. **Meeting notes** - Index markdown notes → Search across meetings → Generate weekly summaries
+3. **Documentation** - Index text files → Ask implementation questions → Generate guides
+4. **Code analysis** - Index code files → Search for patterns → Get explanations
+
+## Related Features
+
+<CardGroup cols={2}>
+  <Card title="Vault Workspaces" icon="vault" href="/advanced/vault-workspace">
+    Learn about private, offline Vault workspaces
+  </Card>
+  
+  <Card title="AI Overviews" icon="lightbulb" href="/ai/ai-overviews">
+    Cloud-based AI summaries for regular workspaces
+  </Card>
+  
+  <Card title="AI Search" icon="magnifying-glass" href="/ai/ai-search">
+    Natural language search in cloud workspaces
+  </Card>
+  
+  <Card title="AI Chat" icon="comments" href="/ai/ai-chat">
+    Interactive AI conversations with document sources
+  </Card>
+</CardGroup>

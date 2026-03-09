@@ -1,0 +1,215 @@
+---
+title: 'Vault Workspace'
+description: 'Create a private, offline workspace with local AI capabilities'
+icon: 'vault'
+---
+
+## Overview
+
+Vault Workspace is a specialized workspace type introduced in AppFlowy 0.9.5 that provides complete privacy and offline functionality. Unlike regular workspaces, Vault Workspaces keep all your data and AI processing entirely local—nothing is ever transmitted to external servers.
+
+<Info>
+  Vault Workspace is perfect for sensitive projects, compliance requirements, or when working in environments with limited internet connectivity.
+</Info>
+
+## Key Features
+
+<CardGroup cols={2}>
+  <Card title="Private & Offline" icon="lock">
+    All data stays on your device with no external data transfer
+  </Card>
+  <Card title="Local AI Processing" icon="microchip">
+    AI runs completely locally with support for custom embedding models
+  </Card>
+  <Card title="File Chat" icon="message">
+    Chat with PDF, Markdown, and TXT files using local AI
+  </Card>
+  <Card title="RAG Search" icon="magnifying-glass">
+    Retrieval-Augmented Generation with AI-generated overviews
+  </Card>
+</CardGroup>
+
+## Creating a Vault Workspace
+
+<Steps>
+  <Step title="Open Workspace Settings">
+    Navigate to Settings → Workspaces in AppFlowy Desktop
+  </Step>
+  
+  <Step title="Create New Workspace">
+    Click "Create Workspace" and select **Vault Workspace** as the type
+  </Step>
+  
+  <Step title="Configure Local AI">
+    Set up your local AI model and embedding model preferences
+  </Step>
+  
+  <Step title="Start Using">
+    Your Vault Workspace is now ready with full privacy protection
+  </Step>
+</Steps>
+
+## Local AI Configuration
+
+### Embedding Models
+
+Vault Workspaces support switching between different embedding models to optimize for your specific use case:
+
+- **Default Model**: Pre-configured for general use
+- **Custom Models**: Import and use your own embedding models
+- **Performance Tuning**: Adjust model settings for speed vs. accuracy
+
+<Note>
+  Embedding models determine how your documents are indexed for semantic search and AI chat features.
+</Note>
+
+### AI Model Setup
+
+1. Navigate to **Settings → AI** in your Vault Workspace
+2. Select "Local AI" as your AI provider
+3. Choose your preferred embedding model from the dropdown
+4. Configure model parameters (optional)
+
+<Warning>
+  Local AI requires sufficient system resources. Ensure your device meets the recommended requirements for optimal performance.
+</Warning>
+
+## Chat with Files
+
+Vault Workspaces enable you to have AI-powered conversations with your documents:
+
+### Supported File Types
+
+- **PDF**: Extract and discuss content from PDF documents
+- **Markdown**: Query and analyze your markdown files
+- **TXT**: Chat with plain text documents
+
+### Using File Chat
+
+<Steps>
+  <Step title="Add Files to Chat">
+    In the AI chat interface, click the file attachment icon to add documents
+  </Step>
+  
+  <Step title="Select Source Files">
+    Choose one or multiple files (PDF, Markdown, or TXT) as context sources
+  </Step>
+  
+  <Step title="Ask Questions">
+    Ask questions about the content—AI will use your selected files as context
+  </Step>
+  
+  <Step title="Get Instant Answers">
+    Receive AI-generated responses based on your document content
+  </Step>
+</Steps>
+
+```markdown Example Questions
+What are the main topics covered in this document?
+Summarize the key findings from section 3.
+Compare the approaches discussed in these two papers.
+```
+
+## RAG Search
+
+Retrieval-Augmented Generation (RAG) search in Vault Workspaces combines semantic search with AI-generated summaries:
+
+### How RAG Search Works
+
+1. **Semantic Indexing**: Your documents are indexed using local embedding models
+2. **Intelligent Retrieval**: Search queries find relevant content across your workspace
+3. **AI Overviews**: Get instant AI-generated summaries with source citations
+4. **Complete Privacy**: All processing happens locally on your device
+
+### Using RAG Search
+
+<Steps>
+  <Step title="Open Search">
+    Press `Cmd+K` (Mac) or `Ctrl+K` (Windows/Linux) to open search
+  </Step>
+  
+  <Step title="Enter Natural Language Query">
+    Type your question in natural language instead of just keywords
+  </Step>
+  
+  <Step title="Review AI Overview">
+    Get an AI-generated summary with links to source documents
+  </Step>
+  
+  <Step title="Explore Sources">
+    Click source links to view the original content
+  </Step>
+</Steps>
+
+<Info>
+  RAG search understands context and meaning, not just keywords, making it more powerful than traditional search.
+</Info>
+
+## Privacy & Security
+
+### Data Storage
+
+- All data is stored locally on your device
+- No cloud synchronization (offline by design)
+- Complete control over your information
+
+### AI Processing
+
+- AI models run entirely on your machine
+- No queries or data sent to external servers
+- Full compliance with strict data privacy requirements
+
+<Warning>
+  Vault Workspaces cannot be synced across devices. If you need multi-device access, consider using a regular workspace with encryption.
+</Warning>
+
+## Performance Optimization
+
+### System Requirements
+
+- **Minimum RAM**: 8GB (16GB recommended)
+- **Storage**: At least 5GB free space for AI models
+- **Processor**: Multi-core CPU recommended for faster AI processing
+
+### Tips for Better Performance
+
+1. **Use appropriate embedding models**: Smaller models are faster but less accurate
+2. **Limit concurrent AI operations**: Process one document at a time for best results
+3. **Keep your workspace organized**: Better organization leads to more relevant search results
+
+## Limitations
+
+<Warning>
+  - No cloud sync or multi-device access
+  - Requires local storage for AI models
+  - AI performance depends on your hardware
+  - Cannot collaborate with team members in real-time
+</Warning>
+
+## When to Use Vault Workspace
+
+<CardGroup cols={2}>
+  <Card title="Sensitive Data" icon="shield">
+    Working with confidential information that must stay on your device
+  </Card>
+  <Card title="Compliance" icon="file-certificate">
+    Meeting regulatory requirements that prohibit cloud storage
+  </Card>
+  <Card title="Offline Work" icon="plane">
+    Working in environments without reliable internet access
+  </Card>
+  <Card title="Privacy Focus" icon="eye-slash">
+    Maximum privacy with no external data transmission
+  </Card>
+</CardGroup>
+
+## Next Steps
+
+<CardGroup cols={2}>
+  <Card title="Data Export" href="/advanced/data-export" icon="download">
+    Learn how to export and backup your Vault Workspace
+  </Card>
+  <Card title="Customization" href="/advanced/customization" icon="palette">
+    Customize your workspace appearance and settings
+  </Card>
+</CardGroup>

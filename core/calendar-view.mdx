@@ -1,0 +1,408 @@
+---
+title: "Calendar View"
+description: "Plan and schedule with calendar-based database views"
+---
+
+## Overview
+
+Calendar View displays your database entries as events on a calendar, making it perfect for content planning, event management, and deadline tracking. Each row becomes a calendar event positioned by its date field.
+
+<CardGroup cols={2}>
+  <Card title="Visual Timeline" icon="timeline" iconType="solid">
+    See all your events and deadlines at a glance
+  </Card>
+  <Card title="Drag & Drop" icon="hand-pointer" iconType="solid">
+    Reschedule events by dragging them to new dates
+  </Card>
+  <Card title="Multiple Dates" icon="calendar-days" iconType="solid">
+    Group by any Date field in your database
+  </Card>
+  <Card title="Flexible Views" icon="eye" iconType="solid">
+    Switch between month, week, and day views
+  </Card>
+</CardGroup>
+
+## Creating a Calendar View
+
+<Steps>
+  <Step title="Create new calendar">
+    Type `/calendar` in a document, or click **+** in sidebar and select **Calendar**
+  </Step>
+  
+  <Step title="Or add to existing database">
+    Open a database, click the view name, and select **+ Add View** → **Calendar**
+  </Step>
+  
+  <Step title="Choose date field">
+    Select which Date field to use for positioning events (defaults to "Date")
+  </Step>
+</Steps>
+
+<Info>
+  Calendar views require a Date field. If your database doesn't have one, AppFlowy creates a default "Date" field automatically.
+</Info>
+
+## Calendar Layout Options
+
+Switch between different time scales:
+
+### Month View
+
+The default view shows an entire month:
+
+- See 4-6 weeks at once
+- Each day shows event titles
+- Multiple events per day stack vertically
+- Great for long-term planning
+
+### Week View
+
+Focus on a single week:
+
+- See 7 days with more detail
+- Hourly time slots for timed events
+- Better for scheduling specific times
+- Perfect for weekly planning
+
+### Day View
+
+Zoom into a single day:
+
+- See all events for one day
+- Hourly breakdown
+- Useful for daily agenda and detailed scheduling
+
+<Steps>
+  <Step title="Switch views">
+    Click **Month** / **Week** / **Day** buttons in the top-left corner
+  </Step>
+  
+  <Step title="Navigate dates">
+    Use **← →** arrows to move backward or forward
+  </Step>
+  
+  <Step title="Jump to today">
+    Click **Today** button to return to current date
+  </Step>
+</Steps>
+
+## Working with Events
+
+### Creating Events
+
+<Steps>
+  <Step title="Click a date">
+    Click on any date cell in the calendar
+  </Step>
+  
+  <Step title="Quick create">
+    Type the event name and press `Enter`
+  </Step>
+  
+  <Step title="Or add details immediately">
+    Click the event to open details and fill in all properties
+  </Step>
+</Steps>
+
+<Tip>
+  You can also create events from the **+ New** button, but you'll need to manually set the date.
+</Tip>
+
+### Viewing Event Details
+
+<Steps>
+  <Step title="Click event">
+    Click any event on the calendar to open the row detail view
+  </Step>
+  
+  <Step title="See all properties">
+    View and edit all database fields in the properties panel
+  </Step>
+  
+  <Step title="Add content">
+    Use the document editor below to add notes, agendas, or attachments
+  </Step>
+</Steps>
+
+### Moving Events
+
+**Drag and drop**: Click and hold an event, then drag it to a new date
+
+**Details view**: Open the event and change the date field value
+
+**Cut and paste**: Select event, `Ctrl/Cmd + X`, click new date, `Ctrl/Cmd + V`
+
+<Note>
+  Dragging an event updates its date field. If the event has a time, it's preserved during the move.
+</Note>
+
+## Date Field Configuration
+
+Customize how dates work in your calendar:
+
+### Date Field Settings
+
+<Steps>
+  <Step title="Edit date field">
+    Right-click the date field header → **Edit property**
+  </Step>
+  
+  <Step title="Configure format">
+    Choose date format (MM/DD/YYYY, DD/MM/YYYY, etc.)
+  </Step>
+  
+  <Step title="Include time">
+    Toggle **Include time** to show specific event times
+  </Step>
+  
+  <Step title="Set time format">
+    Choose 12-hour (AM/PM) or 24-hour format
+  </Step>
+</Steps>
+
+### With Time vs. Without Time
+
+**Date only**:
+- Events appear as all-day events
+- Positioned in date cells
+- Good for deadlines, milestones, birthdays
+
+**Date + Time**:
+- Events show at specific hours
+- Visible in Week and Day views with hourly positioning
+- Perfect for meetings, appointments, schedules
+
+## Changing the Layout Field
+
+Switch which date field controls the calendar:
+
+<Steps>
+  <Step title="Open settings">
+    Click **⚙️** in the toolbar → **Layout**
+  </Step>
+  
+  <Step title="Choose date field">
+    Select from any Date field in your database
+  </Step>
+  
+  <Step title="Calendar updates">
+    Events reposition based on the new date field
+  </Step>
+</Steps>
+
+<Tip>
+  Use different views with different date fields for different purposes: "Due Date" for deadlines, "Published Date" for content calendar.
+</Tip>
+
+## Unscheduled Events
+
+Events without dates appear in the **Unscheduled** section:
+
+<Steps>
+  <Step title="View unscheduled">
+    Click **Unscheduled** in the bottom panel
+  </Step>
+  
+  <Step title="See undated events">
+    All events with empty date fields appear here
+  </Step>
+  
+  <Step title="Schedule them">
+    Drag events from the unscheduled list onto calendar dates
+  </Step>
+</Steps>
+
+<Info>
+  The unscheduled panel helps you track events that need scheduling without losing them.
+</Info>
+
+## Filtering and Sorting
+
+Refine which events appear on your calendar:
+
+### Filters
+
+<Steps>
+  <Step title="Add filter">
+    Click **Filter** → **+ Add filter**
+  </Step>
+  
+  <Step title="Set conditions">
+    Choose field, operator, and value
+  </Step>
+  
+  <Step title="Apply">
+    Only matching events appear on the calendar
+  </Step>
+</Steps>
+
+Example filters:
+- Show only your events (filter by Assignee)
+- Display specific event types (filter by Category)
+- Hide completed events (filter by Status is not "Done")
+
+### Sorting
+
+Sorting affects the order of multiple events on the same date:
+
+<Steps>
+  <Step title="Add sort">
+    Click **Sort** → **+ Add sort**
+  </Step>
+  
+  <Step title="Choose field">
+    Select which field to sort by (e.g., Priority, Time)
+  </Step>
+  
+  <Step title="Set direction">
+    Ascending or descending
+  </Step>
+</Steps>
+
+## Event Appearance
+
+Customize what shows on calendar events:
+
+<Steps>
+  <Step title="Open settings">
+    Click **⚙️** → **Event card**
+  </Step>
+  
+  <Step title="Toggle fields">
+    Select which properties appear on event cards
+  </Step>
+  
+  <Step title="Compact view">
+    Choose compact mode to fit more events in each day
+  </Step>
+</Steps>
+
+### Event Colors
+
+Events inherit colors from Single Select fields:
+
+- If you show a **Status** or **Category** field with colors
+- Events display with the corresponding color
+- Makes it easy to distinguish event types at a glance
+
+<Tip>
+  Create a "Category" or "Type" Single Select field with colors to color-code your calendar.
+</Tip>
+
+## Common Use Cases
+
+<CardGroup cols={2}>
+  <Card title="Content Calendar" icon="newspaper">
+    Plan blog posts, social media, and marketing content
+  </Card>
+  
+  <Card title="Event Management" icon="calendar-check">
+    Schedule conferences, webinars, and company events
+  </Card>
+  
+  <Card title="Editorial Calendar" icon="pen-nib">
+    Track article deadlines, publication dates, and reviews
+  </Card>
+  
+  <Card title="Project Timeline" icon="gantt">
+    Visualize milestones, deliverables, and due dates
+  </Card>
+  
+  <Card title="Team Schedule" icon="users">
+    Coordinate team availability, meetings, and time off
+  </Card>
+  
+  <Card title="Launch Planning" icon="rocket">
+    Plan product launches with tasks and deadlines
+  </Card>
+</CardGroup>
+
+## Multi-Date Workflows
+
+For complex scheduling, use multiple date fields:
+
+### Example: Content Calendar
+
+Create these date fields:
+- **Draft Due**: When writing should be finished
+- **Review Date**: When editing happens
+- **Publish Date**: When content goes live
+
+Create three calendar views, each using a different date field:
+1. **Draft Calendar** (grouped by Draft Due)
+2. **Review Calendar** (grouped by Review Date)
+3. **Publication Calendar** (grouped by Publish Date)
+
+<Tip>
+  Each view gives a different perspective on the same data, helping different team members focus on relevant dates.
+</Tip>
+
+## Calendar Settings
+
+Access all customization options:
+
+**Click ⚙️ in the toolbar** to configure:
+
+- **Layout**: Choose which date field positions events
+- **Properties**: Select visible fields on event cards
+- **Event card**: Customize event appearance and size
+- **Field settings**: Manage field visibility
+- **First day of week**: Set to Monday or Sunday
+- **Show week numbers**: Toggle week number display
+
+## Keyboard Shortcuts
+
+| Action | Shortcut |
+|--------|----------|
+| Create event | Click date or `Ctrl/Cmd + Enter` |
+| Open event | `Enter` |
+| Next month/week/day | `→` |
+| Previous month/week/day | `←` |
+| Go to today | `T` |
+| Switch to month view | `M` |
+| Switch to week view | `W` |
+| Switch to day view | `D` |
+
+## Tips and Best Practices
+
+<CardGroup cols={2}>
+  <Card title="Use colors" icon="palette">
+    Add a color-coded Category or Status field for visual clarity
+  </Card>
+  
+  <Card title="Include times" icon="clock">
+    Use time fields for meetings and appointments
+  </Card>
+  
+  <Card title="Multiple views" icon="eye">
+    Create separate calendar views for different date fields
+  </Card>
+  
+  <Card title="Recurring events" icon="rotate">
+    Duplicate events and adjust dates for recurring meetings
+  </Card>
+</CardGroup>
+
+<Note>
+  AppFlowy doesn't yet support automatic recurring events, but you can duplicate events manually or use templates.
+</Note>
+
+## Next Steps
+
+<CardGroup cols={2}>
+  <Card title="Grid View" icon="table" href="/core/grid-view">
+    View calendar data in spreadsheet format
+  </Card>
+  
+  <Card title="Board View" icon="columns-3" href="/core/board-view">
+    Organize events with kanban boards
+  </Card>
+  
+  <Card title="Databases" icon="database" href="/core/databases">
+    Learn more about database fundamentals
+  </Card>
+  
+  <Card title="Templates" icon="clone" href="/core/templates">
+    Create reusable calendar templates
+  </Card>
+</CardGroup>

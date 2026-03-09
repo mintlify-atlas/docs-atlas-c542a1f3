@@ -1,0 +1,705 @@
+---
+title: Testing Guide
+description: Testing practices and guidelines for AppFlowy
+---
+
+Testing is crucial for maintaining code quality and preventing regressions. This guide covers testing practices for both Flutter and Rust components.
+
+## Testing Philosophy
+
+AppFlowy follows a comprehensive testing strategy:
+
+<CardGroup cols={2}>
+  <Card title="Unit Tests" icon="vial">
+    Test individual functions and classes in isolation
+  </Card>
+  
+  <Card title="Widget Tests" icon="mobile">
+    Test Flutter widgets and UI components
+  </Card>
+  
+  <Card title="Integration Tests" icon="puzzle">
+    Test complete user flows and features
+  </Card>
+  
+  <Card title="Rust Tests" icon="server">
+    Test Rust backend logic and modules
+  </Card>
+</CardGroup>
+
+## Flutter Testing
+
+### Unit Tests
+
+Unit tests verify individual functions and business logic:
+
+```dart
+// test/user/user_profile_test.dart
+import 'package:flutter_test/flutter_test.dart';
+import 'package:appflowy/user/domain/user_profile.dart';
+
+void main() {
+  group('UserProfile', () {
+    test('creates profile with valid data', () {
+      final profile = UserProfile(
+        id: '123',
+        name: 'John Doe',
+        email: 'john@example.com',
+      );
+      
+      expect(profile.id, equals('123'));
+      expect(profile.name, equals('John Doe'));
+      expect(profile.email, equals('john@example.com'));
+    });
+    
+    test('validates email format', () {
+      expect(UserProfile.isValidEmail('test@example.com'), isTrue);
+      expect(UserProfile.isValidEmail('invalid'), isFalse);
+    });
+  });
+}
+```
+
+### Widget Tests
+
+Widget tests verify UI components:
+
+```dart
+// test/widget/document_title_test.dart
+import 'package:flutter/material.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'package:appflowy/workspace/presentation/widgets/document_title.dart';
+
+void main() {
+  testWidgets('DocumentTitle displays title', (tester) async {
+    await tester.pumpWidget(
+      MaterialApp(
+        home: Scaffold(
+          body: DocumentTitle(title: 'My Document'),
+        ),
+      ),
+    );
+    
+    expect(find.text('My Document'), findsOneWidget);
+  });
+  
+  testWidgets('DocumentTitle handles tap', (tester) async {
+    var tapped = false;
+    
+    await tester.pumpWidget(
+      MaterialApp(
+        home: Scaffold(
+          body: DocumentTitle(
+            title: 'My Document',
+            onTap: () => tapped = true,
+          ),
+        ),
+      ),
+    );
+    
+    await tester.tap(find.byType(DocumentTitle));
+    expect(tapped, isTrue);
+  });
+}
+```
+
+### BLoC Tests
+
+Test state management with BLoCs:
+
+```dart
+// test/bloc/document_bloc_test.dart
+import 'package:flutter_test/flutter_test.dart';
+import 'package:bloc_test/bloc_test.dart';
+import 'package:appflowy/workspace/application/document/document_bloc.dart';
+
+void main() {
+  group('DocumentBloc', () {
+    late DocumentBloc bloc;
+    
+    setUp(() {
+      bloc = DocumentBloc(documentId: '123');
+    });
+    
+    tearDown(() {
+      bloc.close();
+    });
+    
+    blocTest<DocumentBloc, DocumentState>(
+      'emits loading and loaded states',
+      build: () => bloc,
+      act: (bloc) => bloc.add(DocumentEvent.load()),
+      expect: () => [
+        DocumentState.loading(),
+        DocumentState.loaded(document: mockDocument),
+      ],
+    );
+    
+    blocTest<DocumentBloc, DocumentState>(
+      'handles load error',
+      build: () => bloc,
+      act: (bloc) => bloc.add(DocumentEvent.load()),
+      expect: () => [
+        DocumentState.loading(),
+        DocumentState.error(message: 'Document not found'),
+      ],
+    );
+  });
+}
+```
+
+### Integration Tests
+
+Integration tests verify complete user flows:
+
+```dart
+// integration_test/document_flow_test.dart
+import 'package:flutter_test/flutter_test.dart';
+import 'package:integration_test/integration_test.dart';
+import 'package:appflowy/main.dart' as app;
+
+void main() {
+  IntegrationTestWidgetsFlutterBinding.ensureInitialized();
+  
+  group('Document Flow', () {
+    testWidgets('create and edit document', (tester) async {
+      app.main();
+      await tester.pumpAndSettle();
+      
+      // Tap create button
+      await tester.tap(find.byIcon(Icons.add));
+      await tester.pumpAndSettle();
+      
+      // Enter document title
+      await tester.enterText(
+        find.byType(TextField),
+        'Test Document',
+      );
+      await tester.pumpAndSettle();
+      
+      // Verify document created
+      expect(find.text('Test Document'), findsOneWidget);
+    });
+  });
+}
+```
+
+### Running Flutter Tests
+
+<Steps>
+  <Step title="Run all tests">
+    ```bash
+    cd appflowy_flutter
+    flutter test
+    ```
+  </Step>
+  
+  <Step title="Run specific test file">
+    ```bash
+    flutter test test/user/user_profile_test.dart
+    ```
+  </Step>
+  
+  <Step title="Run tests with coverage">
+    ```bash
+    flutter test --coverage
+    ```
+    
+    View coverage report:
+    ```bash
+    genhtml coverage/lcov.info -o coverage/html
+    open coverage/html/index.html
+    ```
+  </Step>
+  
+  <Step title="Run integration tests">
+    ```bash
+    flutter test integration_test
+    ```
+  </Step>
+</Steps>
+
+### Using cargo-make for Dart Tests
+
+AppFlowy provides convenient cargo-make tasks:
+
+<CodeGroup>
+```bash Run Dart Unit Tests
+cd frontend
+cargo make dart_unit_test
+```
+
+```bash Run Single Test
+cargo make flutter_test test/path/to/test.dart --name 'test name'
+```
+
+```bash Run Tests Without Building
+cargo make dart_unit_test_no_build
+```
+</CodeGroup>
+
+## Rust Testing
+
+### Unit Tests
+
+Rust unit tests are written inline with the code:
+
+```rust
+// rust-lib/flowy-user/src/user_profile.rs
+pub struct UserProfile {
+  pub id: String,
+  pub name: String,
+  pub email: String,
+}
+
+impl UserProfile {
+  pub fn new(id: String, name: String, email: String) -> Self {
+    Self { id, name, email }
+  }
+  
+  pub fn is_valid_email(email: &str) -> bool {
+    email.contains('@') && email.contains('.')
+  }
+}
+
+#[cfg(test)]
+mod tests {
+  use super::*;
+  
+  #[test]
+  fn test_user_profile_creation() {
+    let profile = UserProfile::new(
+      "123".to_string(),
+      "John Doe".to_string(),
+      "john@example.com".to_string(),
+    );
+    
+    assert_eq!(profile.id, "123");
+    assert_eq!(profile.name, "John Doe");
+  }
+  
+  #[test]
+  fn test_email_validation() {
+    assert!(UserProfile::is_valid_email("test@example.com"));
+    assert!(!UserProfile::is_valid_email("invalid"));
+  }
+}
+```
+
+### Async Tests
+
+Test async functions with `tokio::test`:
+
+```rust
+use tokio::time::{sleep, Duration};
+
+pub async fn load_document(id: &str) -> Result<Document> {
+  sleep(Duration::from_millis(100)).await;
+  // Load document...
+  Ok(Document::default())
+}
+
+#[cfg(test)]
+mod tests {
+  use super::*;
+  
+  #[tokio::test]
+  async fn test_load_document() {
+    let doc = load_document("123").await.unwrap();
+    assert!(!doc.id.is_empty());
+  }
+  
+  #[tokio::test]
+  async fn test_concurrent_loads() {
+    let handles: Vec<_> = (0..10)
+      .map(|i| tokio::spawn(load_document(&format!("{}", i))))
+      .collect();
+    
+    for handle in handles {
+      assert!(handle.await.is_ok());
+    }
+  }
+}
+```
+
+### Integration Tests
+
+Integration tests are in the `tests/` directory:
+
+```rust
+// rust-lib/flowy-user/tests/user_integration_test.rs
+use flowy_user::UserManager;
+
+#[tokio::test]
+async fn test_user_signup_flow() {
+  let manager = UserManager::new();
+  
+  // Sign up new user
+  let result = manager.sign_up(
+    "test@example.com",
+    "password123",
+    "Test User",
+  ).await;
+  
+  assert!(result.is_ok());
+  
+  // Verify user created
+  let user = manager.get_current_user().await.unwrap();
+  assert_eq!(user.email, "test@example.com");
+}
+```
+
+### Running Rust Tests
+
+<Steps>
+  <Step title="Run all tests">
+    ```bash
+    cd rust-lib
+    cargo test
+    ```
+  </Step>
+  
+  <Step title="Run specific module tests">
+    ```bash
+    cargo test --package flowy-user
+    ```
+  </Step>
+  
+  <Step title="Run tests with output">
+    ```bash
+    cargo test -- --nocapture
+    ```
+  </Step>
+  
+  <Step title="Run single test">
+    ```bash
+    cargo test test_user_profile_creation
+    ```
+  </Step>
+</Steps>
+
+### Using cargo-make for Rust Tests
+
+<CodeGroup>
+```bash Run Rust Unit Tests
+cd frontend
+cargo make rust_unit_test
+```
+
+```bash Run with Coverage
+cargo make rust_unit_test_with_coverage
+```
+
+```bash Run Cloud Tests
+cargo make supabase_unit_test
+```
+</CodeGroup>
+
+## Test Backend
+
+AppFlowy provides a test backend for Flutter tests:
+
+<Steps>
+  <Step title="Build test backend">
+    ```bash
+    cd frontend
+    cargo make build_test_backend
+    ```
+    
+    This builds the Rust backend with test-specific configuration.
+  </Step>
+  
+  <Step title="Run tests">
+    The test backend is automatically loaded when running Dart tests.
+  </Step>
+</Steps>
+
+<Note>
+The test backend is built as a dynamic library (cdylib) for easier loading in tests.
+</Note>
+
+## Mocking and Test Doubles
+
+### Dart Mocking
+
+Use `mockito` for creating mocks:
+
+```dart
+import 'package:mockito/mockito.dart';
+import 'package:mockito/annotations.dart';
+
+@GenerateMocks([DocumentRepository])
+import 'document_test.mocks.dart';
+
+void main() {
+  test('loads document from repository', () async {
+    final repository = MockDocumentRepository();
+    
+    when(repository.getDocument('123'))
+      .thenAnswer((_) async => mockDocument);
+    
+    final service = DocumentService(repository);
+    final doc = await service.load('123');
+    
+    expect(doc.id, equals('123'));
+    verify(repository.getDocument('123')).called(1);
+  });
+}
+```
+
+### Rust Mocking
+
+Use traits for dependency injection:
+
+```rust
+#[async_trait]
+pub trait DocumentRepository {
+  async fn get_document(&self, id: &str) -> Result<Document>;
+}
+
+pub struct RealDocumentRepository;
+
+#[async_trait]
+impl DocumentRepository for RealDocumentRepository {
+  async fn get_document(&self, id: &str) -> Result<Document> {
+    // Real implementation
+  }
+}
+
+#[cfg(test)]
+mod tests {
+  use super::*;
+  
+  struct MockDocumentRepository;
+  
+  #[async_trait]
+  impl DocumentRepository for MockDocumentRepository {
+    async fn get_document(&self, id: &str) -> Result<Document> {
+      Ok(Document {
+        id: id.to_string(),
+        ..Default::default()
+      })
+    }
+  }
+  
+  #[tokio::test]
+  async fn test_with_mock() {
+    let repo = MockDocumentRepository;
+    let doc = repo.get_document("123").await.unwrap();
+    assert_eq!(doc.id, "123");
+  }
+}
+```
+
+## Test Coverage
+
+### Flutter Coverage
+
+<Steps>
+  <Step title="Generate coverage">
+    ```bash
+    cd appflowy_flutter
+    flutter test --coverage
+    ```
+  </Step>
+  
+  <Step title="View HTML report">
+    ```bash
+    # Install lcov (macOS)
+    brew install lcov
+    
+    # Generate HTML
+    genhtml coverage/lcov.info -o coverage/html
+    
+    # Open report
+    open coverage/html/index.html
+    ```
+  </Step>
+</Steps>
+
+### Rust Coverage
+
+<Steps>
+  <Step title="Install grcov">
+    ```bash
+    cargo install grcov
+    rustup component add llvm-tools-preview
+    ```
+  </Step>
+  
+  <Step title="Run tests with coverage">
+    ```bash
+    cd frontend
+    cargo make rust_unit_test_with_coverage
+    ```
+  </Step>
+  
+  <Step title="View report">
+    ```bash
+    open rust-lib/target/coverage.lcov
+    ```
+  </Step>
+</Steps>
+
+## CI/CD Testing
+
+AppFlowy runs automated tests on all pull requests:
+
+### GitHub Actions Workflow
+
+```yaml
+name: Tests
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  flutter-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: subosito/flutter-action@v2
+      - run: flutter test
+      
+  rust-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: dtolnay/rust-toolchain@stable
+      - run: cargo test --workspace
+```
+
+### Required Checks
+
+All PRs must pass:
+
+- ✅ Dart unit tests
+- ✅ Rust unit tests
+- ✅ Integration tests
+- ✅ Code formatting
+- ✅ Linting
+
+<Warning>
+PRs with failing tests will not be merged.
+</Warning>
+
+## Best Practices
+
+<CardGroup cols={2}>
+  <Card title="Write Tests First" icon="arrow-right">
+    Consider TDD: write tests before implementing features
+  </Card>
+  
+  <Card title="Test Behavior" icon="eye">
+    Test what the code does, not how it does it
+  </Card>
+  
+  <Card title="Keep Tests Fast" icon="bolt">
+    Fast tests = frequent testing = better quality
+  </Card>
+  
+  <Card title="Isolate Tests" icon="cube">
+    Each test should be independent and repeatable
+  </Card>
+  
+  <Card title="Use Descriptive Names" icon="signature">
+    Test names should explain what is being tested
+  </Card>
+  
+  <Card title="Arrange-Act-Assert" icon="list-ol">
+    Structure tests clearly: setup, execute, verify
+  </Card>
+</CardGroup>
+
+### Test Structure
+
+Follow the AAA pattern:
+
+```dart
+test('should return user profile when ID is valid', () {
+  // Arrange
+  final repository = MockUserRepository();
+  final service = UserService(repository);
+  when(repository.getUser('123')).thenReturn(mockUser);
+  
+  // Act
+  final result = service.getProfile('123');
+  
+  // Assert
+  expect(result.id, equals('123'));
+  expect(result.name, isNotEmpty);
+});
+```
+
+## Troubleshooting
+
+### Flutter Tests Fail
+
+<Tabs>
+  <Tab title="Clean and retry">
+    ```bash
+    flutter clean
+    flutter pub get
+    flutter test
+    ```
+  </Tab>
+  
+  <Tab title="Update dependencies">
+    ```bash
+    flutter pub upgrade
+    flutter test
+    ```
+  </Tab>
+  
+  <Tab title="Run single test">
+    ```bash
+    flutter test test/path/to/test.dart
+    ```
+  </Tab>
+</Tabs>
+
+### Rust Tests Fail
+
+<Tabs>
+  <Tab title="Clean and retry">
+    ```bash
+    cargo clean
+    cargo test
+    ```
+  </Tab>
+  
+  <Tab title="Update dependencies">
+    ```bash
+    cargo update
+    cargo test
+    ```
+  </Tab>
+  
+  <Tab title="Run with backtrace">
+    ```bash
+    RUST_BACKTRACE=1 cargo test
+    ```
+  </Tab>
+</Tabs>
+
+## Next Steps
+
+<CardGroup cols={2}>
+  <Card title="Contributing" href="/developer/contributing" icon="code-pull-request">
+    Contribute your changes with tests
+  </Card>
+  
+  <Card title="Code Style" href="/developer/code-style" icon="paintbrush">
+    Follow coding conventions
+  </Card>
+  
+  <Card title="Building" href="/developer/building-desktop" icon="hammer">
+    Build AppFlowy from source
+  </Card>
+  
+  <Card title="Architecture" href="/developer/architecture" icon="diagram-project">
+    Understand the architecture
+  </Card>
+</CardGroup>

@@ -1,0 +1,257 @@
+---
+title: Real-Time Editing
+description: Collaborate simultaneously with multiple users in real-time
+icon: 'users'
+---
+
+AppFlowy's real-time editing enables multiple team members to work on the same page simultaneously. See changes as they happen, avoid conflicts, and collaborate seamlessly.
+
+## Overview
+
+Real-time collaboration in AppFlowy provides:
+- **Instant synchronization** across all devices and users
+- **Conflict-free editing** with operational transformation
+- **Live presence indicators** showing who's currently editing
+- **Optimized sync protocol** for fast, reliable multi-user collaboration
+- **Multi-device support** for seamless work across desktop and mobile
+
+## How Real-Time Editing Works
+
+<Steps>
+  <Step title="Share the Page">
+    First, [share your page](/collaboration/sharing) with collaborators using **Can Edit** permissions. Only editors can make changes in real-time.
+  </Step>
+  
+  <Step title="Open the Same Page">
+    When multiple editors open the same page, AppFlowy automatically enables real-time collaboration mode.
+  </Step>
+  
+  <Step title="Edit Simultaneously">
+    All editors can make changes at the same time. Changes appear instantly for everyone viewing the page.
+  </Step>
+  
+  <Step title="Automatic Syncing">
+    The optimized syncing protocol ensures all changes are synchronized quickly and reliably across devices.
+  </Step>
+</Steps>
+
+<Note>
+AppFlowy uses an optimized syncing protocol introduced in version 0.9.4 for faster, more reliable multi-user and multi-device data synchronization.
+</Note>
+
+## Real-Time Features
+
+### Instant Change Visibility
+
+When collaborating in real-time:
+
+- **Character-by-character updates**: See text as teammates type
+- **Block-level changes**: Watch as collaborators add, move, or delete content blocks
+- **Database updates**: View real-time changes to database rows and properties
+- **Formatting changes**: See styling updates immediately
+
+<Info>
+Changes typically sync in under a second, depending on your internet connection speed.
+</Info>
+
+### Conflict-Free Editing
+
+AppFlowy's collaborative editing engine prevents conflicts:
+
+<CardGroup cols={2}>
+  <Card title="Operational Transformation" icon="rotate">
+    Smart algorithms merge simultaneous edits without data loss or corruption.
+  </Card>
+  
+  <Card title="Automatic Merging" icon="code-merge">
+    When two people edit nearby content, changes are automatically merged in the correct order.
+  </Card>
+  
+  <Card title="No Overwrites" icon="shield">
+    Your changes are never lost or overwritten by another user's edits.
+  </Card>
+  
+  <Card title="Consistent State" icon="check-double">
+    All users see the same final state, regardless of edit order or timing.
+  </Card>
+</CardGroup>
+
+### Multi-Device Synchronization
+
+Work seamlessly across platforms:
+
+- **Desktop to Mobile**: Start editing on desktop, continue on your phone
+- **Cross-Platform**: Sync between Windows, macOS, Linux, iOS, and Android
+- **Consistent Experience**: Same real-time collaboration features on all platforms
+- **Offline Support**: Changes sync automatically when you reconnect
+
+## Syncing Indicators
+
+AppFlowy displays sync status to keep you informed:
+
+### Document Sync Status
+
+Look for the sync indicator in the top bar:
+- **Synced**: All changes saved to cloud
+- **Syncing**: Currently uploading changes
+- **Offline**: No connection, changes saved locally
+
+### Database Sync Status
+
+Databases show their own sync indicators:
+- View sync status in the database toolbar
+- Track when rows and properties are synced
+- See connection status for real-time updates
+
+<Warning>
+If you see a persistent "Syncing" or "Offline" status, check your internet connection or workspace sync settings.
+</Warning>
+
+## Collaboration Best Practices
+
+<Steps>
+  <Step title="Communicate Your Intent">
+    Use [mentions](/collaboration/mentions) to notify teammates about changes or ask questions. Type `@` to mention someone.
+  </Step>
+  
+  <Step title="Work in Different Sections">
+    When possible, have team members work on different parts of the page to minimize overlapping edits.
+  </Step>
+  
+  <Step title="Use Comments for Discussion">
+    Rather than editing someone else's work directly, use mentions to discuss changes first.
+  </Step>
+  
+  <Step title="Save Frequently">
+    While auto-save is enabled, manually save (Ctrl/Cmd + S) to ensure your changes are synced.
+  </Step>
+</Steps>
+
+## Working with Databases
+
+Real-time collaboration works seamlessly in databases:
+
+### Grid View Collaboration
+- Multiple users can edit different cells simultaneously
+- See row additions and deletions in real-time
+- Watch as teammates update properties and values
+- Sort and filter settings sync across all users
+
+### Board View Collaboration
+- Drag and drop cards while others do the same
+- Real-time updates when cards move between columns
+- See new cards appear instantly
+- Status changes reflect immediately
+
+### Calendar View Collaboration
+- View event changes as they happen
+- Drag events to new dates while others edit
+- See new events appear on the calendar
+- Time and date changes sync instantly
+
+<Info>
+Database views can have independent settings, so each collaborator can customize their view while working on the same data.
+</Info>
+
+## Performance Optimization
+
+AppFlowy's real-time collaboration is optimized for performance:
+
+<CardGroup cols={2}>
+  <Card title="Efficient Protocol" icon="bolt">
+    The new syncing protocol reduces bandwidth usage while improving speed.
+  </Card>
+  
+  <Card title="Smart Batching" icon="layer-group">
+    Multiple rapid changes are batched together for efficient syncing.
+  </Card>
+  
+  <Card title="Incremental Sync" icon="arrows-rotate">
+    Only changed content is synchronized, not entire pages.
+  </Card>
+  
+  <Card title="Local-First" icon="database">
+    Changes are saved locally first, then synced in the background.
+  </Card>
+</CardGroup>
+
+## Offline Editing
+
+AppFlowy supports offline work with automatic sync:
+
+1. **Make changes offline**: Edit pages when disconnected
+2. **Local storage**: Changes are saved to your device
+3. **Auto-sync on reconnect**: When you're back online, changes sync automatically
+4. **Conflict resolution**: If others edited the same content, changes are merged intelligently
+
+<Note>
+Offline changes are stored locally and will sync the next time you connect to the internet. The sync indicator shows "Offline" when disconnected.
+</Note>
+
+## Platform Availability
+
+### Desktop (v0.9.4+)
+- **Full real-time editing** with all features
+- **Presence indicators** showing active collaborators
+- **Fast sync** with the optimized protocol
+- Supported on Windows, macOS, and Linux
+
+### Mobile (v0.9.4+)
+- **View and edit** shared pages
+- **Real-time synchronization** across devices
+- **Shared with me** section for easy access
+- Available on iOS and Android
+
+## Troubleshooting
+
+### Changes Not Appearing for Others
+
+<Steps>
+  <Step title="Check Connection">
+    Verify you're connected to the internet and the sync indicator shows "Synced".
+  </Step>
+  
+  <Step title="Refresh the Page">
+    Have collaborators refresh their view to fetch the latest changes.
+  </Step>
+  
+  <Step title="Verify Permissions">
+    Ensure the collaborator has **Can Edit** permissions, not just **Can View**.
+  </Step>
+  
+  <Step title="Check Workspace Type">
+    Real-time collaboration requires an AppFlowy Cloud workspace, not a local-only workspace.
+  </Step>
+</Steps>
+
+### Sync Conflicts
+
+If you experience frequent conflicts:
+- Coordinate with teammates to work on different sections
+- Use comments and mentions to discuss changes before making them
+- Avoid making rapid, large-scale changes when others are editing
+- Check your internet connection stability
+
+### Performance Issues
+
+If real-time editing feels slow:
+- Check your internet connection speed
+- Reduce the number of open tabs and applications
+- Clear your browser cache (for web version)
+- Restart the AppFlowy application
+
+## Next Steps
+
+<CardGroup cols={3}>
+  <Card title="Sharing Pages" icon="share-nodes" href="/collaboration/sharing">
+    Learn how to share pages and set permissions
+  </Card>
+  
+  <Card title="Mentions" icon="at" href="/collaboration/mentions">
+    Use @mentions to notify and assign teammates
+  </Card>
+  
+  <Card title="Permissions" icon="key" href="/collaboration/permissions">
+    Understand permission levels and access control
+  </Card>
+</CardGroup>

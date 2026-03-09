@@ -1,0 +1,491 @@
+---
+title: Building for Desktop
+description: Build AppFlowy for macOS, Windows, and Linux platforms
+---
+
+This guide covers building AppFlowy for desktop platforms (macOS, Windows, and Linux) from source.
+
+## Prerequisites
+
+Before building, ensure you have completed the [development environment setup](/developer/setup).
+
+<Note>
+All commands should be run from the `frontend/` directory.
+</Note>
+
+## Quick Start
+
+<Steps>
+  <Step title="Navigate to frontend">
+    ```bash
+    cd AppFlowy/frontend
+    ```
+  </Step>
+  
+  <Step title="Build for your platform">
+    <Tabs>
+      <Tab title="macOS">
+        ```bash
+        # For Apple Silicon (M1/M2/M3)
+        cargo make --profile development-mac-arm64 appflowy-core-dev
+        
+        # For Intel Macs
+        cargo make --profile development-mac-x86_64 appflowy-core-dev
+        ```
+      </Tab>
+      
+      <Tab title="Windows">
+        ```bash
+        cargo make --profile development-windows-x86 appflowy-core-dev
+        ```
+      </Tab>
+      
+      <Tab title="Linux">
+        ```bash
+        cargo make --profile development-linux-x86_64 appflowy-core-dev
+        ```
+      </Tab>
+    </Tabs>
+  </Step>
+  
+  <Step title="Run Flutter app">
+    ```bash
+    cd appflowy_flutter
+    flutter run
+    ```
+  </Step>
+</Steps>
+
+## Build Profiles
+
+AppFlowy uses `cargo-make` with different build profiles:
+
+| Profile | Target | Build Type | Use Case |
+|---------|--------|------------|----------|
+| `development-mac-arm64` | macOS ARM64 | Debug | Development on Apple Silicon |
+| `development-mac-x86_64` | macOS x86_64 | Debug | Development on Intel Macs |
+| `production-mac-arm64` | macOS ARM64 | Release | Production builds for Apple Silicon |
+| `production-mac-x86_64` | macOS x86_64 | Release | Production builds for Intel |
+| `production-mac-universal` | Universal | Release | Universal binary (both architectures) |
+| `development-windows-x86` | Windows x64 | Debug | Development on Windows |
+| `production-windows-x86` | Windows x64 | Release | Production builds for Windows |
+| `development-linux-x86_64` | Linux x64 | Debug | Development on Linux |
+| `production-linux-x86_64` | Linux x64 | Release | Production builds for Linux |
+
+## Building the Rust Backend
+
+### Development Build
+
+<Tabs>
+  <Tab title="macOS">
+    <Steps>
+      <Step title="Choose architecture">
+        ```bash
+        # Apple Silicon (M1/M2/M3)
+        export ARCH=arm64
+        
+        # Intel
+        export ARCH=x86_64
+        ```
+      </Step>
+      
+      <Step title="Build Rust backend">
+        ```bash
+        cargo make --profile development-mac-${ARCH} appflowy-core-dev
+        ```
+        
+        This command:
+        - Compiles the Rust backend as a static library
+        - Copies the library to the Flutter app
+        - Generates FFI bindings
+      </Step>
+    </Steps>
+    
+    <Note>
+    macOS builds use **staticlib** (.a) for better integration with the app bundle.
+    </Note>
+  </Tab>
+  
+  <Tab title="Windows">
+    <Steps>
+      <Step title="Build Rust backend">
+        ```bash
+        cargo make --profile development-windows-x86 appflowy-core-dev
+        ```
+      </Step>
+    </Steps>
+    
+    <Note>
+    Windows builds use **cdylib** (.dll) as a dynamic library.
+    </Note>
+  </Tab>
+  
+  <Tab title="Linux">
+    <Steps>
+      <Step title="Build Rust backend">
+        ```bash
+        cargo make --profile development-linux-x86_64 appflowy-core-dev
+        ```
+      </Step>
+    </Steps>
+    
+    <Note>
+    Linux builds use **cdylib** (.so) as a shared library.
+    </Note>
+  </Tab>
+</Tabs>
+
+### Production Build
+
+Production builds are optimized with LTO and higher optimization levels:
+
+<CodeGroup>
+```bash macOS (Universal)
+cargo make --profile production-mac-universal appflowy-core-release
+```
+
+```bash Windows
+cargo make --profile production-windows-x86 appflowy-core-release
+```
+
+```bash Linux
+cargo make --profile production-linux-x86_64 appflowy-core-release
+```
+</CodeGroup>
+
+## Building the Flutter App
+
+### Development Mode
+
+<Steps>
+  <Step title="Navigate to Flutter directory">
+    ```bash
+    cd appflowy_flutter
+    ```
+  </Step>
+  
+  <Step title="Install dependencies">
+    ```bash
+    flutter pub get
+    ```
+  </Step>
+  
+  <Step title="Generate code">
+    ```bash
+    flutter pub run build_runner build --delete-conflicting-outputs
+    ```
+  </Step>
+  
+  <Step title="Run the app">
+    ```bash
+    flutter run -d macos    # macOS
+    flutter run -d windows  # Windows
+    flutter run -d linux    # Linux
+    ```
+  </Step>
+</Steps>
+
+### Release Build
+
+<Tabs>
+  <Tab title="macOS">
+    ```bash
+    cd appflowy_flutter
+    flutter build macos --release
+    ```
+    
+    The app will be at:
+    ```
+    appflowy_flutter/build/macos/Build/Products/Release/AppFlowy.app
+    ```
+  </Tab>
+  
+  <Tab title="Windows">
+    ```bash
+    cd appflowy_flutter
+    flutter build windows --release
+    ```
+    
+    The app will be at:
+    ```
+    appflowy_flutter/build/windows/runner/Release/
+    ```
+  </Tab>
+  
+  <Tab title="Linux">
+    ```bash
+    cd appflowy_flutter
+    flutter build linux --release
+    ```
+    
+    The app will be at:
+    ```
+    appflowy_flutter/build/linux/x64/release/bundle/
+    ```
+  </Tab>
+</Tabs>
+
+## Build Configuration
+
+### Makefile.toml
+
+The build process is configured in `frontend/Makefile.toml`:
+
+```toml
+[env]
+RUST_LOG = "info"
+CARGO_PROFILE = "dev"
+APPFLOWY_VERSION = "0.9.9"
+PRODUCT_NAME = "AppFlowy"
+```
+
+### Environment Variables
+
+Key environment variables:
+
+| Variable | Description |
+|----------|------------|
+| `BUILD_FLAG` | `debug` or `release` |
+| `RUST_COMPILE_TARGET` | Target triple (e.g., `aarch64-apple-darwin`) |
+| `CRATE_TYPE` | `staticlib` or `cdylib` |
+| `TARGET_OS` | `macos`, `windows`, or `linux` |
+| `FLUTTER_DESKTOP_FEATURES` | Rust features to enable |
+
+## Platform-Specific Details
+
+<Tabs>
+  <Tab title="macOS">
+    ### macOS Build Details
+    
+    **Crate Type:** Static library (`.a`)
+    
+    **Build Targets:**
+    - `aarch64-apple-darwin` (Apple Silicon)
+    - `x86_64-apple-darwin` (Intel)
+    
+    **Universal Binary:**
+    
+    To create a universal binary that runs on both architectures:
+    
+    ```bash
+    # Build for both architectures
+    cargo make --profile production-mac-arm64 appflowy-core-release
+    cargo make --profile production-mac-x86_64 appflowy-core-release
+    
+    # Combine with lipo
+    lipo -create \
+      target/aarch64-apple-darwin/release/libdart_ffi.a \
+      target/x86_64-apple-darwin/release/libdart_ffi.a \
+      -output libdart_ffi.a
+    ```
+    
+    **Code Signing:**
+    
+    For distribution, you'll need to sign the app:
+    
+    ```bash
+    codesign --deep --force --verify --verbose \
+      --sign "Developer ID Application: Your Name" \
+      AppFlowy.app
+    ```
+  </Tab>
+  
+  <Tab title="Windows">
+    ### Windows Build Details
+    
+    **Crate Type:** Dynamic library (`.dll`)
+    
+    **Build Target:** `x86_64-pc-windows-msvc`
+    
+    **Visual Studio Requirement:**
+    
+    Ensure you have Visual Studio 2022 with C++ build tools installed.
+    
+    **Library Location:**
+    
+    The DLL is copied to:
+    ```
+    appflowy_flutter/windows/flutter/dart_ffi/dart_ffi.dll
+    ```
+    
+    **Dependencies:**
+    
+    Windows builds may require Visual C++ Redistributable:
+    - [VC++ Redistributable](https://learn.microsoft.com/en-us/cpp/windows/latest-supported-vc-redist)
+  </Tab>
+  
+  <Tab title="Linux">
+    ### Linux Build Details
+    
+    **Crate Type:** Shared library (`.so`)
+    
+    **Build Targets:**
+    - `x86_64-unknown-linux-gnu`
+    - `aarch64-unknown-linux-gnu` (ARM64)
+    
+    **Library Location:**
+    
+    The shared library is copied to:
+    ```
+    appflowy_flutter/linux/flutter/dart_ffi/libdart_ffi.so
+    ```
+    
+    **System Dependencies:**
+    
+    Runtime dependencies include:
+    - GTK 3
+    - SQLite 3
+    - OpenSSL
+    
+    On Ubuntu/Debian:
+    ```bash
+    sudo apt-get install libgtk-3-0 libsqlite3-0 libssl3
+    ```
+  </Tab>
+</Tabs>
+
+## Clean Build
+
+To clean all build artifacts:
+
+```bash
+# Clean Rust
+cd rust-lib
+cargo clean
+
+# Clean Flutter
+cd ../appflowy_flutter
+flutter clean
+```
+
+## Troubleshooting
+
+<Warning>
+Common build issues and solutions:
+</Warning>
+
+### Rust Build Fails
+
+```bash
+# Update Rust toolchain
+rustup update
+
+# Ensure target is installed
+rustup target add <your-target>
+
+# Clean and rebuild
+cargo clean
+cargo make --profile <your-profile> appflowy-core-dev
+```
+
+### Flutter Build Fails
+
+```bash
+# Clean Flutter cache
+flutter clean
+flutter pub get
+
+# Regenerate code
+flutter pub run build_runner clean
+flutter pub run build_runner build --delete-conflicting-outputs
+```
+
+### Library Not Found
+
+<Tabs>
+  <Tab title="macOS">
+    ```bash
+    # Verify library exists
+    ls -la appflowy_flutter/packages/appflowy_backend/macos/
+    
+    # Should contain libdart_ffi.a
+    ```
+  </Tab>
+  
+  <Tab title="Windows">
+    ```bash
+    # Verify DLL exists
+    dir appflowy_flutter\windows\flutter\dart_ffi\
+    
+    # Should contain dart_ffi.dll
+    ```
+  </Tab>
+  
+  <Tab title="Linux">
+    ```bash
+    # Verify library exists
+    ls -la appflowy_flutter/linux/flutter/dart_ffi/
+    
+    # Should contain libdart_ffi.so
+    ```
+  </Tab>
+</Tabs>
+
+### Protobuf Errors
+
+```bash
+# Ensure protoc is installed
+protoc --version
+
+# Regenerate protobuf files
+cd frontend
+cargo make install_flutter_protobuf
+```
+
+## Performance Optimization
+
+### Build Times
+
+To improve build times:
+
+<Steps>
+  <Step title="Use incremental compilation">
+    ```bash
+    export CARGO_INCREMENTAL=1
+    ```
+  </Step>
+  
+  <Step title="Use cargo cache">
+    ```bash
+    cargo install cargo-cache
+    ```
+  </Step>
+  
+  <Step title="Parallel jobs">
+    ```bash
+    # Set number of parallel jobs
+    export CARGO_BUILD_JOBS=8
+    ```
+  </Step>
+</Steps>
+
+### Release Optimization
+
+The production profile uses:
+
+```toml
+[profile.release]
+lto = true              # Link-time optimization
+opt-level = 3           # Maximum optimization
+codegen-units = 1       # Better optimization, slower build
+```
+
+## Next Steps
+
+<CardGroup cols={2}>
+  <Card title="Building Mobile" href="/developer/building-mobile" icon="mobile">
+    Build AppFlowy for iOS and Android
+  </Card>
+  
+  <Card title="Testing" href="/developer/testing" icon="vial">
+    Learn how to run tests
+  </Card>
+  
+  <Card title="Contributing" href="/developer/contributing" icon="code-pull-request">
+    Contribute your changes
+  </Card>
+  
+  <Card title="Code Style" href="/developer/code-style" icon="paintbrush">
+    Follow coding conventions
+  </Card>
+</CardGroup>

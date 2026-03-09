@@ -1,0 +1,337 @@
+---
+title: Permissions & Access Control
+description: Understand and manage access permissions in AppFlowy
+icon: 'key'
+---
+
+AppFlowy's permission system gives you fine-grained control over who can access and edit your content. From workspace-level roles to page-specific permissions, you control exactly what each collaborator can do.
+
+## Permission Levels
+
+AppFlowy uses a hierarchical permission system with two main layers: workspace roles and page permissions.
+
+### Workspace Roles
+
+Workspace roles determine base-level access within your workspace:
+
+<CardGroup cols={3}>
+  <Card title="Owner" icon="crown">
+    Full administrative control over the workspace:
+    - Manage all workspace settings
+    - Add/remove members
+    - Upgrade subscription plans
+    - Delete the workspace
+    - Access all pages and spaces
+  </Card>
+  
+  <Card title="Member" icon="user">
+    Regular team member access:
+    - Create and edit their own pages
+    - Access shared pages based on permissions
+    - Create spaces and organize content
+    - Invite other members
+    - Cannot manage billing or delete workspace
+  </Card>
+  
+  <Card title="Guest" icon="user-shield">
+    Limited access to specific pages:
+    - Access only explicitly shared pages
+    - Cannot see workspace structure
+    - Cannot invite others
+    - Cannot create new pages in workspace
+    - See [Guest Editors](/collaboration/guest-editors) for details
+  </Card>
+</CardGroup>
+
+<Note>
+Workspace roles can be viewed and managed in **Settings** → **Members**.
+</Note>
+
+### Page Permissions
+
+Page-level permissions control what collaborators can do on specific pages:
+
+<CardGroup cols={2}>
+  <Card title="Can View" icon="eye">
+    **Read-only access** to the page:
+    - Read all content and comments
+    - View page history
+    - Export the page
+    - See mentions and references
+    - **Cannot** make any edits
+    - **Cannot** share with others
+  </Card>
+  
+  <Card title="Can Edit" icon="pencil">
+    **Full editing access** to the page:
+    - Make any content changes
+    - Add, edit, and delete blocks
+    - Create mentions and assignments
+    - Modify database entries
+    - Change page properties
+    - Share the page with others (inheriting owner's permission level)
+  </Card>
+</CardGroup>
+
+<Info>
+Page permissions override workspace roles. A workspace Member with "Can View" on a specific page cannot edit it, even though they're a full member.
+</Info>
+
+## Space Permissions
+
+Spaces in AppFlowy have their own permission settings:
+
+### Public Spaces
+
+**Public to All** spaces are visible to everyone in the workspace:
+- All workspace members can see the space
+- Members can view pages unless explicitly restricted
+- Useful for team-wide resources and documentation
+- Default setting for new spaces
+
+### Private Spaces
+
+**Private** spaces restrict visibility:
+- Only the space creator can see it by default
+- Must explicitly share pages from private spaces
+- Ideal for personal work or confidential projects
+- Pages can still be shared individually
+
+<Steps>
+  <Step title="Set Space Permission">
+    Click the space settings icon (⋮) next to any space name.
+  </Step>
+  
+  <Step title="Choose Visibility">
+    Select either **Public to All** or **Private**.
+  </Step>
+  
+  <Step title="Confirm Changes">
+    The space visibility updates immediately for all members.
+  </Step>
+</Steps>
+
+<Warning>
+Changing a space from Public to Private doesn't affect existing page shares. People with direct page access retain their permissions.
+</Warning>
+
+## Permission Inheritance
+
+Understanding how permissions cascade:
+
+### Workspace → Space → Page
+
+1. **Workspace Role**: Base level of access
+2. **Space Permission**: Controls visibility of the space itself
+3. **Page Permission**: Specific access level for individual pages
+
+### Permission Priority
+
+More restrictive permissions always win:
+- Guest role + Can Edit permission = Can Edit (on that page only)
+- Member role + Can View permission = Can View (on that page only)
+- Owner role + Can View permission = Can View (owner can change it)
+
+<Info>
+Page-level permissions are the most specific and always take precedence over workspace and space permissions.
+</Info>
+
+## Managing Permissions
+
+### Changing Workspace Roles
+
+Only workspace owners can change member roles:
+
+<Steps>
+  <Step title="Open Settings">
+    Navigate to **Settings** → **Members**.
+  </Step>
+  
+  <Step title="Find the Member">
+    Locate the member whose role you want to change.
+  </Step>
+  
+  <Step title="Update Role">
+    Click the role dropdown and select the new role (Owner, Member, or Guest).
+  </Step>
+  
+  <Step title="Confirm Change">
+    The change takes effect immediately. The member may need to refresh to see updated permissions.
+  </Step>
+</Steps>
+
+### Changing Page Permissions
+
+Page owners and editors with sharing rights can update permissions:
+
+1. Open the **Share** menu on the page
+2. Find the collaborator in the list
+3. Click the permission dropdown next to their name
+4. Select **Can View** or **Can Edit**
+5. Changes apply immediately
+
+### Bulk Permission Management
+
+Added in version 0.9.8, you can bulk add collaborators:
+
+<Steps>
+  <Step title="Open Share Menu">
+    Click **Share** on the page you want to share.
+  </Step>
+  
+  <Step title="Add Multiple Emails">
+    Enter multiple email addresses separated by commas.
+  </Step>
+  
+  <Step title="Set Permission Level">
+    Choose **Can View** or **Can Edit** for all added collaborators.
+  </Step>
+  
+  <Step title="Send Invitations">
+    Click **Invite** to grant access to everyone at once.
+  </Step>
+</Steps>
+
+## Permission Use Cases
+
+<CardGroup cols={2}>
+  <Card title="Executive Dashboard" icon="chart-line">
+    **Can View** for executives who need visibility but shouldn't edit. **Can Edit** for the team maintaining the dashboard.
+  </Card>
+  
+  <Card title="Team Project" icon="users">
+    **Can Edit** for all team members. **Can View** for stakeholders and managers who need updates.
+  </Card>
+  
+  <Card title="Client Collaboration" icon="handshake">
+    Invite clients as **Guest Editors** with **Can Edit** on specific project pages only.
+  </Card>
+  
+  <Card title="Documentation" icon="book">
+    **Public Space** with **Can Edit** for documentation team. **Can View** for entire company.
+  </Card>
+</CardGroup>
+
+## Advanced Permission Scenarios
+
+### Sharing with External Collaborators
+
+For external partners or clients:
+
+1. Invite them as [Guest Editors](/collaboration/guest-editors)
+2. Share only specific pages they need access to
+3. Set appropriate permissions (usually Can Edit for active collaboration)
+4. They won't see your workspace structure or other pages
+
+### Restricting Sensitive Content
+
+For confidential information:
+
+1. Create a **Private Space** for sensitive content
+2. Only share pages from this space with trusted individuals
+3. Use **Can View** permissions for most people
+4. Grant **Can Edit** only to those who need to update content
+5. Regularly audit who has access
+
+### Temporary Access
+
+For time-limited collaboration:
+
+1. Share the page with **Can Edit** or **Can View** as needed
+2. When the project ends, remove the collaborator from the page
+3. Use **Settings** → **Members** to manage pending invitations
+4. Check the **Shared with me** section to see what you've shared
+
+<Note>
+AppFlowy doesn't currently support time-based permission expiration, so you'll need to manually remove access when it's no longer needed.
+</Note>
+
+## Permission Auditing
+
+### View Who Has Access
+
+To audit page access:
+
+1. Open the **Share** menu on any page
+2. Review the list of collaborators
+3. Check their permission levels
+4. Remove or downgrade access as needed
+
+### Check Your Own Access
+
+To see what's shared with you:
+
+1. Look at the **Shared with me** section in your sidebar
+2. Your permission level is indicated for each page
+3. You can see who shared each page with you
+
+### Workspace Member Audit
+
+Workspace owners can audit all members:
+
+1. Go to **Settings** → **Members**
+2. View all workspace members and their roles
+3. See pending invitations
+4. Review guest editors and their page access
+
+<Info>
+Regularly auditing permissions helps maintain security and ensures only the right people have access to your content.
+</Info>
+
+## Best Practices
+
+<Steps>
+  <Step title="Principle of Least Privilege">
+    Always grant the minimum permission level needed. Start with **Can View** and upgrade only when necessary.
+  </Step>
+  
+  <Step title="Use Guests for External Collaborators">
+    Don't add external partners as full Members. Use Guest roles to limit their access to specific pages.
+  </Step>
+  
+  <Step title="Regular Permission Reviews">
+    Schedule quarterly reviews of who has access to sensitive pages and remove unnecessary permissions.
+  </Step>
+  
+  <Step title="Document Your Permission Strategy">
+    Create a page documenting your team's permission guidelines so everyone knows the standards.
+  </Step>
+</Steps>
+
+## Troubleshooting
+
+### User Can't Access Page
+
+- Verify they have a workspace account (Member or Guest)
+- Check they've been explicitly granted access to the page
+- Ensure the page is in a space they can see (if Private space)
+- Confirm they've accepted their invitation
+
+### User Can't Edit Despite Having Permission
+
+- Verify their permission level is **Can Edit**, not **Can View**
+- Check if the page is locked (lock status overrides edit permissions)
+- Ensure they're logged in to the correct workspace
+- Have them refresh the page to sync latest permissions
+
+### Can't Change Someone's Permissions
+
+- Only page owners can change permissions
+- Workspace role restrictions may apply (Guests can't share)
+- You may not have sharing rights yourself
+
+## Next Steps
+
+<CardGroup cols={3}>
+  <Card title="Sharing Pages" icon="share-nodes" href="/collaboration/sharing">
+    Learn how to share pages and manage access
+  </Card>
+  
+  <Card title="Guest Editors" icon="user-shield" href="/collaboration/guest-editors">
+    Invite external collaborators with limited access
+  </Card>
+  
+  <Card title="Real-Time Editing" icon="users" href="/collaboration/real-time-editing">
+    Collaborate simultaneously on shared pages
+  </Card>
+</CardGroup>

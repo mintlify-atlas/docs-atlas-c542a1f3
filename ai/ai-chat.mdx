@@ -1,0 +1,212 @@
+---
+title: "AI Chat"
+description: "Interact with AI to get answers, generate content, and work with your documents"
+---
+
+## Overview
+
+AppFlowy's AI Chat feature provides an intelligent conversational assistant that helps you brainstorm ideas, answer questions, and create content. You can chat with AI using various models including GPT-5, Claude, and local AI models.
+
+<Info>
+  AI Chat is available in all workspace types, including Vault workspaces for private, offline AI interactions.
+</Info>
+
+## Starting an AI Chat
+
+Create a new AI chat page to begin interacting with the AI assistant.
+
+<Steps>
+  <Step title="Create a Chat Page">
+    Click the **+** button in your sidebar and select **AI Chat** from the page types menu.
+  </Step>
+  
+  <Step title="Choose Your AI Model">
+    Select your preferred AI model from the model selector. Options include:
+    - **GPT-5** - Latest OpenAI model with advanced reasoning
+    - **GPT-4.1** and **GPT-4.1-mini** - Powerful general-purpose models
+    - **Claude 3.7 Sonnet** - Anthropic's latest model
+    - **Local AI** - Run AI offline with Ollama integration
+  </Step>
+  
+  <Step title="Start Chatting">
+    Type your message in the input field and press Enter to send. The AI will respond in real-time with streaming responses.
+  </Step>
+</Steps>
+
+## Key Features
+
+### Multiple AI Models
+
+Switch between different AI models to find the best fit for your task:
+
+- **GPT models** - Best for creative writing, code generation, and complex reasoning
+- **Claude models** - Excellent for long-form content and detailed analysis
+- **Local AI** - Free offline AI using Ollama, perfect for privacy-focused work
+
+<Tip>
+  You can change the AI model mid-conversation by clicking the model selector at the top of the chat.
+</Tip>
+
+### Response Formatting Options
+
+Customize how AI responses appear with different layout options:
+
+<CardGroup cols={2}>
+  <Card title="List" icon="list">
+    Display responses as organized bullet points or numbered lists
+  </Card>
+  
+  <Card title="Table" icon="table">
+    Present structured data in table format for easy comparison
+  </Card>
+  
+  <Card title="Text with Images" icon="image">
+    Combine text responses with AI-generated images using DALL-E
+  </Card>
+  
+  <Card title="Media Only" icon="photo-film">
+    Generate pure image content for visual projects
+  </Card>
+</CardGroup>
+
+### Chat with Your Documents
+
+Add pages as AI sources to ask questions about your existing content:
+
+<Steps>
+  <Step title="Select Source Documents">
+    Click the **Add Sources** button (file icon) in the chat input area.
+  </Step>
+  
+  <Step title="Choose Pages">
+    Select one or more pages from your workspace to use as context for the AI.
+  </Step>
+  
+  <Step title="Ask Questions">
+    The AI will now answer questions based on the content of your selected pages.
+  </Step>
+</Steps>
+
+<Note>
+  When you add document sources, the AI can reference specific information from those pages in its responses.
+</Note>
+
+### Save Responses to Documents
+
+Easily move AI-generated content into your workspace:
+
+1. Select multiple AI messages by clicking the checkbox next to each message
+2. Click **Save to Document** in the selection banner
+3. Choose a target page or create a new one
+4. The selected messages are added to your document
+
+### AppFlowy Prompt Library
+
+Access pre-built prompts for common tasks:
+
+- **Writing assistants** - Improve, expand, or rewrite text
+- **Content generators** - Create blog posts, emails, and more
+- **Coding helpers** - Debug code, explain functions, write tests
+- **Creative prompts** - Story ideas, brainstorming, and creative writing
+
+<Tip>
+  Access the Prompt Library from the chat input area by clicking the prompt icon or typing `/` to search prompts.
+</Tip>
+
+## AI Image Generation with DALL-E
+
+Generate stunning AI images directly in your chat:
+
+```plaintext
+Prompt: "Generate an image of a futuristic workspace with holographic displays"
+```
+
+The AI will create custom images based on your text descriptions. You can:
+- Save images to your documents
+- Regenerate with different prompts
+- Use images as page covers or inline content
+
+## Chat History and Memory
+
+AI Chat maintains context throughout your conversation:
+
+- **Contextual responses** - The AI remembers previous messages in the conversation
+- **Follow-up questions** - Ask clarifying questions without repeating context
+- **Conversation chains** - Build on previous responses for deeper exploration
+
+<Warning>
+  Chat history is stored per chat page. Starting a new chat page creates a fresh conversation without previous context.
+</Warning>
+
+## Using AI Chat on Mobile
+
+AI Chat is fully supported on iOS and Android:
+
+- Create and access chat pages from the mobile sidebar
+- Switch AI models with the mobile model selector
+- Use the mobile slash menu to access prompts
+- Save responses to documents on the go
+
+## Best Practices
+
+<CardGroup cols={2}>
+  <Card title="Be Specific" icon="bullseye">
+    Provide clear, detailed prompts for better responses. Include context, desired format, and any specific requirements.
+  </Card>
+  
+  <Card title="Iterate Responses" icon="arrows-rotate">
+    Use the regenerate button to get alternative responses if the first one doesn't meet your needs.
+  </Card>
+  
+  <Card title="Add Context" icon="folder-open">
+    Link relevant pages as sources to help the AI understand your specific situation or project.
+  </Card>
+  
+  <Card title="Use Custom Prompts" icon="wand-magic-sparkles">
+    Create reusable prompts for repetitive tasks using the Custom Prompts feature.
+  </Card>
+</CardGroup>
+
+## Troubleshooting
+
+### AI Not Responding
+
+If the AI doesn't respond:
+
+1. Check your internet connection (for cloud models)
+2. Verify your AI model selection is available
+3. For local AI, ensure Ollama is running
+4. Try switching to a different AI model
+
+### Slow Response Times
+
+- Cloud models may be slower during peak usage
+- Local AI speed depends on your hardware
+- Complex prompts with many sources take longer to process
+
+### Improving Response Quality
+
+- Provide more specific instructions in your prompts
+- Break complex requests into smaller questions
+- Use the appropriate model for your task (creative vs. analytical)
+- Add relevant document sources for context
+
+## Related Features
+
+<CardGroup cols={2}>
+  <Card title="AI Search" icon="magnifying-glass" href="/ai/ai-search">
+    Search your workspace using natural language questions
+  </Card>
+  
+  <Card title="AI Overviews" icon="lightbulb" href="/ai/ai-overviews">
+    Get AI-generated summaries with source citations
+  </Card>
+  
+  <Card title="Custom Prompts" icon="file-lines" href="/ai/custom-prompts">
+    Create reusable AI prompts from database pages
+  </Card>
+  
+  <Card title="RAG Search" icon="database" href="/ai/rag-search">
+    Search documents using AI in Vault workspaces
+  </Card>
+</CardGroup>

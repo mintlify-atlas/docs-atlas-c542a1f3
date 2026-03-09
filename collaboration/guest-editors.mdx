@@ -1,0 +1,398 @@
+---
+title: Guest Editors
+description: Collaborate with external partners without adding them as full workspace members
+icon: 'user-shield'
+---
+
+Guest editors allow you to invite external collaborators—clients, contractors, or partners—to work on specific pages without giving them access to your entire workspace. This provides secure, limited collaboration for people outside your organization.
+
+## Overview
+
+Guest editors provide:
+- **Limited access** to only shared pages
+- **Full editing capabilities** on pages they're invited to
+- **No workspace visibility** - they can't see your workspace structure
+- **Secure collaboration** without exposing internal content
+- **Easy management** from your workspace settings
+
+<Note>
+Guest editor collaboration was introduced in version 0.9.4 for desktop and mobile platforms.
+</Note>
+
+## Guest Editor vs. Member
+
+Understand the key differences:
+
+<CardGroup cols={2}>
+  <Card title="Workspace Member" icon="user">
+    **Full workspace access:**
+    - See workspace structure and spaces
+    - Create new pages and databases
+    - Access public spaces
+    - Invite other members
+    - Ideal for team members and employees
+  </Card>
+  
+  <Card title="Guest Editor" icon="user-shield">
+    **Limited page access:**
+    - Access only explicitly shared pages
+    - Cannot see workspace structure
+    - Cannot create new workspace pages
+    - Cannot invite others
+    - Ideal for clients and external partners
+  </Card>
+</CardGroup>
+
+<Info>
+Guest editors are perfect for client projects, contractor work, or any external collaboration where you want to limit access to specific content.
+</Info>
+
+## Inviting Guest Editors
+
+### From the Share Menu
+
+The easiest way to invite a guest editor:
+
+<Steps>
+  <Step title="Open Share Menu">
+    Navigate to the page you want to share and click the **Share** button.
+  </Step>
+  
+  <Step title="Enter Email Address">
+    In the Share tab, enter the email address of the person you want to invite. If they're not already a workspace member, they'll be invited as a guest.
+  </Step>
+  
+  <Step title="Set Permissions">
+    Choose **Can Edit** to give them editing rights, or **Can View** for read-only access.
+  </Step>
+  
+  <Step title="Send Invitation">
+    Click **Invite**. The person receives an email invitation with a link to access the shared page.
+  </Step>
+</Steps>
+
+### Bulk Inviting Guests
+
+You can invite multiple guest editors at once (available since v0.9.8):
+
+1. Open the **Share** menu
+2. Enter multiple email addresses separated by commas
+3. Set the permission level (**Can View** or **Can Edit**)
+4. Click **Invite** to send invitations to all recipients
+
+<Warning>
+Guest editors can only access pages you explicitly share with them. They won't see any other content in your workspace.
+</Warning>
+
+## What Guest Editors Can Do
+
+Depending on their permissions:
+
+### With "Can Edit" Permission
+
+<CardGroup cols={2}>
+  <Card title="Content Editing" icon="pencil">
+    - Make changes to page content
+    - Add and modify blocks
+    - Update database entries
+    - Format text and add media
+  </Card>
+  
+  <Card title="Collaboration" icon="users">
+    - Participate in real-time editing
+    - Create mentions and assignments
+    - See other collaborators
+    - Comment and discuss
+  </Card>
+</CardGroup>
+
+### With "Can View" Permission
+
+- Read all page content
+- View comments and mentions
+- Export the page
+- See page history
+- Cannot make any edits
+
+### What Guest Editors Cannot Do
+
+<CardGroup cols={2}>
+  <Card title="Workspace Access" icon="ban">
+    - View workspace structure
+    - See spaces or other pages
+    - Access public workspace content
+    - Browse workspace members
+  </Card>
+  
+  <Card title="Administrative Actions" icon="lock">
+    - Invite other people
+    - Create new workspace pages
+    - Change workspace settings
+    - Access billing information
+  </Card>
+</CardGroup>
+
+## Managing Guest Editors
+
+### View All Guest Editors
+
+See who has guest access to your workspace:
+
+<Steps>
+  <Step title="Open Settings">
+    Navigate to **Settings** → **Members**.
+  </Step>
+  
+  <Step title="View Guest List">
+    Guest editors are listed separately from workspace members with a "Guest" badge.
+  </Step>
+  
+  <Step title="Check Access">
+    See which pages each guest can access and their permission level.
+  </Step>
+</Steps>
+
+### Manage Pending Guest Invitations
+
+Track and manage invitations that haven't been accepted:
+
+1. Go to **Settings** → **Members**
+2. View the **Pending Members** section
+3. See all outstanding guest invitations
+4. Resend or cancel invitations as needed
+
+<Info>
+Pending members management was added in version 0.9.8 for both desktop and mobile.
+</Info>
+
+### Remove Guest Access
+
+To revoke a guest editor's access:
+
+<Steps>
+  <Step title="Open Share Menu">
+    Navigate to the shared page and open the **Share** menu.
+  </Step>
+  
+  <Step title="Find the Guest">
+    Locate the guest editor in the collaborator list.
+  </Step>
+  
+  <Step title="Remove Access">
+    Click the remove button (×) next to their name.
+  </Step>
+  
+  <Step title="Confirm">
+    The guest immediately loses access to that page.
+  </Step>
+</Steps>
+
+<Note>
+If a guest was invited to multiple pages, you need to remove them from each page individually.
+</Note>
+
+### Change Guest Permissions
+
+Update what a guest can do:
+
+1. Open the **Share** menu on the relevant page
+2. Find the guest editor in the list
+3. Click the permission dropdown
+4. Switch between **Can Edit** and **Can View**
+5. Changes take effect immediately
+
+## Guest Editor Experience
+
+What external collaborators see when invited:
+
+### Accepting the Invitation
+
+<Steps>
+  <Step title="Receive Email">
+    The guest receives an email invitation with details about who shared the page and what they can access.
+  </Step>
+  
+  <Step title="Click Link">
+    They click the invitation link, which may prompt them to create an AppFlowy account if they don't have one.
+  </Step>
+  
+  <Step title="Access Page">
+    After logging in, they're taken directly to the shared page.
+  </Step>
+  
+  <Step title="Find Shared Pages">
+    All pages shared with them appear in their **Shared with me** section.
+  </Step>
+</Steps>
+
+### Guest Navigation
+
+When a guest editor logs into AppFlowy:
+
+- They see only the **Shared with me** section
+- No workspace sidebar or structure is visible
+- They can only access pages explicitly shared with them
+- Their interface is simplified compared to full members
+
+<Info>
+Guest editors have a streamlined experience focused solely on the pages they need to access.
+</Info>
+
+## Use Cases
+
+### Client Projects
+
+<Steps>
+  <Step title="Create Project Page">
+    Set up a dedicated page for the client project with all relevant information.
+  </Step>
+  
+  <Step title="Invite Client as Guest">
+    Share the page with your client's email as a guest editor with **Can Edit** or **Can View** permissions.
+  </Step>
+  
+  <Step title="Collaborate Securely">
+    Work together on the project page without exposing your internal workspace.
+  </Step>
+  
+  <Step title="Remove Access When Done">
+    After the project ends, remove the client's access to the page.
+  </Step>
+</Steps>
+
+### Contractor Collaboration
+
+```
+1. Invite freelancer as guest editor
+2. Share only the pages they need for their work
+3. Give Can Edit permissions for active collaboration
+4. Monitor their contributions in real-time
+5. Remove access when the contract ends
+```
+
+### Partner Coordination
+
+- Share specific pages with partner organizations
+- Maintain separate collaboration spaces for each partner
+- Control what each partner can see and edit
+- Keep internal discussions private
+
+### External Reviewers
+
+- Invite reviewers as guests with **Can View** permission
+- Share documents that need external approval
+- Use mentions to request specific feedback
+- Remove access after review is complete
+
+<CardGroup cols={2}>
+  <Card title="Vendor Management" icon="truck">
+    Share project specs and requirements with vendors without giving workspace access.
+  </Card>
+  
+  <Card title="Advisory Board" icon="users-viewfinder">
+    Give advisors access to specific documents for review and guidance.
+  </Card>
+  
+  <Card title="Temporary Collaborators" icon="clock">
+    Bring in outside experts for short-term projects with easy access removal.
+  </Card>
+  
+  <Card title="Client Feedback" icon="comments">
+    Allow clients to review and comment on deliverables before final approval.
+  </Card>
+</CardGroup>
+
+## Pro Plan Requirements
+
+<Note>
+Guest editor functionality requires an AppFlowy Pro Plan for the workspace owner.
+</Note>
+
+### Upgrading for Guest Editors
+
+If you see upgrade prompts when inviting guests:
+
+1. The workspace owner needs a Pro Plan subscription
+2. Click the upgrade button in the Share menu
+3. Select a Pro Plan in the billing settings
+4. After upgrading, you can invite unlimited guest editors
+
+### Pro Plan Benefits
+
+- **Unlimited guest editors**: Invite as many external collaborators as needed
+- **Advanced permissions**: Fine-grained control over guest access
+- **Priority support**: Get help with guest editor setup
+- **Enhanced security**: Additional security features for external collaboration
+
+<Info>
+Workspace members and guests who are invited see prompts explaining the need for Pro Plan if it's not activated.
+</Info>
+
+## Security Best Practices
+
+<Steps>
+  <Step title="Limit Page Access">
+    Only share pages that the guest absolutely needs to access. Create dedicated pages for external collaboration.
+  </Step>
+  
+  <Step title="Use Can View When Possible">
+    Start with read-only access and upgrade to Can Edit only when necessary.
+  </Step>
+  
+  <Step title="Regular Access Audits">
+    Periodically review guest access in Settings → Members and remove inactive guests.
+  </Step>
+  
+  <Step title="Remove Access Promptly">
+    As soon as a project or collaboration ends, remove the guest's access to all shared pages.
+  </Step>
+</Steps>
+
+<Warning>
+Never share pages containing sensitive internal information with guest editors. Create sanitized versions for external sharing.
+</Warning>
+
+## Troubleshooting
+
+### Guest Can't Accept Invitation
+
+- Verify the email address is correct
+- Check if the invitation expired (resend from Settings → Members)
+- Ensure they're using the correct email to sign in
+- Have them check spam/junk folder for the invitation
+
+### Guest Sees Too Much Content
+
+- They may have been added as a Member instead of Guest
+- Check their role in Settings → Members
+- Change their role to Guest to limit access
+- Remove and re-invite with guest-level access
+
+### Can't Invite Guest (Pro Plan Required)
+
+- Guest editor features require a Pro Plan subscription
+- Contact the workspace owner to upgrade
+- If you are the owner, navigate to Settings → Billing to upgrade
+
+### Guest Can't Edit Despite Having Permission
+
+- Verify their permission is set to **Can Edit**
+- Check if the page is locked
+- Ensure they're logged in to the correct account
+- Have them refresh the page to sync latest permissions
+
+## Next Steps
+
+<CardGroup cols={3}>
+  <Card title="Permissions" icon="key" href="/collaboration/permissions">
+    Understand the full permission system in AppFlowy
+  </Card>
+  
+  <Card title="Sharing Pages" icon="share-nodes" href="/collaboration/sharing">
+    Learn all the ways to share content
+  </Card>
+  
+  <Card title="Real-Time Editing" icon="users" href="/collaboration/real-time-editing">
+    Collaborate in real-time with guests and members
+  </Card>
+</CardGroup>

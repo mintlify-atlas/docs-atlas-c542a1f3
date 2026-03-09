@@ -1,0 +1,353 @@
+---
+title: "Databases"
+description: "Organize and visualize data with flexible database views"
+---
+
+## Overview
+
+AppFlowy Databases transform structured data into powerful, customizable views. A single database can be displayed as a Grid (spreadsheet), Board (kanban), or Calendar, giving you multiple perspectives on your information.
+
+<CardGroup cols={3}>
+  <Card title="Multiple Views" icon="eye" iconType="solid">
+    Switch between Grid, Board, and Calendar views of the same data
+  </Card>
+  <Card title="Flexible Fields" icon="table-columns" iconType="solid">
+    Support for text, numbers, dates, tags, checkboxes, and more
+  </Card>
+  <Card title="Filter & Sort" icon="filter" iconType="solid">
+    Create powerful filters and sorts to focus on what matters
+  </Card>
+</CardGroup>
+
+## Understanding Databases
+
+A database in AppFlowy consists of:
+
+- **Rows**: Individual records or items
+- **Fields**: Properties that describe each row (like columns in a spreadsheet)
+- **Views**: Different ways to visualize and interact with your data
+- **Field Types**: Define what kind of data each field contains
+
+<Info>
+  Each database can have multiple views. Changing data in one view updates all other views automatically.
+</Info>
+
+## Creating a Database
+
+<Steps>
+  <Step title="Create from slash menu">
+    In any document, type `/grid`, `/board`, or `/calendar` to insert a database with that view
+  </Step>
+  
+  <Step title="Name your database">
+    Click the database title to rename it
+  </Step>
+  
+  <Step title="Add fields">
+    Click the **+** button in the header to add new fields (columns)
+  </Step>
+  
+  <Step title="Add rows">
+    Click **+ New** at the bottom to add rows, or press `Ctrl/Cmd + Enter`
+  </Step>
+</Steps>
+
+<Tip>
+  You can also create a standalone database from the sidebar by clicking **+** and selecting a database type.
+</Tip>
+
+## Field Types
+
+Choose the right field type for your data:
+
+### Basic Types
+
+- **Rich Text**: Formatted text with multiple lines
+- **Number**: Numeric values with formatting options (decimal, currency, percentage)
+- **Checkbox**: Boolean true/false values displayed as checkboxes
+- **URL**: Clickable web links
+
+### Selection Types
+
+- **Single Select**: Choose one option from a list (with color coding)
+- **Multi Select**: Choose multiple options from a list
+
+### Date & Time
+
+- **Date**: Calendar dates with optional time
+- **Time**: Time values (hours and minutes)
+- **Created At**: Auto-populated timestamp when row is created
+- **Last Modified**: Auto-updated timestamp when row is edited
+
+### Advanced Types
+
+- **Checklist**: Track progress with subtasks
+- **Relation**: Link to rows in another database
+- **Media**: Attach images, videos, or files
+- **Summary**: AI-generated summaries of row content
+- **Translate**: Auto-translate text between languages
+
+<Note>
+  Once you create a field, you can change its type later. AppFlowy will attempt to convert existing data to the new format.
+</Note>
+
+## Working with Fields
+
+### Adding a Field
+
+<Steps>
+  <Step title="Click + button">
+    Click the **+** icon in the database header
+  </Step>
+  
+  <Step title="Choose type">
+    Select the field type from the dropdown menu
+  </Step>
+  
+  <Step title="Configure field">
+    Name the field and configure type-specific options
+  </Step>
+</Steps>
+
+### Field Operations
+
+Right-click any field header to:
+
+- **Rename**: Change the field name
+- **Duplicate**: Create a copy of the field
+- **Insert Left/Right**: Add a new field before or after
+- **Hide**: Hide the field from current view
+- **Delete**: Remove the field and its data
+
+### Field Properties
+
+Each field type has specific properties:
+
+**Number Fields**:
+- Decimal places (0-5)
+- Number format (number, currency, percentage)
+- Currency symbol
+
+**Date Fields**:
+- Date format (MM/DD/YYYY, DD/MM/YYYY, etc.)
+- Time format (12-hour or 24-hour)
+- Include time toggle
+
+**Select Fields**:
+- Option name and color
+- Add, edit, or delete options
+- Reorder options
+
+## Views
+
+Databases support three distinct view types. Learn more about each:
+
+<CardGroup cols={3}>
+  <Card title="Grid View" icon="table-cells" href="/core/grid-view">
+    Spreadsheet-style view for detailed data management
+  </Card>
+  
+  <Card title="Board View" icon="columns-3" href="/core/board-view">
+    Kanban board for visual workflow management
+  </Card>
+  
+  <Card title="Calendar View" icon="calendar" href="/core/calendar-view">
+    Calendar layout for date-based planning
+  </Card>
+</CardGroup>
+
+### Creating Additional Views
+
+<Steps>
+  <Step title="Open view menu">
+    Click the view name at the top of the database
+  </Step>
+  
+  <Step title="Add view">
+    Click **+ Add View** and choose Grid, Board, or Calendar
+  </Step>
+  
+  <Step title="Configure view">
+    Name your view and select which fields to show
+  </Step>
+</Steps>
+
+<Tip>
+  Each view can have its own filters, sorts, and field visibility settings while sharing the same data.
+</Tip>
+
+## Filtering Data
+
+Create filters to show only relevant rows:
+
+<Steps>
+  <Step title="Open filter menu">
+    Click the **Filter** button in the database toolbar
+  </Step>
+  
+  <Step title="Add condition">
+    Click **+ Add filter** and select a field
+  </Step>
+  
+  <Step title="Set criteria">
+    Choose an operator (is, is not, contains, etc.) and value
+  </Step>
+  
+  <Step title="Combine filters">
+    Add multiple filters with AND/OR logic
+  </Step>
+</Steps>
+
+### Filter Operators by Type
+
+**Text**: is, is not, contains, does not contain, starts with, ends with, is empty, is not empty
+
+**Number**: equals, not equals, greater than, less than, greater than or equal, less than or equal, is empty, is not empty
+
+**Select**: is, is not, contains, does not contain, is empty, is not empty
+
+**Date**: is, is before, is after, is on or before, is on or after, is within, is empty, is not empty
+
+**Checkbox**: is checked, is unchecked
+
+## Sorting Data
+
+Organize rows by sorting:
+
+<Steps>
+  <Step title="Open sort menu">
+    Click the **Sort** button in the database toolbar
+  </Step>
+  
+  <Step title="Add sort rule">
+    Click **+ Add sort** and select a field
+  </Step>
+  
+  <Step title="Choose direction">
+    Select ascending (A→Z, 0→9) or descending (Z→A, 9→0)
+  </Step>
+  
+  <Step title="Multiple sorts">
+    Add multiple sort rules to refine ordering (first sort has priority)
+  </Step>
+</Steps>
+
+<Info>
+  Sorts are applied in order. Drag to reorder sort rules in the sort menu.
+</Info>
+
+## Row Details
+
+Every row has a detail page for in-depth editing:
+
+<Steps>
+  <Step title="Open row">
+    Click any cell or row to open the row detail view
+  </Step>
+  
+  <Step title="Edit properties">
+    Update field values in the properties panel
+  </Step>
+  
+  <Step title="Add notes">
+    Use the document area below properties to add detailed notes and content
+  </Step>
+</Steps>
+
+### Row Detail Features
+
+- **Document editor**: Full document editing with all block types
+- **Property panel**: See and edit all field values
+- **Row actions**: Duplicate, delete, or share individual rows
+- **Banner**: Add a cover image to personalize the row
+
+## Grouping (Board View)
+
+In Board view, rows are grouped by a Single Select or Checkbox field:
+
+- Each option becomes a column (group)
+- Drag rows between columns to change their value
+- Create new groups by adding select options
+- Hide groups you don't need
+
+<Tip>
+  Change the grouping field from the view settings to reorganize your board.
+</Tip>
+
+## Calculations (Grid View)
+
+Add calculation rows to summarize data:
+
+<Steps>
+  <Step title="Open calculation menu">
+    Click the **=** icon at the bottom of a column in Grid view
+  </Step>
+  
+  <Step title="Choose calculation">
+    Select from: Count, Sum, Average, Min, Max, Median, etc.
+  </Step>
+  
+  <Step title="View result">
+    The calculation appears at the bottom of the column
+  </Step>
+</Steps>
+
+Available calculations depend on field type:
+- **Number**: Sum, Average, Min, Max, Median, Range
+- **Date**: Earliest, Latest, Range
+- **Checkbox**: Checked count, Unchecked count, Percentage
+- **All types**: Count all, Count empty, Count not empty
+
+## Database Templates
+
+Create pre-configured databases for common use cases:
+
+- **Task Management**: Board with status, assignee, priority
+- **Project Tracker**: Grid with timelines, budgets, status
+- **Content Calendar**: Calendar with topics, deadlines, channels
+- **CRM**: Grid with contacts, companies, deal stages
+- **Reading List**: Grid with books, authors, ratings, notes
+
+<Tip>
+  Save your customized database as a template to reuse in other pages. See [Templates](/core/templates) for details.
+</Tip>
+
+## Best Practices
+
+<CardGroup cols={2}>
+  <Card title="Use field types wisely" icon="list-check">
+    Choose the right field type for validation and proper sorting
+  </Card>
+  
+  <Card title="Create multiple views" icon="eye">
+    Different views for different contexts: planning, execution, review
+  </Card>
+  
+  <Card title="Filter strategically" icon="filter">
+    Save frequently used filter combinations as separate views
+  </Card>
+  
+  <Card title="Document in row details" icon="file-lines">
+    Use row detail documents for meeting notes, specifications, context
+  </Card>
+</CardGroup>
+
+## Next Steps
+
+<CardGroup cols={2}>
+  <Card title="Grid View" icon="table" href="/core/grid-view">
+    Master spreadsheet-style data management
+  </Card>
+  
+  <Card title="Board View" icon="columns-3" href="/core/board-view">
+    Organize tasks with kanban boards
+  </Card>
+  
+  <Card title="Calendar View" icon="calendar" href="/core/calendar-view">
+    Plan with calendar-based views
+  </Card>
+  
+  <Card title="Templates" icon="clone" href="/core/templates">
+    Create reusable database templates
+  </Card>
+</CardGroup>

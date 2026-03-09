@@ -1,0 +1,344 @@
+---
+title: "AI Overviews"
+description: "Get instant AI-generated summaries with source citations from your workspace"
+---
+
+## Overview
+
+AI Overviews provide Google-style AI-generated summaries that answer your questions based on your entire workspace content. Instead of browsing through multiple pages, get a comprehensive answer with citations to source pages.
+
+<Info>
+  AI Overviews were introduced in v0.9.3 and are inspired by Google's AI Overview feature, bringing intelligent summarization to your workspace.
+</Info>
+
+## How AI Overviews Work
+
+When you ask a question, AI Overviews:
+
+1. **Search** your workspace for relevant pages
+2. **Analyze** the content to understand context
+3. **Generate** a comprehensive summary
+4. **Cite** source pages with direct links
+5. **Highlight** key points and important details
+
+## Accessing AI Overviews
+
+<Steps>
+  <Step title="Open Search">
+    Press `Cmd/Ctrl + K` to open the search panel.
+  </Step>
+  
+  <Step title="Ask a Question">
+    Type a natural language question instead of just keywords:
+    - "What are the main features of our Q1 release?"
+    - "Summarize the discussion from yesterday's team meeting"
+    - "What decisions were made about the redesign?"
+  </Step>
+  
+  <Step title="View AI Overview">
+    The AI Overview appears with:
+    - A detailed answer to your question
+    - Highlighted key themes and important details
+    - Source links to pages used for the answer
+  </Step>
+  
+  <Step title="Explore Sources">
+    Click on source links to read the full context from specific pages.
+  </Step>
+</Steps>
+
+<Tip>
+  Press `Cmd/Ctrl + ↓` while in search to toggle between regular search results and AI Overview mode.
+</Tip>
+
+## AI Overview Components
+
+### The Answer Section
+
+The main answer provides:
+
+- **Comprehensive response** - Detailed answer synthesizing information from multiple pages
+- **Clear structure** - Organized into logical sections
+- **Direct addressing** - Answers specifically to your question
+- **Contextual details** - Includes relevant dates, names, and specifics
+
+### Highlights Section
+
+Key themes presented as a markdown bullet list:
+
+- **Main points** - Core themes from your content
+- **Important details** - Critical information like dates, locations, decisions
+- **Action items** - Tasks or next steps mentioned
+- **Key metrics** - Numbers, deadlines, or quantitative data
+
+### Sources Section
+
+Links to pages used to generate the overview:
+
+- **Page titles** - Clear identification of source documents
+- **Clickable links** - Direct navigation to full pages
+- **Source validation** - Verify the AI's answer against original content
+- **Further reading** - Explore topics in more depth
+
+<CardGroup cols={2}>
+  <Card title="Answer" icon="message">
+    A detailed, comprehensive response to your question
+  </Card>
+  
+  <Card title="Highlights" icon="highlighter">
+    Key themes and important details in bullet format
+  </Card>
+  
+  <Card title="Sources" icon="link">
+    Citations with links to source pages
+  </Card>
+  
+  <Card title="Follow-up" icon="arrow-right">
+    Related questions you can ask
+  </Card>
+</CardGroup>
+
+## Use Cases
+
+### Project Status Updates
+
+**Question**: "What's the current status of the mobile app project?"
+
+**AI Overview provides**:
+- Summary of recent progress
+- Key milestones completed
+- Remaining tasks and blockers
+- Links to project pages, meeting notes, task lists
+
+### Meeting Summaries
+
+**Question**: "Summarize decisions from this week's product meetings"
+
+**AI Overview provides**:
+- Major decisions made
+- Action items assigned
+- Discussion topics
+- Links to meeting note pages
+
+### Research Synthesis
+
+**Question**: "What research do we have on user onboarding?"
+
+**AI Overview provides**:
+- Synthesis of research findings
+- Key insights across studies
+- Recommendations made
+- Links to research documents
+
+### Knowledge Discovery
+
+**Question**: "How do we handle customer refunds?"
+
+**AI Overview provides**:
+- Process overview
+- Step-by-step procedures
+- Policy details
+- Links to policy pages and examples
+
+## Writing Effective Questions
+
+### Best Practices
+
+<AccordionGroup>
+  <Accordion title="Be Specific">
+    ✅ "What are the main features planned for the Q1 release?"
+    
+    ❌ "features"
+    
+    Specific questions get more focused, useful answers.
+  </Accordion>
+  
+  <Accordion title="Ask Complete Questions">
+    ✅ "What decisions were made about the pricing model?"
+    
+    ❌ "pricing"
+    
+    Complete questions help the AI understand what information you need.
+  </Accordion>
+  
+  <Accordion title="Include Context">
+    ✅ "What feedback did users give about the beta release last month?"
+    
+    ❌ "feedback"
+    
+    Adding context (time, topic, scope) helps narrow down relevant content.
+  </Accordion>
+  
+  <Accordion title="Use Action Words">
+    ✅ "Summarize the main points from the strategy document"
+    ✅ "Compare the two design proposals"
+    ✅ "List all action items from team meetings"
+    
+    Action words (summarize, compare, list, explain) guide the AI's response format.
+  </Accordion>
+</AccordionGroup>
+
+### Question Types That Work Well
+
+| Question Type | Example | Best For |
+|---------------|---------|----------|
+| **Summaries** | "Summarize our Q1 goals" | Condensing information |
+| **Status** | "What's the status of Project X?" | Progress updates |
+| **Comparisons** | "Compare option A and option B" | Decision making |
+| **Explanations** | "Explain our deployment process" | Understanding procedures |
+| **Lists** | "List all pending tasks" | Action items |
+
+## AI Overview on Mobile
+
+AI Overviews are fully supported on iOS and Android:
+
+<Steps>
+  <Step title="Access Search Tab">
+    Open the Search tab from the bottom navigation (iOS) or main menu (Android).
+  </Step>
+  
+  <Step title="Ask Your Question">
+    Type or use voice input to ask your question naturally.
+  </Step>
+  
+  <Step title="Read the Overview">
+    Scroll through the AI-generated answer, highlights, and sources.
+  </Step>
+  
+  <Step title="Navigate to Sources">
+    Tap source links to open full pages in new tabs.
+  </Step>
+</Steps>
+
+## Advanced Features
+
+### Context-Aware Summaries
+
+AI Overviews understand:
+
+- **Temporal context** - "last week", "Q1", "recent" are interpreted correctly
+- **Project context** - Recognizes project names and team structures
+- **Priority levels** - Understands "urgent", "critical", "low priority"
+- **Status indicators** - Recognizes "completed", "in progress", "blocked"
+
+### Multi-Source Synthesis
+
+The AI combines information from multiple pages:
+
+- **Cross-references** - Connects related information across pages
+- **Timeline building** - Orders events chronologically
+- **Theme identification** - Finds common themes across documents
+- **Contradiction handling** - Notes when sources provide different information
+
+### Intelligent Source Selection
+
+The AI prioritizes:
+
+- **Recent content** - Newer pages for time-sensitive queries
+- **Complete information** - Pages with comprehensive content
+- **Authoritative sources** - Official documentation over casual notes
+- **Relevant sections** - Specific parts of long documents
+
+<Note>
+  AI Overviews may not cite every page in your workspace. The AI selects the most relevant sources for your specific question.
+</Note>
+
+## Comparison with Other AI Features
+
+| Feature | Purpose | Output Format |
+|---------|---------|---------------|
+| **AI Overviews** | Answer questions about workspace content | Summary with sources |
+| **AI Search** | Find specific pages | List of page results |
+| **AI Chat** | Interactive conversation | Chat messages |
+| **RAG Search** | Offline AI search in Vault | Summary with sources (offline) |
+
+## Best Practices
+
+<CardGroup cols={2}>
+  <Card title="Ask Natural Questions" icon="comment">
+    Write questions as you would ask a colleague - the AI understands natural language.
+  </Card>
+  
+  <Card title="Verify Sources" icon="check">
+    Always click through to source pages to verify critical information.
+  </Card>
+  
+  <Card title="Refine Questions" icon="rotate">
+    If the answer isn't quite right, rephrase your question with more specifics.
+  </Card>
+  
+  <Card title="Save Useful Overviews" icon="bookmark">
+    Copy and paste helpful overviews into a document for future reference.
+  </Card>
+</CardGroup>
+
+## Limitations and Considerations
+
+### Content Boundaries
+
+- AI Overviews only search **content you have access to** in your workspace
+- Private pages you can't access won't be included
+- Deleted or archived pages are excluded
+
+### Answer Accuracy
+
+<Warning>
+  Always verify important information by checking the source pages. AI Overviews are summaries and may not capture every nuance.
+</Warning>
+
+- The AI synthesizes information but may miss context
+- For critical decisions, review source documents directly
+- Sources are provided so you can verify the answer
+
+### Internet Connection Required
+
+AI Overviews require an active internet connection:
+
+- Cloud-based AI processing
+- Real-time content analysis
+- For offline AI, use **RAG Search** in Vault workspaces
+
+## Troubleshooting
+
+### No Overview Generated
+
+If AI Overview doesn't appear:
+
+1. Ensure your question is specific enough
+2. Check that you have relevant content in your workspace
+3. Try rephrasing as a complete question
+4. Verify your internet connection
+
+### Incomplete or Vague Answers
+
+- Add more detail to your question
+- Include time ranges, project names, or specific topics
+- Check if source pages have enough information
+- Try breaking complex questions into smaller parts
+
+### Wrong or Irrelevant Sources
+
+- Refine your question with more specific terms
+- Add context about what you're looking for
+- Use filters to limit search scope
+- Review and improve your page titles and content for better searchability
+
+## Related Features
+
+<CardGroup cols={2}>
+  <Card title="AI Search" icon="magnifying-glass" href="/ai/ai-search">
+    Find specific pages with natural language search
+  </Card>
+  
+  <Card title="AI Chat" icon="comments" href="/ai/ai-chat">
+    Have interactive conversations with AI
+  </Card>
+  
+  <Card title="RAG Search" icon="database" href="/ai/rag-search">
+    Get AI summaries offline in Vault workspaces
+  </Card>
+  
+  <Card title="Custom Prompts" icon="file-lines" href="/ai/custom-prompts">
+    Create reusable AI prompts for consistent workflows
+  </Card>
+</CardGroup>

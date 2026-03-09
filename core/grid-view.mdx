@@ -1,0 +1,502 @@
+---
+title: "Grid View"
+description: "Manage data with spreadsheet-style grid views"
+---
+
+## Overview
+
+Grid View displays your database as a spreadsheet, providing a familiar and powerful interface for managing structured data. It's ideal for detailed data entry, bulk editing, and comprehensive data analysis.
+
+<CardGroup cols={2}>
+  <Card title="Spreadsheet Interface" icon="table-cells" iconType="solid">
+    Familiar rows and columns layout for data management
+  </Card>
+  <Card title="Inline Editing" icon="pen" iconType="solid">
+    Edit cells directly without opening separate dialogs
+  </Card>
+  <Card title="Calculations" icon="calculator" iconType="solid">
+    Add calculation rows for sums, averages, and more
+  </Card>
+  <Card title="Bulk Operations" icon="list-check" iconType="solid">
+    Select and modify multiple rows at once
+  </Card>
+</CardGroup>
+
+## Creating a Grid View
+
+<Steps>
+  <Step title="Create new grid">
+    Type `/grid` in a document, or click **+** in sidebar and select **Grid**
+  </Step>
+  
+  <Step title="Or add to existing database">
+    Open a database, click the view name, and select **+ Add View** → **Grid**
+  </Step>
+  
+  <Step title="Add fields and rows">
+    Click **+** in the header to add fields, and **+ New** to add rows
+  </Step>
+</Steps>
+
+<Info>
+  Grid is the default view for new databases and provides the most comprehensive way to view all your data.
+</Info>
+
+## Grid Structure
+
+### Rows
+
+Each row is a record in your database:
+
+- **Row numbers**: Display on the left for reference
+- **Row actions**: Hover over row number for quick actions (duplicate, delete)
+- **Row reordering**: Drag rows by the row number to reorder
+- **Row selection**: Click row number to select entire row
+
+### Columns (Fields)
+
+Each column represents a field:
+
+- **Field headers**: Show field name and type icon
+- **Sortable**: Click header to sort by that field
+- **Resizable**: Drag column borders to adjust width
+- **Reorderable**: Drag field headers to rearrange columns
+
+### Cells
+
+The intersection of rows and columns:
+
+- **Direct editing**: Click any cell to edit inline
+- **Tab navigation**: Press `Tab` to move to next cell
+- **Enter**: Opens row detail (or moves down in some field types)
+- **Escape**: Cancel editing
+
+## Working with Rows
+
+### Creating Rows
+
+<Steps>
+  <Step title="Add at bottom">
+    Click **+ New** at the bottom of the grid
+  </Step>
+  
+  <Step title="Or use keyboard">
+    Press `Ctrl/Cmd + Enter` to create a new row
+  </Step>
+  
+  <Step title="Quick input">
+    Type in cells and press `Tab` to move to next field
+  </Step>
+</Steps>
+
+<Tip>
+  Press `Enter` after creating a row to immediately create another one below it.
+</Tip>
+
+### Selecting Rows
+
+**Single row**: Click the row number
+
+**Multiple rows**: 
+- `Ctrl/Cmd + Click` to select multiple individual rows
+- `Shift + Click` to select a range of rows
+- `Ctrl/Cmd + A` to select all rows
+
+**Row actions**: Right-click selected rows for:
+- Duplicate
+- Delete  
+- Copy
+- Open in new tab
+
+### Reordering Rows
+
+<Steps>
+  <Step title="Grab row">
+    Hover over the row number until you see the drag handle
+  </Step>
+  
+  <Step title="Drag">
+    Click and hold, then drag the row up or down
+  </Step>
+  
+  <Step title="Drop">
+    Release to place the row in its new position
+  </Step>
+</Steps>
+
+<Note>
+  Manual row order is only preserved when no sorts are applied. Adding a sort will override manual ordering.
+</Note>
+
+## Working with Fields
+
+### Adding Fields
+
+<Steps>
+  <Step title="Click +">
+    Click the **+** button on the far right of the field headers
+  </Step>
+  
+  <Step title="Choose type">
+    Select the field type from the dropdown menu
+  </Step>
+  
+  <Step title="Configure">
+    Name the field and set type-specific options
+  </Step>
+</Steps>
+
+### Field Header Actions
+
+Right-click any field header to:
+
+- **Sort ascending/descending**: Quick sort by this field
+- **Hide field**: Remove from current view (data preserved)
+- **Insert left/right**: Add a new field
+- **Duplicate field**: Create a copy of the field
+- **Delete field**: Remove field and all its data
+- **Edit property**: Configure field settings
+
+### Resizing Columns
+
+**Drag border**: Hover over the right edge of a field header and drag
+
+**Double-click**: Double-click the border to auto-fit to content
+
+**Set width**: Right-click header → **Field width** → enter exact pixels
+
+### Reordering Columns
+
+<Steps>
+  <Step title="Grab header">
+    Click and hold a field header
+  </Step>
+  
+  <Step title="Drag">
+    Move left or right to the desired position
+  </Step>
+  
+  <Step title="Drop">
+    Release to place the column
+  </Step>
+</Steps>
+
+<Tip>
+  Keep your most important fields on the left for quick access.
+</Tip>
+
+## Inline Editing
+
+Edit cells directly in the grid:
+
+### Text Fields
+
+- Click cell to edit
+- Type to replace, or double-click to edit in place
+- Press `Enter` to confirm or `Esc` to cancel
+
+### Select Fields
+
+- Click cell to open dropdown
+- Select option(s)
+- Click outside or press `Enter` to close
+
+### Date Fields
+
+- Click cell to open date picker
+- Click a date or use arrow keys
+- Toggle time if needed
+
+### Checkbox Fields
+
+- Click cell to toggle on/off
+- Or press `Space` when cell is selected
+
+### Number Fields
+
+- Click and type numbers
+- Formatted automatically based on field settings
+
+<Info>
+  Some complex field types (like Relation or Media) open a popup editor instead of inline editing.
+</Info>
+
+## Calculations
+
+Add calculation rows to aggregate data:
+
+<Steps>
+  <Step title="Open calculation menu">
+    Click the **=** icon at the bottom of any column
+  </Step>
+  
+  <Step title="Choose function">
+    Select from available calculations
+  </Step>
+  
+  <Step title="View result">
+    The calculation appears at the bottom of the column
+  </Step>
+</Steps>
+
+### Available Calculations
+
+**For Numbers**:
+- **Sum**: Total of all values
+- **Average**: Mean value
+- **Median**: Middle value
+- **Min**: Smallest value
+- **Max**: Largest value
+- **Range**: Max - Min
+
+**For All Types**:
+- **Count all**: Total number of entries
+- **Count values**: Number of non-empty entries
+- **Count empty**: Number of empty entries
+- **Percent empty**: Percentage of empty entries
+- **Percent not empty**: Percentage of filled entries
+
+**For Checkboxes**:
+- **Checked**: Count of checked boxes
+- **Unchecked**: Count of unchecked boxes
+- **Percent checked**: Percentage checked
+
+**For Dates**:
+- **Earliest date**: Oldest date
+- **Latest date**: Most recent date
+- **Date range**: Days between earliest and latest
+
+<Tip>
+  Calculations update automatically as you add, edit, or remove data.
+</Tip>
+
+## Filtering Data
+
+Show only specific rows:
+
+<Steps>
+  <Step title="Add filter">
+    Click **Filter** → **+ Add filter**
+  </Step>
+  
+  <Step title="Choose field">
+    Select which field to filter by
+  </Step>
+  
+  <Step title="Set condition">
+    Choose operator and value
+  </Step>
+  
+  <Step title="Add more filters">
+    Click **+ Add filter** to combine conditions with AND logic
+  </Step>
+</Steps>
+
+### Filter Examples
+
+- **Status is "In Progress"**: Show only active tasks
+- **Due Date is before today**: Show overdue items
+- **Assignee is You**: Show your tasks
+- **Priority is High AND Status is not Done**: Urgent incomplete items
+
+<Info>
+  Each view can have its own filters, letting you create focused perspectives on your data.
+</Info>
+
+## Sorting Data
+
+Organize rows by field values:
+
+<Steps>
+  <Step title="Quick sort">
+    Click any field header and choose **Sort Ascending** or **Sort Descending**
+  </Step>
+  
+  <Step title="Or use sort menu">
+    Click **Sort** → **+ Add sort** for more control
+  </Step>
+  
+  <Step title="Multiple sorts">
+    Add multiple sort rules (applied in order)
+  </Step>
+</Steps>
+
+### Sort Examples
+
+- **Sort by Priority (high to low), then Due Date (earliest first)**
+- **Sort by Status, then Assignee, then Created Date**
+- **Sort alphabetically by Name**
+
+<Note>
+  Sorts apply to the current view only. Different views can have different sort orders.
+</Note>
+
+## Grouping Rows
+
+Organize rows into collapsible groups:
+
+<Steps>
+  <Step title="Open group settings">
+    Click **⚙️** → **Group**
+  </Step>
+  
+  <Step title="Choose field">
+    Select a Select or Checkbox field to group by
+  </Step>
+  
+  <Step title="View grouped rows">
+    Rows organize into sections based on field values
+  </Step>
+</Steps>
+
+**Benefits of grouping**:
+- Collapse/expand groups to focus
+- See count of rows in each group
+- Quickly identify distribution of values
+
+<Tip>
+  Grouping in Grid View gives you a board-like organization while maintaining the spreadsheet interface.
+</Tip>
+
+## Hiding and Showing Fields
+
+Control which columns are visible:
+
+<Steps>
+  <Step title="Open field menu">
+    Click **⚙️** → **Properties**
+  </Step>
+  
+  <Step title="Toggle visibility">
+    Check/uncheck fields to show or hide them
+  </Step>
+  
+  <Step title="Reorder">
+    Drag fields to change their order in the grid
+  </Step>
+</Steps>
+
+<Info>
+  Hidden fields still exist and contain data. They're just not visible in the current view.
+</Info>
+
+## Keyboard Navigation
+
+| Action | Shortcut |
+|--------|----------|
+| Move to next cell | `Tab` |
+| Move to previous cell | `Shift + Tab` |
+| Move down | `↓` or `Enter` |
+| Move up | `↑` |
+| Edit cell | Click or `F2` |
+| Cancel edit | `Esc` |
+| New row | `Ctrl/Cmd + Enter` |
+| Delete row | `Delete` (with row selected) |
+| Select all | `Ctrl/Cmd + A` |
+| Open row details | `Enter` (in Name field) |
+
+## Row Detail View
+
+Open full details for any row:
+
+<Steps>
+  <Step title="Open row">
+    Click the primary field (usually Name) or press `Space`
+  </Step>
+  
+  <Step title="Edit properties">
+    All fields are shown in a vertical layout
+  </Step>
+  
+  <Step title="Add content">
+    Use the document editor to add detailed notes, files, and more
+  </Step>
+</Steps>
+
+<Tip>
+  Row details give you more space for editing complex fields and adding rich content.
+</Tip>
+
+## Common Use Cases
+
+<CardGroup cols={2}>
+  <Card title="Inventory Management" icon="boxes-stacked">
+    Track products, quantities, prices, and suppliers
+  </Card>
+  
+  <Card title="CRM" icon="handshake">
+    Manage contacts, companies, deals, and interactions
+  </Card>
+  
+  <Card title="Project Tracker" icon="list-check">
+    Monitor tasks, owners, deadlines, and status
+  </Card>
+  
+  <Card title="Budget Tracking" icon="dollar-sign">
+    Calculate expenses, income, and balances
+  </Card>
+  
+  <Card title="Employee Directory" icon="users">
+    Store team information, roles, and contacts
+  </Card>
+  
+  <Card title="Reading List" icon="book">
+    Catalog books with authors, ratings, and notes
+  </Card>
+</CardGroup>
+
+## Grid View Settings
+
+Access all customization options:
+
+**Click ⚙️ in the toolbar** to configure:
+
+- **Properties**: Show/hide and reorder fields
+- **Group**: Group rows by a Select field
+- **Field settings**: Configure individual field options
+- **Calculations**: Toggle calculation row visibility
+- **Row height**: Compact, medium, or tall rows
+
+## Tips and Best Practices
+
+<CardGroup cols={2}>
+  <Card title="Freeze columns" icon="snowflake">
+    Keep important fields visible while scrolling (coming soon)
+  </Card>
+  
+  <Card title="Use calculations" icon="calculator">
+    Add totals and averages to track metrics
+  </Card>
+  
+  <Card title="Smart filters" icon="filter">
+    Create filtered views for different workflows or team members
+  </Card>
+  
+  <Card title="Export data" icon="download">
+    Copy and paste to Excel or Google Sheets for external analysis
+  </Card>
+</CardGroup>
+
+<Note>
+  Grid View excels at bulk data entry and detailed analysis. For visual workflows, consider Board or Calendar views.
+</Note>
+
+## Next Steps
+
+<CardGroup cols={2}>
+  <Card title="Board View" icon="columns-3" href="/core/board-view">
+    Visualize the same data as a kanban board
+  </Card>
+  
+  <Card title="Calendar View" icon="calendar" href="/core/calendar-view">
+    Switch to calendar for date-based views
+  </Card>
+  
+  <Card title="Databases" icon="database" href="/core/databases">
+    Learn database fundamentals and field types
+  </Card>
+  
+  <Card title="Templates" icon="clone" href="/core/templates">
+    Save your grid as a reusable template
+  </Card>
+</CardGroup>

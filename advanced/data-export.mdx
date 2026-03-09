@@ -1,0 +1,379 @@
+---
+title: 'Data Export & Import'
+description: 'Export, backup, and migrate your AppFlowy workspace data'
+icon: 'download'
+---
+
+## Overview
+
+AppFlowy provides comprehensive data export and import capabilities to ensure your data is portable, backed up, and easily transferable. Since version 0.9.7, you can export your entire workspace as a ZIP file and import it back at any time.
+
+<Info>
+  Regular backups protect your work and ensure you can recover from data loss or migrate to a new device.
+</Info>
+
+## Export Workspace as ZIP
+
+### What Gets Exported
+
+When you export your workspace, AppFlowy includes:
+
+- All documents and pages
+- Database views (Grid, Board, Calendar)
+- Document formatting and styling
+- Embedded images and files
+- Workspace settings and preferences
+- Favorites and recent pages
+
+<Note>
+  Workspace exports preserve your complete data structure, making it easy to restore everything exactly as it was.
+</Note>
+
+### Exporting Your Workspace
+
+<Steps>
+  <Step title="Open Settings">
+    Navigate to **Settings → Manage Data** in AppFlowy Desktop
+  </Step>
+  
+  <Step title="Select Export">
+    Click on **Export Workspace** to begin the export process
+  </Step>
+  
+  <Step title="Choose Files">
+    Select which pages and spaces you want to include in the export
+    - Select All: Export everything
+    - Custom Selection: Choose specific pages or spaces
+  </Step>
+  
+  <Step title="Choose Destination">
+    Select a folder where you want to save the exported ZIP file
+  </Step>
+  
+  <Step title="Confirm Export">
+    Click **Export** and wait for the process to complete. Large workspaces may take a few moments.
+  </Step>
+</Steps>
+
+```bash Export Location Recommendation
+# Recommended backup locations:
+~/Documents/AppFlowy-Backups/
+/path/to/external-drive/AppFlowy/
+/path/to/cloud-sync-folder/AppFlowy-Backups/
+```
+
+<Warning>
+  Ensure you have sufficient disk space for the export. Large workspaces with many images can result in large ZIP files.
+</Warning>
+
+## Import Workspace
+
+### When to Import
+
+- Restoring from a backup
+- Migrating to a new device
+- Recovering deleted data
+- Setting up AppFlowy with existing data
+
+### Importing Your Workspace
+
+<Steps>
+  <Step title="Open Settings">
+    Navigate to **Settings → Manage Data**
+  </Step>
+  
+  <Step title="Select Import">
+    Click on **Import Workspace** or **Import Data Folder**
+  </Step>
+  
+  <Step title="Choose ZIP File">
+    Select the workspace ZIP file you previously exported
+  </Step>
+  
+  <Step title="Confirm Import">
+    Review the import details and click **Import**
+  </Step>
+  
+  <Step title="Wait for Completion">
+    AppFlowy will extract and restore your data. This may take time for large workspaces.
+  </Step>
+</Steps>
+
+<Note>
+  Importing a workspace creates a new workspace in AppFlowy. Your existing workspace will remain unchanged.
+</Note>
+
+## Individual File Export
+
+### Export Documents
+
+You can export individual documents in multiple formats:
+
+<CardGroup cols={2}>
+  <Card title="Markdown" icon="markdown">
+    Export as .md files for use in other applications
+  </Card>
+  <Card title="HTML" icon="code">
+    Export as HTML for web publishing
+  </Card>
+  <Card title="Plain Text" icon="file-lines">
+    Export as .txt for universal compatibility
+  </Card>
+  <Card title="PDF" icon="file-pdf">
+    Export as PDF for sharing and printing
+  </Card>
+</CardGroup>
+
+#### Exporting a Document
+
+1. Open the document you want to export
+2. Click the **More** menu (three dots) in the top right
+3. Select **Export**
+4. Choose your preferred format (Markdown, HTML, PDF, or TXT)
+5. Select the destination folder
+
+### Export Databases
+
+Databases can be exported in CSV format:
+
+<Steps>
+  <Step title="Open Database">
+    Navigate to the database view you want to export
+  </Step>
+  
+  <Step title="Access Export">
+    Click the **More** menu (⋮) in the database toolbar
+  </Step>
+  
+  <Step title="Export as CSV">
+    Select **Export → CSV** from the menu
+  </Step>
+  
+  <Step title="Save File">
+    Choose where to save the CSV file
+  </Step>
+</Steps>
+
+<Info>
+  CSV exports include all visible columns and rows. Hidden columns are not included in the export.
+</Info>
+
+## Data Portability
+
+### AppFlowy Data Format
+
+AppFlowy stores data in an open format:
+
+- **Documents**: JSON-based format with full formatting
+- **Databases**: Structured data compatible with CSV export
+- **Settings**: Plain text configuration files
+
+### Migrating Between Versions
+
+When upgrading AppFlowy:
+
+1. **Export your current workspace** before upgrading
+2. **Install the new version**
+3. **Test the new version** with a fresh workspace
+4. **Import your backup** if migration is needed
+
+<Warning>
+  Major version upgrades (e.g., 0.8.x to 0.9.x) may require data migration. Always backup before upgrading.
+</Warning>
+
+## Backup Strategies
+
+### Recommended Backup Schedule
+
+<CardGroup cols={3}>
+  <Card title="Daily" icon="calendar-day">
+    Quick exports for active projects
+  </Card>
+  <Card title="Weekly" icon="calendar-week">
+    Full workspace export
+  </Card>
+  <Card title="Monthly" icon="calendar">
+    Archive backup to external storage
+  </Card>
+</CardGroup>
+
+### Manual Backup Workflow
+
+<Steps>
+  <Step title="Schedule Regular Exports">
+    Set a reminder to export your workspace weekly or after significant changes
+  </Step>
+  
+  <Step title="Use Versioned Names">
+    Name backups with dates: `AppFlowy-Backup-2025-03-09.zip`
+  </Step>
+  
+  <Step title="Store in Multiple Locations">
+    Keep backups in at least two locations:
+    - Local external drive
+    - Cloud storage (encrypted if sensitive)
+  </Step>
+  
+  <Step title="Test Your Backups">
+    Periodically test importing a backup to ensure it works
+  </Step>
+</Steps>
+
+### Automated Backup Options
+
+```bash Example: Script for Automatic Backups
+# This example shows how to automate backups using sync folders
+
+# 1. Export to a cloud-synced folder (e.g., Dropbox, Google Drive)
+# Set export location to: ~/Dropbox/AppFlowy-Backups/
+
+# 2. Use time-stamped filenames
+# Manual export will save as: workspace-2025-03-09.zip
+
+# 3. Set up folder sync with version history
+# Most cloud providers keep 30-day version history
+```
+
+<Info>
+  While AppFlowy doesn't have built-in automatic backups yet, you can manually export to a cloud-synced folder for automated backup.
+</Info>
+
+## Cross-Platform Migration
+
+### Moving Between Devices
+
+<Steps>
+  <Step title="Export on Source Device">
+    Export your workspace as ZIP on the original device
+  </Step>
+  
+  <Step title="Transfer File">
+    Copy the ZIP file to your new device via:
+    - USB drive
+    - Cloud storage
+    - Network transfer
+  </Step>
+  
+  <Step title="Install AppFlowy">
+    Install AppFlowy on your new device
+  </Step>
+  
+  <Step title="Import Workspace">
+    Import the ZIP file on your new device
+  </Step>
+</Steps>
+
+### Platform Compatibility
+
+Workspace exports are compatible across:
+
+- macOS ↔ Windows ↔ Linux (Desktop)
+- Desktop ↔ Mobile (with limitations)
+
+<Note>
+  Some features may differ between platforms. Test your imported workspace to ensure everything works as expected.
+</Note>
+
+## Selective Export
+
+### Exporting Specific Pages
+
+To export only certain pages or spaces:
+
+1. Navigate to **Settings → Manage Data → Export Files**
+2. In the export dialog, **deselect** spaces or pages you don't want to include
+3. Choose **Select All** to quickly select everything, or **Deselect All** to start fresh
+4. Check only the items you want to export
+5. Proceed with the export
+
+<Info>
+  Selective exports are useful for sharing specific projects or creating partial backups.
+</Info>
+
+## Troubleshooting
+
+### Export Issues
+
+<AccordionGroup>
+  <Accordion title="Export fails or hangs">
+    - Check available disk space
+    - Close other applications to free up memory
+    - Try exporting smaller sections individually
+    - Restart AppFlowy and try again
+  </Accordion>
+  
+  <Accordion title="ZIP file is too large">
+    - Use selective export to export only needed pages
+    - Export databases separately as CSV
+    - Consider compressing large images before adding to AppFlowy
+  </Accordion>
+  
+  <Accordion title="Images missing after export">
+    - Ensure images are properly embedded (not just linked)
+    - Check that image files aren't in use by other applications
+    - Try exporting again with fewer pages to isolate the issue
+  </Accordion>
+</AccordionGroup>
+
+### Import Issues
+
+<AccordionGroup>
+  <Accordion title="Import fails with error">
+    - Verify the ZIP file isn't corrupted (try extracting manually)
+    - Ensure you're using a compatible AppFlowy version
+    - Check that you have write permissions to the data folder
+    - Try importing on a fresh installation
+  </Accordion>
+  
+  <Accordion title="Data looks different after import">
+    - Version differences may cause formatting changes
+    - Some features may not be available on the target platform
+    - Databases may need to be refreshed
+  </Accordion>
+  
+  <Accordion title="Import is very slow">
+    - Large workspaces take time—be patient
+    - Close other applications to free up resources
+    - Ensure adequate disk space is available
+  </Accordion>
+</AccordionGroup>
+
+<Warning>
+  If import fails repeatedly, check the [AppFlowy GitHub Issues](https://github.com/AppFlowy-IO/AppFlowy/issues) for known problems or report a new issue.
+</Warning>
+
+## Data Security
+
+### Encryption Recommendations
+
+For sensitive data:
+
+1. **Encrypt exported ZIP files** using tools like:
+   - 7-Zip with AES-256 encryption
+   - VeraCrypt for encrypted containers
+   - Your OS's built-in encryption (FileVault, BitLocker)
+
+2. **Use secure transfer methods**:
+   - Encrypted cloud storage
+   - Secure file transfer protocols (SFTP)
+   - Encrypted messaging apps for sharing
+
+3. **Store backups securely**:
+   - Encrypted external drives
+   - Password-protected cloud storage
+   - Physical security for backup devices
+
+<Warning>
+  AppFlowy workspace exports are NOT encrypted by default. Add your own encryption layer for sensitive data.
+</Warning>
+
+## Next Steps
+
+<CardGroup cols={2}>
+  <Card title="Vault Workspace" href="/advanced/vault-workspace" icon="vault">
+    Learn about private, offline workspaces
+  </Card>
+  <Card title="Customization" href="/advanced/customization" icon="palette">
+    Customize your workspace appearance
+  </Card>
+</CardGroup>
