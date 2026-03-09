@@ -1,0 +1,143 @@
+{
+  "projectType": "saas",
+  "projectName": "AppFlowy",
+  "projectDescription": "AI collaborative workspace where you achieve more without losing control of your data - the leading open source Notion alternative",
+  "theme": "almond",
+  "primaryColor": "#04c7fc",
+  "lightColor": "#f96b35",
+  "darkColor": "#c418b1",
+  "navigation": {
+    "tabs": [
+      {
+        "tab": "Documentation",
+        "groups": [
+          {
+            "group": "Overview",
+            "pages": [
+              "introduction",
+              "features"
+            ]
+          },
+          {
+            "group": "Getting Started",
+            "pages": [
+              "getting-started/installation",
+              "getting-started/quickstart",
+              "getting-started/workspace-basics",
+              "getting-started/account-setup"
+            ]
+          },
+          {
+            "group": "Core Features",
+            "pages": [
+              "core/documents",
+              "core/databases",
+              "core/board-view",
+              "core/calendar-view",
+              "core/grid-view",
+              "core/templates"
+            ]
+          },
+          {
+            "group": "AI Features",
+            "pages": [
+              "ai/ai-chat",
+              "ai/ai-search",
+              "ai/ai-overviews",
+              "ai/custom-prompts",
+              "ai/rag-search"
+            ]
+          },
+          {
+            "group": "Collaboration",
+            "pages": [
+              "collaboration/sharing",
+              "collaboration/real-time-editing",
+              "collaboration/permissions",
+              "collaboration/mentions",
+              "collaboration/guest-editors"
+            ]
+          },
+          {
+            "group": "Self-Hosting",
+            "pages": [
+              "self-hosting/overview",
+              "self-hosting/installation",
+              "self-hosting/configuration",
+              "self-hosting/security"
+            ]
+          },
+          {
+            "group": "Mobile",
+            "pages": [
+              "mobile/ios",
+              "mobile/android",
+              "mobile/widgets",
+              "mobile/sync"
+            ]
+          },
+          {
+            "group": "Advanced",
+            "pages": [
+              "advanced/vault-workspace",
+              "advanced/data-export",
+              "advanced/customization",
+              "advanced/plugins"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Developer Guide",
+        "groups": [
+          {
+            "group": "Architecture",
+            "pages": [
+              "developer/architecture",
+              "developer/flutter-frontend",
+              "developer/rust-backend"
+            ]
+          },
+          {
+            "group": "Building from Source",
+            "pages": [
+              "developer/setup",
+              "developer/building-desktop",
+              "developer/building-mobile"
+            ]
+          },
+          {
+            "group": "Contributing",
+            "pages": [
+              "developer/contributing",
+              "developer/code-style",
+              "developer/testing"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "keyFeatures": [
+    "Rich text document editor with block-based editing",
+    "Database views (Grid, Board, Calendar) for structured data",
+    "AI-powered chat, search, and content generation",
+    "Real-time collaboration with multi-user editing",
+    "Cross-platform sync (Desktop, iOS, Android)",
+    "Self-hosting and data privacy controls",
+    "Offline-first Vault workspaces",
+    "Templates and workspace customization",
+    "Page sharing with granular permissions"
+  ],
+  "publicApiSurface": [
+    "Document creation and editing API",
+    "Database operations (views, filters, sorts)",
+    "Workspace and folder management",
+    "User authentication and collaboration",
+    "AI chat and search endpoints",
+    "Real-time collaboration sync protocol",
+    "Storage and file management",
+    "Template import/export",
+    "Search and indexing services"
+  ]
+}
